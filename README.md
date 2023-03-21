@@ -1,1 +1,1 @@
-"# Do an Java - Qu?n ly nh�n s? tru?ng c?p 2" 
+# Đồ án Java - Quản lý nhân sự trường cấp 2
