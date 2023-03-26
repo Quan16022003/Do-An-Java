@@ -4,6 +4,8 @@ import com.raven.model.Model_Card;
 import com.raven.model.StatusType;
 import com.raven.swing.ScrollBar;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -43,18 +45,26 @@ public class NhanVien extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
-        JTextField texty = new JTextField();
-        JTextField texties = new JTextField();
         
-        texties.setSize(WIDTH, HEIGHT);
+         String[] a = {"Mã nhân viên", "Tên nhân viên", "Họ nhân viên", "Ngày sinh", "Địa chỉ", "Giới tính"};
+         int[] b = {90,200,100,120,280,90};
+        
+        JTextField[] text = new JTextField[a.length];
+        
         
         panel1 = new javax.swing.JLayeredPane();
+        
+        panel1.setLayout(new FlowLayout());
         panel = new javax.swing.JLayeredPane();  
         
-        texty.setText("Nhap vao please");
-        texties.setText("Nhap vao please");
-        panel.add(texty);
-        panel1.add(texties);
+        
+        for (int i = 0; i < a.length; i++) {
+            text[i] = new JTextField();
+            text[i].setText(a[i]);
+            text[i].setPreferredSize(new Dimension(b[i],40));
+            panel1.add(text[i]);
+        }
+
         
         card1 = new com.raven.component.Card();
         card2 = new com.raven.component.Card();
@@ -65,7 +75,6 @@ public class NhanVien extends javax.swing.JPanel {
         table = new com.raven.swing.Table();
 
         panel.setLayout(new java.awt.GridLayout(1, 0, 10, 0));
-        panel1.setLayout(new java.awt.GridLayout(5, 0, 10, 0));
         
         card1.setColor1(new java.awt.Color(142, 142, 250));
         card1.setColor2(new java.awt.Color(123, 123, 245));

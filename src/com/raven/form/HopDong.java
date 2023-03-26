@@ -4,9 +4,12 @@ import com.raven.model.Model_Card;
 import com.raven.model.StatusType;
 import com.raven.swing.ScrollBar;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 
 public class HopDong extends javax.swing.JPanel {
 
@@ -41,6 +44,25 @@ public class HopDong extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
+        
+         String[] a = {"Mã giáo viên", "Tên giáo viên", "Ngày lập", "Lương hợp đồng", "Thời gian dạy"};
+         int[] b = {90,200,180,120,280};
+        
+        JTextField[] text = new JTextField[a.length];
+        
+        
+        panel1 = new javax.swing.JLayeredPane();
+        
+        panel1.setLayout(new FlowLayout());
+        
+        
+        for (int i = 0; i < a.length; i++) {
+            text[i] = new JTextField();
+            text[i].setText(a[i]);
+            text[i].setPreferredSize(new Dimension(b[i],40));
+            panel1.add(text[i]);
+        }
+
 
         panel = new javax.swing.JLayeredPane();
         card1 = new com.raven.component.Card();
@@ -122,6 +144,7 @@ public class HopDong extends javax.swing.JPanel {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, 875, Short.MAX_VALUE)
                     .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, 875, Short.MAX_VALUE))
                 .addGap(20, 20, 20))
         );
@@ -129,6 +152,7 @@ public class HopDong extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
+                .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -143,6 +167,7 @@ public class HopDong extends javax.swing.JPanel {
     private com.raven.component.Card card3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLayeredPane panel;
+    private javax.swing.JLayeredPane panel1;
     private com.raven.swing.PanelBorder panelBorder1;
     private javax.swing.JScrollPane spTable;
     private com.raven.swing.Table table;

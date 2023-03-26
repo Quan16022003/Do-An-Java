@@ -9,7 +9,7 @@ import com.raven.event.EventMenuSelected;
 import com.raven.form.Form_1;
 import com.raven.form.Form_2;
 import com.raven.form.Form_3;
-import com.raven.form.NhanVien;
+import com.raven.form.GiaoVien;
 import java.awt.Color;
 import javax.swing.JComponent;
 
@@ -22,7 +22,7 @@ public class Main extends javax.swing.JFrame {
     /**
      * Creates new form Main
      */
-    private NhanVien home;
+    private GiaoVien home;
     private Form_1 form1;
     private Form_2 form2;
     private Form_3 form3;
@@ -30,7 +30,7 @@ public class Main extends javax.swing.JFrame {
     public Main() {
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
-        home = new NhanVien();
+        home = new GiaoVien();
         form1 = new Form_1();
         form2 = new Form_2();
         form3 = new Form_3();
@@ -50,7 +50,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
         //  set when system open start with home form
-        setForm(new NhanVien());
+        setForm(new GiaoVien());
     }
 
     private void setForm(JComponent com) {
