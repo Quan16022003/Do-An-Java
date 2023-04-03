@@ -1,4 +1,3 @@
-import BLL.ToChuyenMonBLL;;
 import GUI.LoginForm;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.FlatLightLaf;
@@ -11,8 +10,6 @@ public class Main {
     public static void main(String[] args) {
         FlatIntelliJLaf.setup();
         // initialize all data
-        ToChuyenMonBLL.getInstance();
-        
         
         SwingUtilities.invokeLater(new Runnable() {
             @Override

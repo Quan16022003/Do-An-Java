@@ -5,7 +5,6 @@
 package GUI;
 
 import BLL.AccountBLL;
-import BLL.ToChuyenMonBLL;
 import DTO.Account;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.BorderLayout;
@@ -116,10 +115,6 @@ public class LoginForm extends JFrame implements KeyListener, ActionListener{
     
     public static void main(String[] args) {
         FlatLightLaf.setup();
-        // initialize all data
-        ToChuyenMonBLL.getInstance();
-        
-        
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {

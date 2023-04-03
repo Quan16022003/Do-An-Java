@@ -19,9 +19,9 @@ import java.util.logging.Logger;
 public class DBConnection {
     private static DBConnection instance;
     private Connection connection;
-    private String url = "jdbc:mysql://localhost:3307/quanlygiaovien";
+    private String url = "jdbc:mysql://localhost:3306/quanlygiaovien";
     private String user = "root";
-    private String password = "Quan";
+    private String password = "";
     
     private DBConnection() throws SQLException {
         try {
