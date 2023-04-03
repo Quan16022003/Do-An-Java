@@ -38,13 +38,16 @@ public class DBConnection {
         return connection;
     }
     
-    public static DBConnection getInstance() throws SQLException {
-        if (instance == null) {
-            instance = new DBConnection();
-        } else if (instance.getConnection().isClosed()) {
-            instance = new DBConnection();
+    public static DBConnection getInstance() {
+        try {
+            if (instance == null) {
+                instance = new DBConnection();
+            } else if (instance.getConnection().isClosed()) {
+                instance = new DBConnection();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         return instance;
     }
     
