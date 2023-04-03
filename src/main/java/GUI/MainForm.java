@@ -29,7 +29,7 @@ public class MainForm extends JFrame{
     private final SideBar sideBar;
     private Content pContent;
     
-    private String[] menus = new String[]{"Quản lý giáo viên", "Xin chào", "Tạm biệt"};
+    private String[] menus = new String[]{"Quản lý giáo viên","Chấm công giáo viên", "Xin chào", "Tạm biệt"};
     
     public MainForm(String username) throws HeadlessException {
         setSize(FRAME_SIZE);
@@ -59,6 +59,9 @@ public class MainForm extends JFrame{
         switch (menu.getText()) {
             case "Quản lý giáo viên" -> {
                 pContent = new Form1Content();
+            }
+            case "Chấm công giáo viên" -> {
+                pContent = new ChamCong_Form();
             }
             case "Xin chào" -> {
                 pContent = new Form2Content();
