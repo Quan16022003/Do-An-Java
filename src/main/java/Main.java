@@ -1,19 +1,23 @@
-import GUI.MainForm;
+import BLL.ToChuyenMonBLL;;
+import GUI.LoginForm;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
+import GUI.LoginForm;
+import com.formdev.flatlaf.FlatIntelliJLaf;
+import javax.swing.SwingUtilities;
 
 public class Main {
     public static void main(String[] args) {
-        FlatLightLaf.setup();
+        FlatIntelliJLaf.setup();
+        // initialize all data
+        ToChuyenMonBLL.getInstance();
         
         
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new MainForm().setVisible(true);
+                new LoginForm().setVisible(true);
             }
             
         });
