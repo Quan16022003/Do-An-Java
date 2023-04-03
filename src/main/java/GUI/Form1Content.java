@@ -5,7 +5,7 @@
 package GUI;
 
 import GUI.modal.Content;
-import BLL.ToChuyenMonBLL;
+//import BLL.ToChuyenMonBLL;
 import DTO.ToChuyenMon;
 import java.awt.Color;
 
@@ -20,8 +20,8 @@ public class Form1Content extends Content{
         setBackground(Color.red);
         
         // Tổ chuyên môn
-        ToChuyenMonBLL tcmBLL = ToChuyenMonBLL.getInstance();
-        System.out.println(tcmBLL);
+//        ToChuyenMonBLL tcmBLL = ToChuyenMonBLL.getInstance();
+//        System.out.println(tcmBLL);
     }
     
     
