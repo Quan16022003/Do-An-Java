@@ -41,12 +41,12 @@ public class MainForm extends JFrame{
         getRootPane().putClientProperty("JRootPane.titleBarForeground", Color.white);
         ImageIcon icon = new ImageIcon("./src/main/java/Image/management_48px.png");
         setIconImage(icon.getImage());
-        setTitle(titleCenter(username));
+        setTitle(username);
         setLayout(new BorderLayout());
         
 //        titleBar = new TitleBar(this);
         sideBar = new SideBar(this);
-        pContent = new Form1Content();
+        pContent = new HomeformGiaoVien();
         
         //this.add(titleBar, BorderLayout.PAGE_START);
         add(sideBar, BorderLayout.WEST);
@@ -58,7 +58,7 @@ public class MainForm extends JFrame{
         remove(pContent);
         switch (menu.getText()) {
             case "Quản lý giáo viên" -> {
-                pContent = new Form1Content();
+                pContent = new HomeformGiaoVien();
             }
             case "Chấm công giáo viên" -> {
                 pContent = new ChamCong_Form();
@@ -77,20 +77,7 @@ public class MainForm extends JFrame{
         validate();
     }
 
-    private String titleCenter(String name) {
-        Font f = new Font("System", Font.PLAIN, 14);
-        FontMetrics fm = this.getFontMetrics(f);
-        int t = fm.stringWidth("QUAN LY GIAO VIEN");
-        int x = fm.stringWidth(name);
-        int y = fm.stringWidth(" ");
-        int z = this.getWidth()/2 - (x/2) - t/2;
-        int w = z/y;
-        String pad ="";
-        //for (int i=0; i!=w; i++) pad +=" "; 
-        pad = String.format("%"+w+"s", pad);
-        System.out.println(String.format("lengtgh:t=%d x=%d, y=%d, z=%d, w=%d", t,x,y,z,w));
-        return "QUẢN LÝ GIÁO VIÊN" + pad + name;
-    }
+    
     
     public String[] getMenus() {
         return menus;
