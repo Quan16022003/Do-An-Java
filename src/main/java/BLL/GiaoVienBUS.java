@@ -5,18 +5,31 @@
 package BLL;
 
 import DTO.GiaoVien;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 /**
  *
  * @author apple
  */
 public class GiaoVienBUS {
        public boolean check(GiaoVien gv){
-           int cccd = 0;
-           if (gv.getCCCD().isBlank() != false)
-               cccd = Integer.parseInt(gv.getCCCD());
+           String EMAIL_PATTERN = 
+            "^[a-zA-Z][\\w-]+@([\\w]+\\.[\\w]+|[\\w]+\\.[\\w]{2,}\\.[\\w]{2,})$";
            if (
-                   cccd * 0 != 0
+                    Pattern.matches("[0-9]*",gv.getCCCD())
+                    |Pattern.matches("^[1-zA-Z0-9\\s\\/]*$",gv.getDiaChi())
+                    |Pattern.matches("[a-z0-9]*",gv.getMaGV())
+                    |Pattern.matches("[a-z0-9\\s]*",gv.getHoTen())
+                    |Pattern.matches("^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$", gv.getNgaySinh())
+                    |Pattern.matches("[a-z\\s]*",gv.getMonHoc())
+                    |Pattern.matches("(?i)(nam|nu)",gv.getGioiTinh())
+                    |Pattern.matches("[a-z\\s]*",gv.getNoiSinh())
+                    |Pattern.matches("[a-z\\s]*",gv.getQueQuan())
+                    |Pattern.matches("^[1-zA-Z0-9\\s\\/]*$",gv.getNoiO())
+                    |Pattern.matches("[0-9\\s]*", gv.getSoDienThoai())
+                    |Pattern.matches(EMAIL_PATTERN, gv.getEmail())
+                    |Pattern.matches("[a-z\\s]*",gv.getToChuyenMon())
+                    |gv.getCCCD().isEmpty()
                     |gv.getDiaChi().isEmpty()
                     |gv.getMaGV().isEmpty()
                     |gv.getHoTen().isEmpty()

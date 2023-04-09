@@ -5,6 +5,7 @@ import GUI.HomeformGiaoVien;
 import GUI.EditGiaoVien;
 import DTO.GiaoVien;
 import BLL.GiaoVienBUS;
+import DAL.BindingListener;
 import javax.swing.JOptionPane;
 //import model.Student;
 
@@ -29,6 +30,21 @@ public class InputGiaoVien extends javax.swing.JDialog {
         this.setTitle("Sửa thông tin sinh viên");
         BUS = new GiaoVienBUS();
         DAO = new GiaoVienDAO();
+        String EMAIL_PATTERN = 
+            "^[a-zA-Z][\\w-]+@([\\w]+\\.[\\w]+|[\\w]+\\.[\\w]{2,}\\.[\\w]{2,})$";
+        txtMaGV.getDocument().addDocumentListener(new BindingListener(txtMaGV, "[a-z0-9]*"));
+        txtCCCD.getDocument().addDocumentListener(new BindingListener(txtCCCD, "[0-9]*"));
+        txtDiaChi.getDocument().addDocumentListener(new BindingListener(txtDiaChi, "^[a-zA-Z0-9\\s\\/]*$"));
+        txtHoTen.getDocument().addDocumentListener(new BindingListener(txtHoTen,"[a-z0-9\\s]*"));
+        txtNgaySinh.getDocument().addDocumentListener(new BindingListener(txtNgaySinh,"^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$"));        
+        txtMonHoc.getDocument().addDocumentListener(new BindingListener(txtMonHoc,"[a-z\\s]*"));
+        txtGioiTinh.getDocument().addDocumentListener(new BindingListener(txtGioiTinh,"(?i)(nam|nu)"));        
+        txtNoiSinh.getDocument().addDocumentListener(new BindingListener(txtNoiSinh,"[a-z\\s]*"));        
+        txtQueQuan.getDocument().addDocumentListener(new BindingListener(txtQueQuan,"[a-z\\s]*"));        
+        txtNoiO.getDocument().addDocumentListener(new BindingListener(txtNoiO,"^[1-zA-Z0-9\\s\\/]*$"));      
+        txtSoDienThoai.getDocument().addDocumentListener(new BindingListener(txtSoDienThoai,"[0-9\\s]*"));        
+        txtEmail.getDocument().addDocumentListener(new BindingListener(txtEmail,EMAIL_PATTERN));   
+        txtToChuyenMon.getDocument().addDocumentListener(new BindingListener(txtToChuyenMon,"[a-z\\s]*"));
     }
 
     /**

@@ -33,12 +33,13 @@ public class MainForm extends JFrame{
     
     public MainForm(String username) throws HeadlessException {
         setSize(FRAME_SIZE);
+        setResizable(true);
         setBackground(FRAME_COLOR);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setResizable(false);
+//        setResizable(false);
         getRootPane().putClientProperty("JRootPane.titleBarBackground", new Color(34,40,49));
-        getRootPane().putClientProperty("JRootPane.titleBarForeground", Color.white);
+//        getRootPane().putClientProperty("JRootPane.titleBarForeground", Color.white);
         ImageIcon icon = new ImageIcon("./src/main/java/Image/management_48px.png");
         setIconImage(icon.getImage());
         setTitle(username);
