@@ -1,42 +1,31 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package GUI;
 
-import BLL.AccountBLL;
-import DTO.Account;
+import BLL.LoginBUS;
 import com.formdev.flatlaf.FlatLightLaf;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.util.HashMap;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.HeadlessException;
+import java.awt.event.*;
 import javax.swing.*;
-import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
-import javax.swing.plaf.OptionPaneUI;
-import javax.swing.plaf.RootPaneUI;
-
-/**
- *
- * @author Nguyen Hoang Quan
- */
 
 public class LoginForm extends JFrame implements KeyListener, ActionListener{
-    private final Color FRAME_COLOR = new Color(238,238,238);
-    private final Font font = new Font("Segoe UI", 0, 16);
-    private final AccountBLL accountBLL = new AccountBLL();
-    private HashMap<String, Account> loginInfo = accountBLL.getLoginInfo();
+    private final Font font = new Font("Segoe UI", Font.PLAIN, 16);
+    private final LoginBUS loginBL = new LoginBUS();
     private JButton dangNhapButton;
     private JTextField userField;
     private JPasswordField passwordField;
     
     public LoginForm() throws HeadlessException {
         setSize(new Dimension(400,250));
+        Color FRAME_COLOR = new Color(238, 238, 238);
         setBackground(FRAME_COLOR);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
         setResizable(false);
         getRootPane().putClientProperty("JRootPane.titleBarBackground", new Color(34,40,49));
         getRootPane().putClientProperty("JRootPane.titleBarForeground", Color.white);
@@ -44,17 +33,16 @@ public class LoginForm extends JFrame implements KeyListener, ActionListener{
         setIconImage(icon.getImage());
         setTitle("QUẢN LÝ GIÁO VIÊN");
         setLayout(new BorderLayout());
-        
-        
+
         getContentPane().add(createForm(), BorderLayout.CENTER);
         getContentPane().add(createButtonsPanel(), BorderLayout.PAGE_END);
-        
+
     }
     
     private JPanel createButtonsPanel() {
         JPanel buttonsPanel = new JPanel();
         dangNhapButton = new JButton("Đăng nhập");
-        dangNhapButton.setPreferredSize(new Dimension(110, 32));
+        dangNhapButton.setPreferredSize(new Dimension(100, 32));
         dangNhapButton.addActionListener(this);
         buttonsPanel.add(dangNhapButton);
         return buttonsPanel;
@@ -96,39 +84,19 @@ public class LoginForm extends JFrame implements KeyListener, ActionListener{
     
     public static void main(String[] args) {
         FlatLightLaf.setup();
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new LoginForm().setVisible(true);
-            }
-            
-        });
+        SwingUtilities.invokeLater(() -> new LoginForm().setVisible(true));
     }
-    
-    private boolean checkvalid() {
-        if (userField.getText().isEmpty() || String.valueOf(passwordField.getPassword()).isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Vui lòng điền đầy đủ thông tin");
-            return false;
-        }
 
-        return true;
-    }
-    
-    
+
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (userField.getText().isEmpty() || String.valueOf(passwordField.getPassword()).isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Vui lòng điền đầy đủ thông tin");
-            } else {
-                dangNhapButton.doClick();
-            }
+            dangNhapButton.doClick();
         }        
     }
 
     @Override
     public void keyTyped(KeyEvent e) {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
@@ -138,28 +106,27 @@ public class LoginForm extends JFrame implements KeyListener, ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String userID = userField.getText();
+        String username = userField.getText();
         String password = String.valueOf(passwordField.getPassword());
-        
-        if (loginInfo.containsKey(userID)) {
-            if (loginInfo.get(userID).getPassword().equals(password)) {
-                JOptionPane.showMessageDialog(null, "Đăng nhập thành công");
-                dispose();
-                SwingUtilities.invokeLater(() -> {
-                    new MainForm(userField.getText()).setVisible(true);
-                });
-            } else {
-                JOptionPane.showMessageDialog(null, "Đăng nhập không thành công");
-                passwordField.setText("");
+        String validation = loginBL.validateLogin(username, password);
+        if (validation.equals("OK")) {
+            JOptionPane.showMessageDialog(null, "Đăng nhập thành công");
+            String maGiaoVien = loginBL.getMaGiaoVien(username);
+//            if (maGiaoVien.equals("admin")) {
+//                SwingUtilities.invokeLater(() -> new AdminFrame().setVisible(true));
+//            } else {
+//                SwingUtilities.invokeLater(() -> new UserFrame(maGiaoVien).setVisible(true));
+//            }
+            SwingUtilities.invokeLater(() -> new MainForm(maGiaoVien).setVisible(true));
+            dispose();
+        }
+        else {
+            JOptionPane.showMessageDialog(null, validation);
+            if (validation.equals("Mật khẩu không đúng"))
                 passwordField.requestFocus();
-            }
+            else
+                userField.requestFocus();
+
         }
-        else  {
-            JOptionPane.showMessageDialog(null, "Tài khoản không tồn tại");
-            userField.setText("");
-            passwordField.setText("");
-            userField.requestFocus();
-        }
-            
     }
 }

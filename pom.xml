@@ -28,12 +28,14 @@
             <groupId>com.formdev</groupId>
             <artifactId>flatlaf</artifactId>
             <version>3.0</version>
-      </dependency>
-        <dependency>
-            <groupId>org.netbeans.external</groupId>
-            <artifactId>AbsoluteLayout</artifactId>
-            <version>RELEASE150</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/commons-dbutils/commons-dbutils -->
+        <dependency>
+            <groupId>commons-dbutils</groupId>
+            <artifactId>commons-dbutils</artifactId>
+            <version>1.7</version>
+        </dependency>
+
     </dependencies>
     
 </project>

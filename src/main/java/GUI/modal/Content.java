@@ -4,7 +4,7 @@
  */
 package GUI.modal;
 
-import java.awt.Dimension;
+import java.awt.*;
 import javax.swing.JPanel;
 
 /**
@@ -13,7 +13,9 @@ import javax.swing.JPanel;
  */
 public abstract class Content extends JPanel{
     final Dimension CONTENT_SIZE = new Dimension(1080, 688);
+    final Color CONTENT_COLOR = new Color(238,238,238);
     public Content() {
         setPreferredSize(CONTENT_SIZE);
+        setBackground(CONTENT_COLOR);
     }
 }
