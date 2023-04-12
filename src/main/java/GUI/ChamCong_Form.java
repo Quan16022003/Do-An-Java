@@ -8,7 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.ComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -24,12 +26,13 @@ public class ChamCong_Form extends Content implements MouseListener {
     private JPanel p, pn1;
     private JLabel lblYear, lblWeek, lblID, lblSubJect, lblClass, lblSum,
             lblMo, lblTu, lblWe, lblTh, lblFr, lblSa;
+    private JComboBox cbbGV;
     private JTextField txtYear, txtWeek, txtID, txtSubJect, txtClass, txtSum;
     private int sum;
     private JLabel[][] lblTiet;
-    private JLabel lblbreak;
+    private JLabel lblbreak,lblGV;
     private int tongNghi = 0;
-    private JButton bt1;
+    private JButton bt1,btApply;
     
     public ChamCong_Form() {
         super();
@@ -40,52 +43,62 @@ public class ChamCong_Form extends Content implements MouseListener {
 //Header: năm, tuần, mã GV
          lblYear = new JLabel();
         lblYear.setText("Năm");
-        lblYear.setBounds(230, 50, 30, 20);
+        lblYear.setBounds(230, 40, 30, 20);
          txtYear = new JTextField();
         txtYear.setBackground(Color.decode("#E3F2FD"));
         txtYear.setText("2020");
-        txtYear.setBounds(290, 50, 71, 22);
+        txtYear.setBounds(290, 40, 71, 22);
 
         lblWeek = new JLabel();
         lblWeek.setText("Tuần");
-        lblWeek.setBounds(411, 50, 30, 20);
+        lblWeek.setBounds(411, 40, 30, 20);
         txtWeek = new JTextField();
         txtWeek.setBackground(Color.decode("#E3F2FD"));
         txtWeek.setText("5");
-        txtWeek.setBounds(451, 50, 71, 22);
+        txtWeek.setBounds(451, 40, 71, 22);
 
         lblID = new JLabel();
         lblID.setText("Mã GV");
-        lblID.setBounds(572, 50, 37, 20);
+        lblID.setBounds(572, 40, 37, 20);
         txtID = new JTextField();
         txtID.setBackground(Color.decode("#E3F2FD"));
         txtID.setText("GV001");
-        txtID.setBounds(619, 50, 71, 22);
+        txtID.setBounds(619, 40, 71, 22);
         
-        bt1 = new JButton();
-        bt1.setText("Xác Nhận");
-        bt1.setBounds(730, 50, 100, 20);
-        bt1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(pn1, "Hiển thị bảng chấm công tuần "+txtWeek.getText()+", năm "+txtYear.getText()+" của "+txtID.getText());
-                
-            }
-        });
-
+//        bt1 = new JButton();
+//        bt1.setText("Xác Nhận");
+//        bt1.setBounds(730, 40, 100, 20);
+//        bt1.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                JOptionPane.showMessageDialog(pn1, "Hiển thị bảng chấm công tuần "+txtWeek.getText()+", năm "+txtYear.getText()+" của "+txtID.getText());
+//                
+//            }
+//        });
+        
+        lblGV = new JLabel();
+        lblGV.setText("BẢNG CHẤM CÔNG CỦA GIÁO VIÊN: ");
+        lblGV.setBounds(230,95,200,20);
+        
+        String[] a = {"Chọn giáo viên","Nguyễn Văn A","Lê Thị B"};
+        cbbGV = new JComboBox(a);
+        cbbGV.setBounds(430, 90, 150, 30);
+        
+        
         add(lblYear);
         add(txtYear);
         add(lblWeek);
         add(txtWeek);
         add(lblID);
         add(txtID);
-        add(bt1);
+        add(lblGV);
+        add(cbbGV);
         /**
          * ****************************************************************
          */
 //BODY: TKB
         pn1 = new JPanel();
-        pn1.setBounds(140, 100, 800, 450);
+        pn1.setBounds(140, 150, 800, 450);
         pn1.setLayout(new GridLayout(12, 6));
 
         lblMo = new JLabel("Thứ Hai", SwingConstants.CENTER);
@@ -151,28 +164,40 @@ public class ChamCong_Form extends Content implements MouseListener {
         txtClass.setText("12a4");
         txtClass.setBounds(290, 630, 70, 22);
 
-        lblSubJect = new JLabel();
-        lblSubJect.setText("Môn");
-        lblSubJect.setBounds(411, 630, 30, 20);
-        txtSubJect = new JTextField();
-        txtSubJect.setBackground(Color.decode("#E3F2FD"));
-        txtSubJect.setText("Hoa hoc");
-        txtSubJect.setBounds(451, 630, 64, 22);
+//        lblSubJect = new JLabel();
+//        lblSubJect.setText("Môn");
+//        lblSubJect.setBounds(411, 630, 30, 20);
+//        txtSubJect = new JTextField();
+//        txtSubJect.setBackground(Color.decode("#E3F2FD"));
+//        txtSubJect.setText("Hoa hoc");
+//        txtSubJect.setBounds(451, 630, 64, 22);
 
         lblSum = new JLabel();
         lblSum.setText("Tổng ngày nghỉ");
-        lblSum.setBounds(572, 630, 90, 20);
+        lblSum.setBounds(411, 630, 90, 20);
         txtSum = new JTextField();
         txtSum.setBackground(Color.decode("#E3F2FD"));
         txtSum.setText(String.valueOf(tongNghi));
-        txtSum.setBounds(669, 630, 30, 22);
+        txtSum.setBounds(501, 630, 30, 22);
 
-        add(lblSubJect);
-        add(txtSubJect);
+        btApply = new JButton();
+        btApply.setText("Apply");
+        btApply.setBounds(600, 630, 80, 25);
+        btApply.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showConfirmDialog(pn1, "Bạn chắc chắn muốn lưu? ");
+             
+            }
+        });
+        
+//        add(lblSubJect);
+//        add(txtSubJect);
         add(lblClass);
         add(txtClass);
         add(lblSum);
         add(txtSum);
+        add(btApply);
 //        
 //        pn1.setVisible(false);
 //        lblClass.setVisible(false);
