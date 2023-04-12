@@ -1,17 +1,14 @@
 package GUI;
 
 import GUI.modal.Content;
-import com.sun.source.tree.BreakTree;
-import com.sun.source.tree.ContinueTree;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.Locale;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -46,7 +43,7 @@ public class ChamCong_Form extends Content implements MouseListener {
         lblYear.setBounds(230, 50, 30, 20);
          txtYear = new JTextField();
         txtYear.setBackground(Color.decode("#E3F2FD"));
-        txtYear.setText("");
+        txtYear.setText("2020");
         txtYear.setBounds(290, 50, 71, 22);
 
         lblWeek = new JLabel();
@@ -54,7 +51,7 @@ public class ChamCong_Form extends Content implements MouseListener {
         lblWeek.setBounds(411, 50, 30, 20);
         txtWeek = new JTextField();
         txtWeek.setBackground(Color.decode("#E3F2FD"));
-        txtWeek.setText("");
+        txtWeek.setText("5");
         txtWeek.setBounds(451, 50, 71, 22);
 
         lblID = new JLabel();
@@ -62,12 +59,19 @@ public class ChamCong_Form extends Content implements MouseListener {
         lblID.setBounds(572, 50, 37, 20);
         txtID = new JTextField();
         txtID.setBackground(Color.decode("#E3F2FD"));
-        txtID.setText("");
+        txtID.setText("GV001");
         txtID.setBounds(619, 50, 71, 22);
         
         bt1 = new JButton();
         bt1.setText("Xác Nhận");
         bt1.setBounds(730, 50, 100, 20);
+        bt1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(pn1, "Hiển thị bảng chấm công tuần "+txtWeek.getText()+", năm "+txtYear.getText()+" của "+txtID.getText());
+                
+            }
+        });
 
         add(lblYear);
         add(txtYear);
@@ -80,31 +84,31 @@ public class ChamCong_Form extends Content implements MouseListener {
          * ****************************************************************
          */
 //BODY: TKB
-        JPanel pn1 = new JPanel();
+        pn1 = new JPanel();
         pn1.setBounds(140, 100, 800, 450);
         pn1.setLayout(new GridLayout(12, 6));
 
-        JLabel lblMo = new JLabel("Thứ Hai", SwingConstants.CENTER);
+        lblMo = new JLabel("Thứ Hai", SwingConstants.CENTER);
         lblMo.setBackground(Color.decode("#29B6F6"));
         lblMo.setOpaque(true);
         pn1.add(lblMo);
 
-        JLabel lblTu = new JLabel("Thứ Ba", SwingConstants.CENTER);
+        lblTu = new JLabel("Thứ Ba", SwingConstants.CENTER);
         lblTu.setBackground(Color.decode("#29B6F6"));
         lblTu.setOpaque(true);
         pn1.add(lblTu);
 
-        JLabel lblWe = new JLabel("Thứ Tư", SwingConstants.CENTER);
+        lblWe = new JLabel("Thứ Tư", SwingConstants.CENTER);
         lblWe.setBackground(Color.decode("#29B6F6"));
         lblWe.setOpaque(true);
         pn1.add(lblWe);
 
-        JLabel lblTh = new JLabel("Thứ Năm", SwingConstants.CENTER);
+        lblTh = new JLabel("Thứ Năm", SwingConstants.CENTER);
         lblTh.setBackground(Color.decode("#29B6F6"));
         lblTh.setOpaque(true);
         pn1.add(lblTh);
 
-        JLabel lblFr = new JLabel("Thứ Sáu", SwingConstants.CENTER);
+        lblFr = new JLabel("Thứ Sáu", SwingConstants.CENTER);
         lblFr.setBackground(Color.decode("#29B6F6"));
         lblFr.setOpaque(true);
         pn1.add(lblFr);
@@ -139,26 +143,26 @@ public class ChamCong_Form extends Content implements MouseListener {
          * ***********************************************************
          */
 //FOOTER: môn, lớp , tổng ngày nghỉ
-        JLabel lblClass = new JLabel();
+        lblClass = new JLabel();
         lblClass.setText("Lớp");
         lblClass.setBounds(230, 630, 40, 20);
-        JTextField txtClass = new JTextField();
+        txtClass = new JTextField();
         txtClass.setBackground(Color.decode("#E3F2FD"));
         txtClass.setText("12a4");
         txtClass.setBounds(290, 630, 70, 22);
 
-        JLabel lblSubJect = new JLabel();
+        lblSubJect = new JLabel();
         lblSubJect.setText("Môn");
         lblSubJect.setBounds(411, 630, 30, 20);
-        JTextField txtSubJect = new JTextField();
+        txtSubJect = new JTextField();
         txtSubJect.setBackground(Color.decode("#E3F2FD"));
         txtSubJect.setText("Hoa hoc");
         txtSubJect.setBounds(451, 630, 64, 22);
 
-        JLabel lblSum = new JLabel();
+        lblSum = new JLabel();
         lblSum.setText("Tổng ngày nghỉ");
         lblSum.setBounds(572, 630, 90, 20);
-        JTextField txtSum = new JTextField();
+        txtSum = new JTextField();
         txtSum.setBackground(Color.decode("#E3F2FD"));
         txtSum.setText(String.valueOf(tongNghi));
         txtSum.setBounds(669, 630, 30, 22);
@@ -169,27 +173,41 @@ public class ChamCong_Form extends Content implements MouseListener {
         add(txtClass);
         add(lblSum);
         add(txtSum);
+//        
+//        pn1.setVisible(false);
+//        lblClass.setVisible(false);
+//        txtClass.setVisible(false);
+//        lblSubJect.setVisible(false);
+//        txtSubJect.setVisible(false);
+//        lblSum.setVisible(false);
+//        txtSum.setVisible(false);
+//
 
-//        this.setLayout(null);
-//        this.add(p);
-//        p.setBounds(0, 0, 1080  , 670);
-//        this.f = f;
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
         JLabel lb1 = (JLabel) e.getSource();
+
         if (lb1.getBackground().equals(Color.decode("#FF8A80"))) {
-            lb1.setBackground(Color.decode("#FF5252"));
-            int result = JOptionPane.showConfirmDialog(this, "Ban da xac nhan thong tin");
+            int result = JOptionPane.showConfirmDialog(this, "Xác nhận giáo viên "+txtID.getText()+" vắng "+lb1.getText());
             if(result == JOptionPane.YES_OPTION) {
-                int tongTiet = SumAbsent(lblTiet);
-                lblSum.setText((String.valueOf(tongTiet)));
+                lb1.setBackground(Color.decode("#FF5252"));
+                txtSum.setText((String.valueOf(SumAbsent(lblTiet))));
             } else {
                 if (lb1.getBackground().equals(Color.decode("#FF5252"))) {
             lb1.setBackground(Color.decode("#FF8A80"));
                 }
             }
+        } else if (lb1.getBackground().equals(Color.decode("#FF5252"))) {
+            int result = JOptionPane.showConfirmDialog(this, "Xác nhận xóa tiết vắng của giáo viên "+txtID.getText());
+            if(result == JOptionPane.YES_OPTION) {
+                lb1.setBackground(Color.decode("#FF8A80"));
+                txtSum.setText((String.valueOf(SumAbsent(lblTiet))));
+            } 
+//            else {
+//                txtSum.setText((String.valueOf(tongTiet)));
+//            }
         }
     }
 
@@ -237,5 +255,20 @@ public class ChamCong_Form extends Content implements MouseListener {
         }
         return sum;
     }
+
+//    @Override
+//    public void actionPerformed(ActionEvent e) {
+//        if("Xác Nhận".equals(bt1.getText())) {
+//            add(pn1);
+//
+//        add(lblSubJect);
+//        add(txtSubJect);
+//        add(lblClass);
+//        add(txtClass);
+//        add(lblSum);
+//        add(txtSum);
+
+//        }
+//    }
 
 }
