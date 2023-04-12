@@ -1,8 +1,6 @@
 package GUI;
 
 import DAL.GiaoVienDAO;
-import GUI.HomeformGiaoVien;
-import GUI.EditGiaoVien;
 import DTO.GiaoVien;
 import BLL.GiaoVienBUS;
 import DAL.BindingListener;
@@ -86,7 +84,6 @@ public class InputGiaoVien extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
        // setTitle("THÔNG TIN GIÁO VIÊN");
-
         jLabel2.setText("Mã giáo viên:");
         jLabel2.setSize(new java.awt.Dimension(50, 20));
 
