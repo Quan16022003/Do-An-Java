@@ -4,27 +4,27 @@
  */
 package DTO;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  *
  * @author Nguyen Hoang Quan
  */
 public class TaiKhoan {
-    private int id;
     private String username;
     private String password;
     private String maGiaoVien;
     private String role;
-    private int is_deleted;
 
     public TaiKhoan() {
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public TaiKhoan(ResultSet rs) throws SQLException {
+        setUsername(rs.getString("username"));
+        setPassword(rs.getString("password"));
+        setMaGiaoVien(rs.getString("ma_giao_vien"));
+        setRole(rs.getString("role"));
     }
 
     public String getUsername() {
@@ -59,11 +59,13 @@ public class TaiKhoan {
         this.role = role;
     }
 
-    public int getIs_deleted() {
-        return is_deleted;
-    }
-
-    public void setIs_deleted(int is_deleted) {
-        this.is_deleted = is_deleted;
+    @Override
+    public String toString() {
+        return "TaiKhoan{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", maGiaoVien='" + maGiaoVien + '\'' +
+                ", role='" + role + '\'' +
+                '}';
     }
 }

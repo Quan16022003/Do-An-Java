@@ -32,14 +32,15 @@ public class MainForm extends JFrame{
     private String[] menus = new String[]{"Quản lý giáo viên","Chấm công giáo viên", "Xin chào", "Tạm biệt"};
     
     public MainForm(String username) throws HeadlessException {
+        System.out.println(username );
         setSize(FRAME_SIZE);
         setResizable(true);
         setBackground(FRAME_COLOR);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-//        setResizable(false);
+        setResizable(false);
         getRootPane().putClientProperty("JRootPane.titleBarBackground", new Color(34,40,49));
-//        getRootPane().putClientProperty("JRootPane.titleBarForeground", Color.white);
+        getRootPane().putClientProperty("JRootPane.titleBarForeground", Color.white);
         ImageIcon icon = new ImageIcon("./src/main/java/Image/management_48px.png");
         setIconImage(icon.getImage());
         setTitle(username);
@@ -78,8 +79,12 @@ public class MainForm extends JFrame{
         validate();
     }
 
-    
-    
+    @Override
+    public void setTitle(String title) {
+        String newTitle = "QUẢN LÝ GIÁO VIÊN    -   " + (title == null ? "ADMIN" : title.toUpperCase());
+        super.setTitle(newTitle);
+    }
+
     public String[] getMenus() {
         return menus;
     }

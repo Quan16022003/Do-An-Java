@@ -3,8 +3,17 @@ package BLL;
 import DAL.TaiKhoanDAO;
 import DTO.TaiKhoan;
 
+import java.util.List;
+
 public class LoginBUS {
     TaiKhoanDAO taiKhoanDAO = new TaiKhoanDAO();
+
+    public LoginBUS() {
+        List<TaiKhoan> taiKhoans= taiKhoanDAO.selectAll();
+        for (var tk : taiKhoans) {
+            System.out.println(tk.toString());
+        }
+    }
 
     public String validateLogin(String username, String password) {
         if (username.matches(".*[^a-zA-Z0-9].*")) {
@@ -20,7 +29,7 @@ public class LoginBUS {
             return "Mật khẩu không được để trống";
         }
 
-        TaiKhoan taiKhoan = taiKhoanDAO.selectByUsername(username);
+        TaiKhoan taiKhoan = taiKhoanDAO.select(username);
 
         if (taiKhoan != null) {
             if (taiKhoan.getPassword().equals(password)) {
@@ -33,7 +42,7 @@ public class LoginBUS {
     }
 
     public String getMaGiaoVien(String username) {
-        return taiKhoanDAO.selectByUsername(username).getMaGiaoVien();
+        return taiKhoanDAO.select(username).getMaGiaoVien();
 
     }
 }

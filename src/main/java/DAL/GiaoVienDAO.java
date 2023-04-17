@@ -17,30 +17,11 @@ import java.util.logging.Logger;
  */
 public class GiaoVienDAO {
     public void add(GiaoVien gv) {
-        Connection conn = DBConnection.getInstance().getConnection();
-        String query = "INSERT INTO giaovien(ma, mama) VALUES (?,?)";
-        try {
-            PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setString(1, gv.getMaGV());
-            stmt.setString(2, gv.getMonHoc());
-            stmt.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(GiaoVienDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
     }
     
     public void edit(GiaoVien gv) {
-        Connection conn = DBConnection.getInstance().getConnection();
-        String query = "UPDATE giaovien SET mama=? WHERE ma=?";
-        try {
-            PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setString(2, gv.getMaGV());
-            stmt.setString(1, gv.getMonHoc());
-            stmt.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(GiaoVienDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }         
-            
+
     }
     
 }
