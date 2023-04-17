@@ -13,10 +13,9 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.HeadlessException;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.*;
 
 /**
  *
@@ -37,7 +36,17 @@ public class MainForm extends JFrame{
         setResizable(true);
         setBackground(FRAME_COLOR);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                int result = JOptionPane.showConfirmDialog(null,
+                        "Bạn có muốn đóng ứng dụng không", "Confirm close", JOptionPane.YES_NO_OPTION);
+                if (result == JOptionPane.YES_OPTION) {
+                    setDefaultCloseOperation(EXIT_ON_CLOSE);
+                }
+            }
+        });
         setResizable(false);
         getRootPane().putClientProperty("JRootPane.titleBarBackground", new Color(34,40,49));
         getRootPane().putClientProperty("JRootPane.titleBarForeground", Color.white);
@@ -54,6 +63,7 @@ public class MainForm extends JFrame{
         add(sideBar, BorderLayout.WEST);
         add(pContent, BorderLayout.CENTER);
         pack();
+
     }
     
     public void changeContent(JLabel menu) {
@@ -89,4 +99,13 @@ public class MainForm extends JFrame{
         return menus;
     }
 
+    public void logout() {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new LoginForm().setVisible(true);
+            }
+        });
+        dispose();
+    }
 }
