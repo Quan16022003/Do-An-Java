@@ -4,6 +4,7 @@ import DAL.GiaoVienDAO;
 import DTO.GiaoVien;
 import BLL.GiaoVienBUS;
 import DAL.BindingListener;
+import DTO.ToChuyenMon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 //import model.Student;
@@ -23,6 +24,7 @@ public class EditGiaoVien extends javax.swing.JDialog {
     
     public EditGiaoVien(javax.swing.JPanel parent) {
 //        super(parent, modal);
+
         initComponents();
         this.setLocationRelativeTo(null);
         home = (HomeformGiaoVien) parent;
@@ -36,14 +38,14 @@ public class EditGiaoVien extends javax.swing.JDialog {
         txtDiaChi.getDocument().addDocumentListener(new BindingListener(txtDiaChi, "^[a-zA-Z0-9\\s\\/]*$"));
         txtHoTen.getDocument().addDocumentListener(new BindingListener(txtHoTen,"[a-z0-9\\s]*"));
         txtNgaySinh.getDocument().addDocumentListener(new BindingListener(txtNgaySinh,"^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$"));        
-        txtMonHoc.getDocument().addDocumentListener(new BindingListener(txtMonHoc,"[a-z\\s]*"));
-        txtGioiTinh.getDocument().addDocumentListener(new BindingListener(txtGioiTinh,"(?i)(nam|nu)"));        
+//        txtMonHoc.getDocument().addDocumentListener(new BindingListener(txtMonHoc,"[a-z\\s]*"));
+//        txtGioiTinh.getDocument().addDocumentListener(new BindingListener(txtGioiTinh,"(?i)(nam|nu)"));        
         txtNoiSinh.getDocument().addDocumentListener(new BindingListener(txtNoiSinh,"[a-z\\s]*"));        
         txtQueQuan.getDocument().addDocumentListener(new BindingListener(txtQueQuan,"[a-z\\s]*"));        
         txtNoiO.getDocument().addDocumentListener(new BindingListener(txtNoiO,"^[1-zA-Z0-9\\s\\/]*$"));      
         txtSoDienThoai.getDocument().addDocumentListener(new BindingListener(txtSoDienThoai,"[0-9\\s]*"));        
         txtEmail.getDocument().addDocumentListener(new BindingListener(txtEmail,EMAIL_PATTERN));   
-        txtToChuyenMon.getDocument().addDocumentListener(new BindingListener(txtToChuyenMon,"[a-z\\s]*"));
+//        txtToChuyenMon.getDocument().addDocumentListener(new BindingListener(txtToChuyenMon,"[a-z\\s]*"));
     }
 
     /**
@@ -54,6 +56,10 @@ public class EditGiaoVien extends javax.swing.JDialog {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
+        String monhoc[] = {"tram cam"," FA", "no life"};
+                String gioitinh[] = {"nu", "khong phai nu", "loai khac"};
+                        String chuyenmon[] = {"thi lai", " rot mon", "helpless"};
+        
         btnEdit = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         
@@ -83,8 +89,8 @@ public class EditGiaoVien extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        txtMonHoc = new javax.swing.JTextField();
-        txtGioiTinh = new javax.swing.JTextField();
+        txtMonHoc = new javax.swing.JComboBox(monhoc);
+        txtGioiTinh = new javax.swing.JComboBox(gioitinh);
         txtQueQuan = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -95,7 +101,7 @@ public class EditGiaoVien extends javax.swing.JDialog {
         txtNoiO = new javax.swing.JTextField();
         txtCCCD = new javax.swing.JTextField();
         txtSoDienThoai = new javax.swing.JTextField();
-        txtToChuyenMon = new javax.swing.JTextField();
+        txtToChuyenMon = new javax.swing.JComboBox(chuyenmon);
         jLabel14 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
 
@@ -138,9 +144,9 @@ public class EditGiaoVien extends javax.swing.JDialog {
 
         txtNoiSinh.setText("");
         
-        txtMonHoc.setText("");
+//        txtMonHoc.setText("");
 
-        txtGioiTinh.setText("");
+//        txtGioiTinh.setText("");
 
         txtQueQuan.setText("");
         
@@ -152,7 +158,7 @@ public class EditGiaoVien extends javax.swing.JDialog {
 
         txtSoDienThoai.setText("");
 
-        txtToChuyenMon.setText("");
+//        txtToChuyenMon.setText("");
         
         txtEmail.setText("");
 
@@ -299,15 +305,15 @@ public class EditGiaoVien extends javax.swing.JDialog {
         String MaGV = "", HoTen = "", NgaySinh = "", MonHoc = "",
                GioiTinh = "",  NoiSinh = "",  QueQuan = "", DiaChi = "" ,
                NoiO = "", CCCD = "", SoDienThoai = "",
-               Email = "", ToChuyenMon = "";
+               Email = "", ToChuyenMon = "", DanToc = "", TonGiao = "", NgayCap = "", NoiCap = "";
           
         boolean isOK = true;
         
         MaGV = txtMaGV.getText();
         HoTen = txtHoTen.getText();
         NgaySinh = txtNgaySinh.getText();
-        MonHoc = txtMonHoc.getText();
-        GioiTinh = txtGioiTinh.getText();
+        MonHoc = txtMonHoc.getSelectedItem().toString();
+        GioiTinh = txtGioiTinh.getSelectedItem().toString();
         NoiSinh = txtNoiSinh.getText();
         QueQuan = txtQueQuan.getText();
         DiaChi = txtDiaChi.getText();
@@ -315,7 +321,7 @@ public class EditGiaoVien extends javax.swing.JDialog {
         CCCD = txtCCCD.getText();
         SoDienThoai = txtSoDienThoai.getText();
         Email = txtEmail.getText();
-        ToChuyenMon = txtToChuyenMon.getText();
+        ToChuyenMon = txtToChuyenMon.getSelectedItem().toString();
         
 //        try {
 //            age = Integer.parseInt(txtAge.getText());
@@ -341,7 +347,7 @@ public class EditGiaoVien extends javax.swing.JDialog {
                MaGV, HoTen, NgaySinh, MonHoc,
                GioiTinh,  NoiSinh, QueQuan, DiaChi,
                NoiO, CCCD, SoDienThoai,
-               Email, ToChuyenMon
+               Email, ToChuyenMon, DanToc, TonGiao, NgayCap, NoiCap
             );
             
             if (BUS.check(giaovien))
@@ -429,13 +435,13 @@ public class EditGiaoVien extends javax.swing.JDialog {
     private javax.swing.JTextField txtNoiO;
     private javax.swing.JTextField txtCCCD;
     private javax.swing.JTextField txtSoDienThoai;
-    private javax.swing.JTextField txtToChuyenMon;
+    private javax.swing.JComboBox txtToChuyenMon;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtHoTen;
     private javax.swing.JTextField txtNgaySinh;
     private javax.swing.JTextField txtNoiSinh;
-    private javax.swing.JTextField txtMonHoc;
-    private javax.swing.JTextField txtGioiTinh;
+    private javax.swing.JComboBox txtMonHoc;
+    private javax.swing.JComboBox txtGioiTinh;
     private javax.swing.JTextField txtQueQuan;
     private javax.swing.JTextField txtDiaChi;
     // End of variables declaration                   
@@ -445,13 +451,34 @@ public class EditGiaoVien extends javax.swing.JDialog {
         txtNoiO.setText(g.getNoiO());
         txtCCCD.setText(g.getCCCD());
         txtSoDienThoai.setText(g.getSoDienThoai());
-        txtToChuyenMon.setText(g.getToChuyenMon());
+
+        if (g.getMonHoc()== "tram cam")
+            txtMonHoc.setSelectedIndex(0);
+        if (g.getMonHoc()== " FA")
+            txtMonHoc.setSelectedIndex(1);
+        else 
+            txtMonHoc.setSelectedIndex(2);
+        
+        if (g.getGioiTinh() == "nu")
+            txtGioiTinh.setSelectedIndex(0);
+        if (g.getGioiTinh() == "khong phai nu")
+            txtGioiTinh.setSelectedIndex(1);
+        else 
+            txtGioiTinh.setSelectedIndex(2);
+        
+        if (g.getToChuyenMon()== "thi lai")
+            txtToChuyenMon.setSelectedIndex(0);
+        if (g.getToChuyenMon()== " rot mon")
+            txtToChuyenMon.setSelectedIndex(1);
+        else 
+            txtToChuyenMon.setSelectedIndex(2);
+        
         txtEmail.setText(g.getEmail());
         txtHoTen.setText(g.getHoTen());
         txtNgaySinh.setText(g.getNgaySinh());
         txtNoiSinh.setText(g.getNoiSinh());
-        txtMonHoc.setText(g.getMonHoc());
-        txtGioiTinh.setText(g.getGioiTinh());
+
+
         txtQueQuan.setText(g.getQueQuan());
         txtDiaChi.setText(g.getDiaChi());
     }

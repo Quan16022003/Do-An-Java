@@ -13,9 +13,10 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.HeadlessException;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
@@ -31,25 +32,14 @@ public class MainForm extends JFrame{
     private String[] menus = new String[]{"Quản lý giáo viên","Chấm công giáo viên", "Xin chào", "Tạm biệt"};
     
     public MainForm(String username) throws HeadlessException {
-        System.out.println(username );
         setSize(FRAME_SIZE);
         setResizable(true);
         setBackground(FRAME_COLOR);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                int result = JOptionPane.showConfirmDialog(null,
-                        "Bạn có muốn đóng ứng dụng không", "Confirm close", JOptionPane.YES_NO_OPTION);
-                if (result == JOptionPane.YES_OPTION) {
-                    setDefaultCloseOperation(EXIT_ON_CLOSE);
-                }
-            }
-        });
-        setResizable(false);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+//        setResizable(false);
         getRootPane().putClientProperty("JRootPane.titleBarBackground", new Color(34,40,49));
-        getRootPane().putClientProperty("JRootPane.titleBarForeground", Color.white);
+//        getRootPane().putClientProperty("JRootPane.titleBarForeground", Color.white);
         ImageIcon icon = new ImageIcon("./src/main/java/Image/management_48px.png");
         setIconImage(icon.getImage());
         setTitle(username);
@@ -63,7 +53,6 @@ public class MainForm extends JFrame{
         add(sideBar, BorderLayout.WEST);
         add(pContent, BorderLayout.CENTER);
         pack();
-
     }
     
     public void changeContent(JLabel menu) {
@@ -89,23 +78,10 @@ public class MainForm extends JFrame{
         validate();
     }
 
-    @Override
-    public void setTitle(String title) {
-        String newTitle = "QUẢN LÝ GIÁO VIÊN    -   " + (title == null ? "ADMIN" : title.toUpperCase());
-        super.setTitle(newTitle);
-    }
-
+    
+    
     public String[] getMenus() {
         return menus;
     }
 
-    public void logout() {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new LoginForm().setVisible(true);
-            }
-        });
-        dispose();
-    }
 }

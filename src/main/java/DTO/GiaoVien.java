@@ -6,14 +6,14 @@ package DTO;
  */
 public class GiaoVien {
     private String MaGV, HoTen, NgaySinh, MonHoc, GioiTinh,  NoiSinh,  QueQuan, DiaChi ,
-            NoiO, CCCD, SoDienThoai, Email, ToChuyenMon;
+            NoiO, CCCD, SoDienThoai, Email, ToChuyenMon, DanToc, TonGiao, NgayCap, NoiCap;
            
     public GiaoVien() {
     }
 
     public GiaoVien(String MaGV, String HoTen, String NgaySinh, String MonHoc, String GioiTinh,
             String NoiSinh, String QueQuan, String DiaChi, String NoiO, String CCCD,
-            String SoDienThoai, String Email, String ToChuyenMon) {
+            String SoDienThoai, String Email, String ToChuyenMon, String DanToc, String TonGiao, String NgayCap, String NoiCap) {
         this.MaGV = MaGV;
         this.HoTen = HoTen;
         this.NgaySinh = NgaySinh;
@@ -27,6 +27,42 @@ public class GiaoVien {
         this.SoDienThoai = SoDienThoai;
         this.Email = Email;
         this.ToChuyenMon = ToChuyenMon;
+        this.DanToc = DanToc;
+        this.TonGiao = TonGiao;
+        this.NgayCap = NgayCap;
+        this.NoiCap = NoiCap;
+    }
+
+    public String getDanToc() {
+        return DanToc;
+    }
+
+    public void setDanToc(String DanToc) {
+        this.DanToc = DanToc;
+    }
+
+    public String getTonGiao() {
+        return TonGiao;
+    }
+
+    public void setTonGiao(String TonGiao) {
+        this.TonGiao = TonGiao;
+    }
+
+    public String getNgayCap() {
+        return NgayCap;
+    }
+
+    public void setNgayCap(String NgayCap) {
+        this.NgayCap = NgayCap;
+    }
+
+    public String getNoiCap() {
+        return NoiCap;
+    }
+
+    public void setNoiCap(String NoiCap) {
+        this.NoiCap = NoiCap;
     }
 
     public void setMaGV(String MaGV) {

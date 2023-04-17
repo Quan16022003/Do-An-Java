@@ -3,6 +3,7 @@ package GUI;
 //import controller.ControllerImp;
 import GUI.EditGiaoVien;
 import DTO.GiaoVien;
+import DAL.GiaoVienDAO;
 import GUI.modal.Content;
 import GUI.modal.HomeAbstractDataModel;
 import java.awt.Dimension;
@@ -28,6 +29,7 @@ public class HomeformGiaoVien extends Content {
     private HomeAbstractDataModel tblModel;
     private int selectedIndex;
     private JTable table;
+    private GiaoVienDAO Dao;
     
     public HomeformGiaoVien() {
         initComponents();
@@ -200,6 +202,7 @@ public class HomeformGiaoVien extends Content {
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (key == JOptionPane.YES_OPTION){
                     giaoviens.remove(selectedIndex);
+                    //EditGiaoVien edit = new EditGiaoVien(this);
                 }
         }
         showData();
