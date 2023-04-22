@@ -14,7 +14,7 @@ import javax.swing.*;
 
 public class LoginForm extends JFrame implements KeyListener, ActionListener{
     private final Font font = new Font("Segoe UI", Font.PLAIN, 16);
-    private final LoginBUS loginBL = new LoginBUS();
+    private final LoginBUS loginBUS = new LoginBUS();
     private JButton dangNhapButton;
     private JTextField userField;
     private JPasswordField passwordField;
@@ -108,15 +108,10 @@ public class LoginForm extends JFrame implements KeyListener, ActionListener{
     public void actionPerformed(ActionEvent e) {
         String username = userField.getText();
         String password = String.valueOf(passwordField.getPassword());
-        String validation = loginBL.validateLogin(username, password);
+        String validation = loginBUS.validateLogin(username, password);
         if (validation.equals("OK")) {
             JOptionPane.showMessageDialog(null, "Đăng nhập thành công");
-            String maGiaoVien = loginBL.getMaGiaoVien(username);
-//            if (maGiaoVien.equals("admin")) {
-//                SwingUtilities.invokeLater(() -> new AdminFrame().setVisible(true));
-//            } else {
-//                SwingUtilities.invokeLater(() -> new UserFrame(maGiaoVien).setVisible(true));
-//            }
+            String maGiaoVien = loginBUS.getMaNhanVien(username);
             SwingUtilities.invokeLater(() -> new MainForm(maGiaoVien).setVisible(true));
             dispose();
         }

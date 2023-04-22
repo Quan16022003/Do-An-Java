@@ -2,16 +2,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package DTO;
+package GUI.QLTaiKhoan;
+
+import GUI.Content;
+
+import java.awt.*;
 
 /**
  *
  * @author Nguyen Hoang Quan
  */
-public class ThoiKhoaBieu {
-    private int maTKB;
-    private String maGV;
-    private String maLop;
-    private int thu;
-    private int tiet;
+public final class Form4Content extends Content {
+
+    public Form4Content() {
+        super();
+        setBackground(Color.YELLOW);
+    }
+    
 }
