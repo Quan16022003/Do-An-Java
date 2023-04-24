@@ -18,20 +18,20 @@ import java.util.logging.Logger;
  */
 public class MySQLConnection {
 
-    private Connection connection;
+    public Connection connection;
     private final String URL = "jdbc:mysql://localhost:3306/quanlygiaovien";
     private final String USER = "root";
-    private final String PASSWORD = "";
+    private final String PASSWORD = "123456";
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final Logger LOGGER = Logger.getLogger(MySQLConnection.class.getName());
-    MySQLConnection() {
+    public MySQLConnection() {
         try {
             Class.forName(JDBC_DRIVER);
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
-
+    
     public void openConnection() {
         try {
             connection = DriverManager.getConnection(URL, USER, PASSWORD);

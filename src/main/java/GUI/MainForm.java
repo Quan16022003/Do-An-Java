@@ -4,9 +4,9 @@
  */
 package GUI;
 
-import GUI.QLChamCong.Form1Content;
-import GUI.QLLuong.Form2Content;
-import GUI.QLNhanVien.Form3Content;
+import GUI.QLChamCong.Form2Content;
+import GUI.QLLuong.Form3Content;
+import GUI.QLNhanVien.Form1Content;
 import GUI.QLTaiKhoan.Form4Content;
 
 import java.awt.BorderLayout;
