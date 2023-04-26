@@ -6,85 +6,49 @@ package DAL;
 
 import DTO.TaiKhoan;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
  * @author Nguyen Hoang Quan
  */
-public class TaiKhoanDAO extends AbstractDAO<TaiKhoan, String> {
-    private static final Logger LOGGER = Logger.getLogger(TaiKhoanDAO.class.getName());
+public class TaiKhoanDAO extends AbstractAccessDatabase<TaiKhoan> implements IDAO<TaiKhoan, Integer> {
+    public TaiKhoanDAO() {
+        setClazz(TaiKhoan.class);
+    }
 
     @Override
     public boolean insert(TaiKhoan taiKhoan) {
         String query = "INSERT INTO tai_khoan(username, password, ma_giao_vien, role) VALUES (?, ?, ?, ?)";
-        mySQLConnection.openConnection();
-        int rowsInserted = mySQLConnection.executeUpdate(query, taiKhoan.getUsername(), taiKhoan.getPassword(), taiKhoan.getMaNhanVien(), taiKhoan.getRole());
-        LOGGER.log(Level.SEVERE, (rowsInserted > 0) ? "insert successfully" : "insert failed");
-        mySQLConnection.closeConnection();
-        return rowsInserted > 0;
+        return executeUpdate(query, taiKhoan.getUsername(), taiKhoan.getPassword(), taiKhoan.getMaGiaoVien(), taiKhoan.getRole());
     }
 
     @Override
     public boolean update(TaiKhoan taiKhoan) {
-        String query = "UPDATE tai_khoan SET password=?, role=? WHERE username=?";
-        mySQLConnection.openConnection();
-        int rowsUpdated = mySQLConnection.executeUpdate(query, taiKhoan.getPassword(), taiKhoan.getRole(), taiKhoan.getUsername());
-        LOGGER.log(Level.SEVERE, (rowsUpdated > 0)? "update successfully" : "update failed");
-        mySQLConnection.closeConnection();
-        return rowsUpdated > 0;
+        String query = "UPDATE tai_khoan SET username=?,password=?,ma_giao_vien=?,role=?,is_delete=? WHERE id=?";
+        return executeUpdate(query, taiKhoan.getUsername(), taiKhoan.getPassword(), taiKhoan.getMaGiaoVien(), taiKhoan.getRole(), taiKhoan.getIs_deleted(), taiKhoan.getId());
     }
 
     @Override
-    public boolean delete(String username) {
-        String query = "UPDATE tai_khoan SET is_deleted=1 WHERE username = ?";
-        mySQLConnection.openConnection();
-        int rowsDeleted = mySQLConnection.executeUpdate(query, username);
-        LOGGER.log(Level.SEVERE, (rowsDeleted > 0)? "delete successfully" : "delete failed");
-        mySQLConnection.closeConnection();
-        return rowsDeleted > 0;
+    public boolean delete(Integer id) {
+        String query = "UPDATE tai_khoan SET is_delete=1 WHERE id=?";
+        return executeUpdate(query, id);
     }
 
     @Override
-    public TaiKhoan select(String username) {
-        String query = "SELECT * FROM tai_khoan WHERE username=? AND is_deleted=0";
-        try {
-            mySQLConnection.openConnection();
-            ResultSet rs = mySQLConnection.executeQuery(query, username);
-            TaiKhoan taiKhoan = null;
-            if (rs.next()) {
-                taiKhoan = new TaiKhoan(rs);
-            }
-            mySQLConnection.closeConnection();
-            return taiKhoan;
-        } catch (SQLException e) {
-            LOGGER.log(Level.SEVERE, e.getMessage(), e);
-            return null;
-        }
+    public TaiKhoan select(Integer id) {
+        String query = "SELECT * FROM tai_khoan WHERE id=? AND is_delete=0";
+        return executeQuery(query, id);
     }
 
     @Override
     public List<TaiKhoan> selectAll() {
-        String query = "SELECT * FROM tai_khoan WHERE is_deleted=0";
-        try {
-            mySQLConnection.openConnection();
-            List<TaiKhoan> taiKhoans = new ArrayList<>();
-            ResultSet rs = mySQLConnection.executeQuery(query);
-            while (rs.next()) {
-                TaiKhoan taiKhoan = new TaiKhoan(rs);
-                taiKhoans.add(taiKhoan);
-            }
-            mySQLConnection.closeConnection();
-            return taiKhoans;
-        } catch (SQLException e) {
-            LOGGER.log(Level.SEVERE, e.getMessage(), e);
-            return new ArrayList<>();
-        }
+        String query = "SELECT * FROM tai_khoan WHERE is_delete=0";
+        return executeQueryList(query);
     }
 
+    public TaiKhoan selectByUsername(String username) {
+        String query = "SELECT * FROM tai_khoan WHERE username=? AND is_delete=0";
+        return executeQuery(query, username);
+    }
 }
