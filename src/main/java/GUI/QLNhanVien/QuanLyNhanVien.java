@@ -1,8 +1,6 @@
 package GUI.QLNhanVien;
 
-import GUI.QLLuong.XemLichSu;
-import GUI.QLLuong.XemLuongHienTai;
-import GUI.modal.Content;
+import GUI.Model.Content;
 
 import javax.swing.*;
 import java.awt.*;

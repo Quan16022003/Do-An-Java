@@ -10,7 +10,7 @@ import DAL.NVdao_updateNVDV_Pass;
 import DTO.DonViDTO;
 import DTO.NhanVienDTO_u_nvdv_pass;
 import DTO.NhanVienDonViDTO;
-import GUI.modal.Content;
+import GUI.Model.Content;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;

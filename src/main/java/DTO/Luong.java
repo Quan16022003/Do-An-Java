@@ -9,10 +9,10 @@ public class Luong {
     private int luongCB;
     private int ngayCongQD;
     private int ngayCongTT;
-    private double hsChucVu;
     private double hsLuong;
     private int luongHuong;
-    private int tyLePC;
+    private double hsChucVu;
+    private double heSoPhuCap;
     private int mucPC;
     private int mucBH;
     private int thucLinh;
@@ -100,12 +100,12 @@ public class Luong {
         this.thucLinh = thucLinh;
     }
 
-    public int getTyLePC() {
-        return tyLePC;
+    public double getHeSoPhuCap() {
+        return heSoPhuCap;
     }
 
-    public void setTyLePC(int tyLePC) {
-        this.tyLePC = tyLePC;
+    public void setHeSoPhuCap(double heSoPhuCap) {
+        this.heSoPhuCap = heSoPhuCap;
     }
 
     public int getNgayCongQD() {
@@ -128,10 +128,10 @@ public class Luong {
         double tyLeNC = ngayCongTT * 1.0 / ngayCongQD;
         DecimalFormat df = new DecimalFormat("#.#");
         luongHuong = (int) (Double.valueOf(df.format(luongCB / 1000 * hsLuong * tyLeNC)) * 1000);
-        mucPC = (int) (luongCB*1.0 / 1000 * (hsLuong + hsChucVu) * tyLePC / 100) * 1000;
+        mucPC = (int) (luongCB*1.0 / 1000 * (hsLuong + hsChucVu) * heSoPhuCap) * 1000;
         mucBH = (int) (Double.valueOf(df.format(luongHuong /1000 * 8.5 / 100)) * 1000);
         thucLinh = luongHuong + mucPC - mucBH;
-        System.out.println(luongCB*1.0 / 1000 * (hsLuong + hsChucVu) * tyLePC / 100);
+        System.out.println(luongCB*1.0 / 1000 * (hsLuong + hsChucVu) * heSoPhuCap / 100);
     }
 
     @Override
@@ -145,7 +145,7 @@ public class Luong {
                 ", hsChucVu=" + hsChucVu +
                 ", hsLuong=" + hsLuong +
                 ", luongHuong=" + luongHuong +
-                ", tyLePC=" + tyLePC +
+                ", tyLePC=" + heSoPhuCap +
                 ", mucPC=" + mucPC +
                 ", mucBH=" + mucBH +
                 ", thucLinh=" + thucLinh +

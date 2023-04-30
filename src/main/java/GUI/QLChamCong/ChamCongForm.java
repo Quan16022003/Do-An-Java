@@ -8,7 +8,7 @@ import BLL.Report_Excel.expDATA;
 import DAL.BindingListener;
 import DAL.ChamCongDAO;
 import DTO.ChamCong;
-import GUI.modal.Content;
+import GUI.Model.Content;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

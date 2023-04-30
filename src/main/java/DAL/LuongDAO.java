@@ -58,7 +58,7 @@ public class LuongDAO extends AbstractDAO<Luong, Integer> {
                 luong.setMaNV(rs.getString("MaNV"));
                 luong.setTenNV(rs.getString("HoTenNV"));
                 luong.setHsLuong(rs.getDouble("HeSoLuong"));
-                luong.setTyLePC(rs.getInt("TyLePC"));
+                luong.setHeSoPhuCap(rs.getInt("TyLePC"));
                 luong.setHsChucVu(rs.getDouble("HsCV"));
                 luong.setNgayCongQD(rs.getInt("ngay_cong_qd"));
                 luong.setNgayCongTT(rs.getInt("ngay_cong_tt"));
@@ -108,7 +108,8 @@ public class LuongDAO extends AbstractDAO<Luong, Integer> {
     }
     public List<Luong> createNew(LocalDate localDate) {
         List<Luong> list = new ArrayList<Luong>();
-        String query = "SELECT *, (SELECT LuongCB FROM luongcb ORDER BY id DESC LIMIT 1) AS luongCB\n" +
+        String query = "SELECT nv.MaNV, Ten, HeSoLuong, HeSoPhuCap, HeSoChucVu, ngay_cong_qd, ngay_cong_tt, luongCB" +
+                "(SELECT LuongCB FROM luongcb ORDER BY id DESC LIMIT 1) AS luongCB\n" +
                 "FROM nhan_vien\n" +
                 "JOIN chuc_vu cv ON cv.MaCV = nhan_vien.MaChucVu\n" +
                 "JOIN (SELECT ma_nhan_vien MaNV, COUNT(*) as ngay_cong_qd FROM `cham_cong` WHERE month(ngay_cham_cong) = "+ localDate.getMonthValue() +" AND year(ngay_cham_cong) = "+ localDate.getYear() +" GROUP BY ma_nhan_vien) tk1 ON tk1.MaNV = nhan_vien.MaNV\n" +
@@ -121,8 +122,8 @@ public class LuongDAO extends AbstractDAO<Luong, Integer> {
                 luong.setMaNV(rs.getString("MaNV"));
                 luong.setTenNV(rs.getString("Ten"));
                 luong.setHsLuong(rs.getDouble("HeSoLuong"));
-                luong.setTyLePC(rs.getInt("TyLePC"));
-                luong.setHsChucVu(rs.getDouble("HsCV"));
+                luong.setHeSoPhuCap(rs.getInt("HeSoPhucCap"));
+                luong.setHsChucVu(rs.getDouble("HeSoChucVu"));
                 luong.setNgayCongQD(rs.getInt("ngay_cong_qd"));
                 luong.setNgayCongTT(rs.getInt("ngay_cong_tt"));
                 luong.setLuongCB(rs.getInt("luongCB"));

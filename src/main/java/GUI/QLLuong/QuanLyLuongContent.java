@@ -4,8 +4,7 @@
  */
 package GUI.QLLuong;
 
-import GUI.modal.Content;
-import com.formdev.flatlaf.FlatIntelliJLaf;
+import GUI.Model.Content;
 
 import javax.swing.*;
 import java.awt.*;

@@ -4,7 +4,8 @@
  */
 package GUI;
 
-import GUI.MainForm;
+import DTO.ChucNang;
+import DTO.CodeCN;
 import GUI.Model.RoundedLabel;
 
 import java.awt.BorderLayout;
@@ -14,7 +15,13 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import javax.swing.*;
+
+import static DTO.CodeCN.*;
 
 /**
  *
@@ -24,7 +31,7 @@ public class SideBar extends JPanel implements MouseListener{
     private final Color SIDEBAR_COLOR = new Color(57,62,70);
     private final Font SIDEBAR_FONT = new Font("Segoe UI", Font.PLAIN, 18);
     private JPanel imagePanel, menuPanel, logoutPanel;
-    private JLabel[] menusLabel;
+    private JLabel[] menuLabels;
     private JLabel itemActiveLabel, logoutLabel;
     private final MainForm _main;
     public SideBar(MainForm main) {
@@ -54,18 +61,35 @@ public class SideBar extends JPanel implements MouseListener{
     private void initMenu() {
         menuPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 10));
         menuPanel.setBackground(SIDEBAR_COLOR);
-        String[] menus = _main.getMenus();
-        menusLabel = new JLabel[menus.length];
-        for (int i = 0; i < menus.length; i++) {
-            menusLabel[i] = new RoundedLabel(menus[i]);
-            menusLabel[i].setPreferredSize(new Dimension(180, 50));
-            menusLabel[i].setForeground(Color.WHITE);
-            menusLabel[i].setFont(SIDEBAR_FONT);
-            menusLabel[i].setBackground(SIDEBAR_COLOR);
-            menusLabel[i].addMouseListener(this);
-            menuPanel.add(menusLabel[i]);
+//        String[] menus = _main.getMenus();
+//        menusLabel = new JLabel[menus.length];
+//        for (int i = 0; i < menus.length; i++) {
+//            menusLabel[i] = new RoundedLabel(menus[i]);
+//            menusLabel[i].setPreferredSize(new Dimension(180, 50));
+//            menusLabel[i].setForeground(Color.WHITE);
+//            menusLabel[i].setFont(SIDEBAR_FONT);
+//            menusLabel[i].setBackground(SIDEBAR_COLOR);
+//            menusLabel[i].addMouseListener(this);
+//            menuPanel.add(menusLabel[i]);
+//        }
+        List<ChucNang> dsChucNang = _main.getDsChucNang();
+        Map<CodeCN, String> menus = new HashMap<>();
+        for (var chucNang : dsChucNang) {
+            menus.put(chucNang.getCodeCN(), chucNang.getTenCN());
         }
-        itemActiveLabel = menusLabel[0];
+        Set menuKeys = menus.keySet();
+        menuLabels = new JLabel[menuKeys.size()];
+        int i = 0;
+        if (menuKeys.contains(QLNV)) menuLabels[i++] = initMenuLabel(menus.get(QLNV));
+        if (menuKeys.contains(QLHD)) menuLabels[i++] = initMenuLabel(menus.get(QLHD));
+        if (menuKeys.contains(QLCC)) menuLabels[i++] = initMenuLabel(menus.get(QLCC));
+        if (menuKeys.contains(QLTL)) menuLabels[i++] = initMenuLabel(menus.get(QLTL));
+
+        for (i = 0; i < menuLabels.length; i++) {
+            menuPanel.add(menuLabels[i]);
+        }
+
+        itemActiveLabel = menuLabels[0];
         itemActiveLabel.setBackground(new Color(0,173,181));
         itemActiveLabel.setForeground(Color.BLACK);
     }
@@ -84,6 +108,17 @@ public class SideBar extends JPanel implements MouseListener{
         logoutPanel.add(logoutLabel);
     }
 
+
+    private JLabel initMenuLabel(String name) {
+        JLabel menuLabel = new RoundedLabel(name);
+        menuLabel.setPreferredSize(new Dimension(180, 50));
+        menuLabel.setForeground(Color.WHITE);
+        menuLabel.setFont(SIDEBAR_FONT);
+        menuLabel.setBackground(SIDEBAR_COLOR);
+        menuLabel.addMouseListener(this);
+        return menuLabel;
+    }
+
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getSource() == logoutLabel) {
@@ -92,7 +127,7 @@ public class SideBar extends JPanel implements MouseListener{
         }
         if (e.getSource() instanceof JLabel && e.getSource() != itemActiveLabel) {
             itemActiveLabel = (JLabel) e.getSource();
-            for (JLabel lblMenu : menusLabel) {
+            for (JLabel lblMenu : menuLabels) {
                 lblMenu.setBackground(SIDEBAR_COLOR);
                 lblMenu.setForeground(Color.WHITE);
             }
@@ -128,5 +163,9 @@ public class SideBar extends JPanel implements MouseListener{
             JLabel lblExited = (JLabel) e.getSource();
             lblExited.setBackground(SIDEBAR_COLOR);
         }
+    }
+
+    public JLabel getActiveLabel() {
+        return itemActiveLabel;
     }
 }

@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
-package GUI.modal;
+package GUI.Model;
 
 import DTO.NhanVien;
 import java.util.ArrayList;

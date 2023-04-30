@@ -7,17 +7,16 @@ import GUI.QLChamCong.ChamCongForm;
 import GUI.QLLuong.QuanLyLuongContent;
 import GUI.QLNhanVien.HopDongGUI;
 import GUI.QLNhanVien.NhanVienGUI;
-import GUI.modal.Content;
+import GUI.Model.Content;
+import GUI.ViewInfo;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.bouncycastle.asn1.x500.style.RFC4519Style.c;
-
 public class MainFormBUS {
     private String[] dsTenCN;
-    private Map<String, CodeCN> mapTenCN;
+    private Map<CodeCN, String> mapTenCN;
     private List<ChucNang> dsChucNang;
     private ChucNangDAO dao;
     public MainFormBUS() {
@@ -29,34 +28,34 @@ public class MainFormBUS {
 //        mapTenCN.put(CodeCN.QLTL, "Quản lý tính lương");
     }
 
-    public String[] getDsTenCN(String username) {
+    public List<ChucNang> getDsTenCN(String username) {
         if (dsChucNang == null) {
             dsChucNang = dao.selectAllByUsername(username);
-
-            mapTenCN = new HashMap<>();
-            dsTenCN = new String[dsChucNang.size()];
-            int i = 0;
-            for (var cn : dsChucNang) {
-                dsTenCN[i++] = cn.getTenCN();
-                mapTenCN.put(cn.getTenCN(), cn.getCodeCN());
-            }
         }
-        return dsTenCN;
+        return dsChucNang;
     }
 
     public Content changeContent(String tenCN) {
-        switch (mapTenCN.get(tenCN)) {
-            case QLNV -> {
-                return new NhanVienGUI();
-            }
-            case QLHD -> {
-                return new HopDongGUI();
-            }
-            case QLCC -> {
-                return new ChamCongForm();
-            }
-            case QLTL -> {
-                return new QuanLyLuongContent();
+        for (var chucNang : dsChucNang) {
+            if (chucNang.getTenCN().equals(tenCN)) {
+                switch (chucNang.getCodeCN()) {
+                    case QLNV -> {
+                        return new NhanVienGUI();
+                    }
+                    case QLHD -> {
+                        return new HopDongGUI();
+                    }
+                    case QLCC -> {
+                        return new ChamCongForm();
+                    }
+                    case QLTL -> {
+                        return new QuanLyLuongContent();
+                    }
+                    case VIEW_INFOR -> {
+                        return new ViewInfo();
+                    }
+                }
+                break;
             }
         }
         return null;

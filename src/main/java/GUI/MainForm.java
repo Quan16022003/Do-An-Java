@@ -5,20 +5,18 @@
 package GUI;
 
 import BLL.MainFormBUS;
-import GUI.QLChamCong.ChamCongForm;
-import GUI.QLLuong.QuanLyLuongContent;
-import GUI.QLNhanVien.HopDongGUI;
+import DTO.ChucNang;
+import DTO.CodeCN;
+import GUI.Model.Content;
 import GUI.QLNhanVien.NhanVienGUI;
-import GUI.QLNhanVien.QuanLyNhanVien;
-import GUI.QLTaiKhoan.Panel_QuanLyDonVi;
-import GUI.modal.Content;
-import com.sun.tools.javac.Main;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.List;
+import java.util.Map;
 import javax.swing.*;
 
 /**
@@ -31,12 +29,11 @@ public class MainForm extends JFrame{
     private final SideBar sideBar;
     private Content pContent;
     private final MainFormBUS bus = new MainFormBUS();
-
-    private String[] menus;
+    private List<ChucNang> dsChucNang;
 
     public MainForm(String username) {
         System.out.println(username );
-        menus = bus.getDsTenCN(username);
+        dsChucNang = bus.getDsTenCN(username);
         setSize(FRAME_SIZE);
         setResizable(true);
         setBackground(FRAME_COLOR);
@@ -62,7 +59,7 @@ public class MainForm extends JFrame{
 
 //        titleBar = new TitleBar(this);
         sideBar = new SideBar(this);
-        pContent = bus.changeContent(menus[0]);
+        pContent = bus.changeContent(sideBar.getActiveLabel().getText());
 
         //this.add(titleBar, BorderLayout.PAGE_START);
         add(sideBar, BorderLayout.WEST);
@@ -85,8 +82,8 @@ public class MainForm extends JFrame{
         super.setTitle(newTitle);
     }
 
-    public String[] getMenus() {
-        return menus;
+    public List<ChucNang> getDsChucNang() {
+        return dsChucNang;
     }
 
     public void logout() {
