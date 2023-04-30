@@ -9,26 +9,29 @@ import java.util.Date;
 public class ChamCong {
 
     
-    private String MaNV,HoTen;
-    private int TimeIn,TimeOut;
-
+    private String MaNV,TimeIn,TimeOut,xacNhan;
+    private int Is_deleted;
     private Date NgayThang;
-//    public String getID() {
-//        return ID;
-//    }
-//
-//    public void setID(String ID) {
-//        this.ID = ID;
-//    }
+
     
-    public ChamCong( String MaNV, String HoTen, Date NgayThang, int TimeIn,int TimeOut) {
-//        this.ID = ID;
+    public ChamCong( String MaNV, String xacNhan, Date NgayThang, String TimeIn,String TimeOut,int Is_deleted) {
+        this.Is_deleted = Is_deleted;
         this.MaNV = MaNV;
-        this.HoTen = HoTen;
+        this.xacNhan = xacNhan;
         this.NgayThang = NgayThang;
         this.TimeIn = TimeIn;
         this.TimeOut = TimeOut;
     }
+
+    public int getIs_deleted() {
+        return Is_deleted;
+    }
+
+    public void setIs_deleted(int Is_deleted) {
+        this.Is_deleted = Is_deleted;
+    }
+    
+    
     public  ChamCong() {
         
     }
@@ -41,12 +44,12 @@ public class ChamCong {
         this.MaNV = MaNV;
     }
 
-    public String getHoTen() {
-        return HoTen;
+    public String getxacNhan() {
+        return xacNhan;
     }
 
-    public void setHoTen(String HoTen) {
-        this.HoTen = HoTen;
+    public void setxacNhan(String xacNhan) {
+        this.xacNhan = xacNhan;
     }
 
     public Date getNgayThang() {
@@ -59,19 +62,19 @@ public class ChamCong {
 
     
 
-    public int getTimeIn() {
+    public String getTimeIn() {
         return TimeIn;
     }
 
-    public void setTimeIn(int TimeIn) {
+    public void setTimeIn(String TimeIn) {
         this.TimeIn = TimeIn;
     }
 
-    public int getTimeOut() {
+    public String getTimeOut() {
         return TimeOut;
     }
 
-    public void setTimeOut(int TimeOut) {
+    public void setTimeOut(String TimeOut) {
         this.TimeOut = TimeOut;
     }
 

@@ -36,4 +36,14 @@ public class TaiKhoanBUS extends AbstractElementBUS<TaiKhoan, String> {
         }
         return taiKhoans;
     }
+
+    @Override
+    public boolean updateDeleted(TaiKhoan t) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<TaiKhoan> find(String k) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

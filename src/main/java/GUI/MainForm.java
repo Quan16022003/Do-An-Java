@@ -4,7 +4,7 @@
  */
 package GUI;
 
-import GUI.QLChamCong.Form2Content;
+import GUI.QLChamCong.ChamCongForm;
 import GUI.QLLuong.Form3Content;
 import GUI.QLNhanVien.Form1Content;
 import GUI.QLTaiKhoan.Form4Content;
@@ -70,7 +70,7 @@ public class MainForm extends JFrame{
         remove(pContent);
         switch (menu.getText()) {
             case "Quản lý nhân viên" -> pContent = new Form1Content();
-            case "Quản lý chấm công" -> pContent = new Form2Content();
+            case "Quản lý chấm công" -> pContent = new ChamCongForm();
             case "Quản lý lương" -> pContent = new Form3Content();
             case "Quản lý tài khoản" -> pContent = new Form4Content();
 
