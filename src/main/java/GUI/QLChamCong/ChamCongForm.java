@@ -11,9 +11,13 @@ import GUI.Content;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -25,7 +29,7 @@ public class ChamCongForm extends Content {
 
     private JTabbedPane tab1;
     private JPanel pn1, pn2;
-    private JButton btThem, btSua, btXoa, btTimKiem, btLuu, btHuy;
+    private JButton btThem, btSua, btXoa, btTimKiem, btLuu, btHuy, btExport;
     private JLabel lblTitle, lblMaNV, lblXacNhan, lblNgay, lblThang, lblNgayNghi, lblTimeIn, lblTimeOut;
     private JTextField txtMaNV, txtXacNhan, txtTimeIn, txtTimeOut, txtNgayNghi, txtTimKiem;
     private JComboBox cbNgay, cbThang;
@@ -33,6 +37,8 @@ public class ChamCongForm extends Content {
     DefaultTableModel dtm1,dtm2;
     private ArrayList<ChamCong> listChamCong;
 
+    
+    
     public void showResult() {
         ChamCong x = listChamCong.get(listChamCong.size() - 1);
 
@@ -294,6 +300,28 @@ public class ChamCongForm extends Content {
                         showTable();
 
                     }
+                }
+
+            }
+
+        });
+        
+        btExport = new JButton("Export");
+        btExport.setBounds(250, 550, 100, 35);
+        pn1.add(btExport);
+        btExport.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ArrayList<ChamCong> xa = null;
+                String[] headera = null;
+                String namefa = null;
+                String patha = null;
+                String sheetnamea = null;
+                expDATA z = new expDATA();
+                try {
+                    z.exp(listChamCong, headera, namefa, patha, sheetnamea);
+                } catch (IOException ex) {
+                    Logger.getLogger(ChamCongForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             

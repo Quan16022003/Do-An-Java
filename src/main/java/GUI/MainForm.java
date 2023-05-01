@@ -15,6 +15,8 @@ import java.awt.Dimension;
 import java.awt.HeadlessException;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import javax.swing.*;
 
 /**
@@ -30,7 +32,7 @@ public class MainForm extends JFrame{
     
     private final String[] menus = new String[]{"Quản lý nhân viên", "Quản lý chấm công", "Quản lý lương", "Quản lý tài khoản"};
     
-    public MainForm(String username) throws HeadlessException {
+    public MainForm(String username) throws HeadlessException,IOException,FileNotFoundException {
         System.out.println(username );
         setSize(FRAME_SIZE);
         setResizable(true);
