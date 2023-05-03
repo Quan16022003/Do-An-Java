@@ -4,7 +4,7 @@ import DAL.TaiKhoanDAO;
 import DTO.TaiKhoan;
 
 public class LoginBUS {
-    TaiKhoanDAO taiKhoanDAO = new TaiKhoanDAO();
+    TaiKhoanBUS bus = new TaiKhoanBUS();
 
     public String validateLogin(String username, String password) {
         if (username.matches(".*[^a-zA-Z0-9].*")) {
@@ -19,21 +19,15 @@ public class LoginBUS {
         if (password.isEmpty()) {
             return "Mật khẩu không được để trống";
         }
-
-        TaiKhoan taiKhoan = taiKhoanDAO.selectByUsername(username);
-
-        if (taiKhoan != null) {
-            if (taiKhoan.getPassword().equals(password)) {
-                return "OK";
-            } else {
-                return "Mật khẩu không đúng";
-            }
+        
+        if (bus.validate(username, password)) {
+            return "OK";
+        } else {
+            return "Tài khoản hoặc mật khẩu không đúng";
         }
-        return "Tài khoản không tồn tại";
     }
 
     public String getMaGiaoVien(String username) {
         return taiKhoanDAO.selectByUsername(username).getMaGiaoVien();
 
-    }
 }

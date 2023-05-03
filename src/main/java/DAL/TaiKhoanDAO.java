@@ -4,6 +4,7 @@
  */
 package DAL;
 
+import DTO.ChamCong;
 import DTO.TaiKhoan;
 
 import java.util.List;
@@ -12,10 +13,9 @@ import java.util.List;
  *
  * @author Nguyen Hoang Quan
  */
-public class TaiKhoanDAO extends AbstractAccessDatabase<TaiKhoan> implements IDAO<TaiKhoan, Integer> {
-    public TaiKhoanDAO() {
-        setClazz(TaiKhoan.class);
-    }
+
+public class TaiKhoanDAO extends AbstractDAO<TaiKhoan, String> {
+    private final MySQLConnection mySQLConnection = new MySQLConnection();
 
     @Override
     public boolean insert(TaiKhoan taiKhoan) {

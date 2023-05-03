@@ -8,6 +8,7 @@ package DAL;
  *
  * @author apple
  */
+
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
@@ -15,7 +16,6 @@ import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.util.function.Consumer;
 import java.util.regex.Pattern;
-
 
 public class BindingListener<T> implements DocumentListener {
     private final JTextComponent parent;
@@ -63,6 +63,4 @@ public class BindingListener<T> implements DocumentListener {
             throw new RuntimeException(ex);
         }
     }
-
-
 }

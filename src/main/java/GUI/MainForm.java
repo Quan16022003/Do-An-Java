@@ -4,19 +4,21 @@
  */
 package GUI;
 
-import GUI.modal.Content;
-import GUI.modal.SideBar;
-import GUI.modal.TitleBar;
+
+import GUI.QLChamCong.ChamCongForm;
+import GUI.QLLuong.QuanLyLuongContent;
+import GUI.QLNhanVien.Form1Content;
+import GUI.QLTaiKhoan.Form4Content;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.HeadlessException;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import javax.swing.*;
+
 
 /**
  *
@@ -25,13 +27,14 @@ import javax.swing.JPanel;
 public class MainForm extends JFrame{
     private final Dimension FRAME_SIZE = new Dimension(1280, 720);
     private final Color FRAME_COLOR = new Color(238,238,238);
-//    private final TitleBar titleBar;
     private final SideBar sideBar;
     private Content pContent;
     
     private String[] menus = new String[]{"Quản lý giáo viên","Chấm công giáo viên", "Xin chào", "Tạm biệt"};
     
-    public MainForm(String username) throws HeadlessException {
+
+    public MainForm(String username) {
+        
         setSize(FRAME_SIZE);
         setResizable(true);
         setBackground(FRAME_COLOR);
@@ -58,18 +61,11 @@ public class MainForm extends JFrame{
     public void changeContent(JLabel menu) {
         remove(pContent);
         switch (menu.getText()) {
-            case "Quản lý giáo viên" -> {
-                pContent = new Nhan_Vien_GUI();
-            }
-            case "Chấm công giáo viên" -> {
-                pContent = new ChamCong_Form();
-            }
-            case "Xin chào" -> {
-                pContent = new Form2Content();
-            }
-            case "Tạm biệt" -> {
-                pContent = new Form3Content();
-            }
+            case "Quản lý nhân viên" -> pContent = new new Nhan_Vien_GUI();
+            case "Quản lý chấm công" -> pContent = new ChamCongForm();
+            case "Quản lý lương" -> pContent = new QuanLyLuongContent();
+            case "Quản lý tài khoản" -> pContent = new Form4Content();
+
 
             default -> throw new AssertionError();
         }
