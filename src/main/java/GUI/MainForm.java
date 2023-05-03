@@ -4,9 +4,9 @@
  */
 package GUI;
 
-import GUI.QLChamCong.Form1Content;
-import GUI.QLLuong.Form2Content;
-import GUI.QLNhanVien.Form3Content;
+import GUI.QLNhanVien.Form1Content;
+import GUI.QLChamCong.ChamCongContent;
+import GUI.QLLuong.QuanLyLuongContent;
 import GUI.QLTaiKhoan.Form4Content;
 
 import java.awt.BorderLayout;
@@ -70,8 +70,8 @@ public class MainForm extends JFrame{
         remove(pContent);
         switch (menu.getText()) {
             case "Quản lý nhân viên" -> pContent = new Form1Content();
-            case "Quản lý chấm công" -> pContent = new Form2Content();
-            case "Quản lý lương" -> pContent = new Form3Content();
+            case "Quản lý chấm công" -> pContent = new ChamCongContent();
+            case "Quản lý lương" -> pContent = new QuanLyLuongContent();
             case "Quản lý tài khoản" -> pContent = new Form4Content();
 
             default -> throw new AssertionError();
