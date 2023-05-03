@@ -2,8 +2,9 @@ package DAL;
 
 import java.util.List;
 
-
-public interface IDAO<T, K> {
+public abstract class AbstractDAO<T, K> {
+    protected final MySQLConnection mySQLConnection = new MySQLConnection();
+    
     public abstract boolean insert(T t);
     public abstract boolean update(T t);
     public abstract boolean delete(K k);

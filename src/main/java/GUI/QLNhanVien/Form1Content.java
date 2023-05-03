@@ -4,6 +4,7 @@
  */
 package GUI.QLNhanVien;
 
+import GUI.QLChamCong.*;
 import GUI.Content;
 
 import javax.swing.*;

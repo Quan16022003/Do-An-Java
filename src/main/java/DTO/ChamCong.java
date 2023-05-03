@@ -1,85 +1,81 @@
 package DTO;
 
-import java.time.Duration;
-import java.time.LocalTime;
+import java.util.Date;
 
+/**
+ *
+ * @author Luan
+ */
 public class ChamCong {
-    String maNV;
-    String hoTen;
-    String gioVao;
-    String gioRa;
-    String gioCong;
-    String xacNhanCong;
 
-    public ChamCong() {
+    
+    private String MaNV,TimeIn,TimeOut,xacNhan;
+    private int Is_deleted;
+    private Date NgayThang;
+
+    
+    public ChamCong( String MaNV, String xacNhan, Date NgayThang, String TimeIn,String TimeOut,int Is_deleted) {
+        this.Is_deleted = Is_deleted;
+        this.MaNV = MaNV;
+        this.xacNhan = xacNhan;
+        this.NgayThang = NgayThang;
+        this.TimeIn = TimeIn;
+        this.TimeOut = TimeOut;
     }
 
-    public ChamCong(String maNV, String gioVao, String gioRa) {
-        this.maNV = maNV;
-        this.gioVao = gioVao;
-        this.gioRa = gioRa;
+    public int getIs_deleted() {
+        return Is_deleted;
     }
 
+    public void setIs_deleted(int Is_deleted) {
+        this.Is_deleted = Is_deleted;
+    }
+    
+    
+    public  ChamCong() {
+        
+    }
+    
     public String getMaNV() {
-        return maNV;
+        return MaNV;
     }
 
-    public void setMaNV(String maNV) {
-        this.maNV = maNV;
+    public void setMaNV(String MaNV) {
+        this.MaNV = MaNV;
     }
 
-    public String getHoTen() {
-        return hoTen;
+    public String getxacNhan() {
+        return xacNhan;
     }
 
-    public void setHoTen(String hoTen) {
-        this.hoTen = hoTen;
+    public void setxacNhan(String xacNhan) {
+        this.xacNhan = xacNhan;
     }
 
-    public String getGioVao() {
-        return gioVao;
+    public Date getNgayThang() {
+        return NgayThang;
     }
 
-    public void setGioVao(String gioVao) {
-        this.gioVao = gioVao;
+    public void setNgayThang(Date NgayThang) {
+        this.NgayThang = NgayThang;
     }
 
-    public String getGioRa() {
-        return gioRa;
+    
+
+    public String getTimeIn() {
+        return TimeIn;
     }
 
-    public void setGioRa(String gioRa) {
-        this.gioRa = gioRa;
+    public void setTimeIn(String TimeIn) {
+        this.TimeIn = TimeIn;
     }
 
-    public String getGioCong() {
-        return gioCong;
+    public String getTimeOut() {
+        return TimeOut;
     }
 
-    public void setGioCong(String gioCong) {
-        this.gioCong = gioCong;
+    public void setTimeOut(String TimeOut) {
+        this.TimeOut = TimeOut;
     }
 
-    public String getXacNhanCong() {
-        return xacNhanCong;
-    }
-
-    public void setXacNhanCong(String xacNhanCong) {
-        this.xacNhanCong = xacNhanCong;
-    }
-
-    public void calculateGioCong() {
-        Duration duration = Duration.between(LocalTime.parse(gioVao), LocalTime.parse(gioRa));
-        this.gioCong = String.format("%02d:%02d", duration.toHours(), duration.toMinutes()%60);
-        if (LocalTime.parse(this.gioCong).compareTo(LocalTime.parse("08:00")) >= 1) {
-            this.xacNhanCong = "Đủ công";
-        } else {
-            this.xacNhanCong = "Không đủ công";
-        }
-    }
-
-    @Override
-    public String toString() {
-        return String.format("Mã NV: %s, giờ vào: %s, giờ ra: %s, giờ công: %s", getMaNV(), getGioVao(), getGioRa(), getGioCong());
-    }
 }
