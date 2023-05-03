@@ -10,19 +10,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.apache.poi.hssf.record.RowRecord;
-import static org.apache.poi.hssf.record.aggregates.RowRecordsAggregate.createRow;
-import org.apache.poi.sl.usermodel.*;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFFont;
@@ -40,10 +28,10 @@ public class expDATA {
 
         //        phần đầu vào giả , tự điều chỉnh cho hợp lí nha
         
-        header = new String[]{"Cột a", "Cột b","Cột a", "Cột b", "Cột b"};
+        header = new String[]{"Mã nhân viên", "Ngày chấm công","Giờ vào", "Giờ ra", "Xác nhận"};
         path = "C:\\Users\\ADMIN\\Documents\\NetBeansProJects\\";
-        namef = "tenfile";
-        sheetname = "sheet aaa";
+        namef = "ChamCongfile";
+        sheetname = "ChamCong";
         path = path + (namef + ".xlsx");
         //        phần đầu vào giả , tự điều chỉnh cho hợp lí nha      
 
@@ -58,7 +46,7 @@ public class expDATA {
         XSSFCellStyle style = workbook.createCellStyle();
         style.setFont(font);
 
-        XSSFRow row = sheet.createRow(3);
+        XSSFRow row = sheet.createRow(0);
         XSSFCell cell;
 
         for (int h = 0; h < header.length; h++) {
