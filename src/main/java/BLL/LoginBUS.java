@@ -6,9 +6,6 @@ import DTO.TaiKhoan;
 public class LoginBUS {
     TaiKhoanBUS bus = new TaiKhoanBUS();
 
-    public LoginBUS() {
-    }
-
     public String validateLogin(String username, String password) {
         if (username.matches(".*[^a-zA-Z0-9].*")) {
             return "Tài khoản không được chứa ký tự đặc biệt";
@@ -22,8 +19,7 @@ public class LoginBUS {
         if (password.isEmpty()) {
             return "Mật khẩu không được để trống";
         }
-
-
+        
         if (bus.validate(username, password)) {
             return "OK";
         } else {
@@ -31,7 +27,7 @@ public class LoginBUS {
         }
     }
 
-    public String getMaNhanVien(String username) {
-        return bus.select(username).getMaNhanVien();
-    }
+    public String getMaGiaoVien(String username) {
+        return taiKhoanDAO.selectByUsername(username).getMaGiaoVien();
+
 }
