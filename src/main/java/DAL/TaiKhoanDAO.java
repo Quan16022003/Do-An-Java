@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  *
  * @author Nguyen Hoang Quan
  */
-public class TaiKhoanDAO implements IDAO<TaiKhoan, String> {
+public class TaiKhoanDAO extends AbstractDAO<TaiKhoan, String> {
     private final MySQLConnection mySQLConnection = new MySQLConnection();
 
     private static final Logger LOGGER = Logger.getLogger(TaiKhoanDAO.class.getName());
@@ -42,15 +42,7 @@ public class TaiKhoanDAO implements IDAO<TaiKhoan, String> {
         mySQLConnection.closeConnection();
         return rowsUpdated > 0;
     }
-    @Override
-    public List<TaiKhoan> find(String taiKhoan) {
-        
-        return null;
-    }
-    public boolean updateDeleted(TaiKhoan taiKhoan) {
-        
-        return false;
-    }
+
     @Override
     public boolean delete(String username) {
         String query = "UPDATE tai_khoan SET is_deleted=1 WHERE username = ?";

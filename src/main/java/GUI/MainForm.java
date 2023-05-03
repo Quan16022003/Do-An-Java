@@ -5,7 +5,6 @@
 package GUI;
 
 import GUI.QLChamCong.ChamCongForm;
-import GUI.QLLuong.Form3Content;
 import GUI.QLLuong.QuanLyLuongContent;
 import GUI.QLNhanVien.Form1Content;
 import GUI.QLTaiKhoan.Form4Content;

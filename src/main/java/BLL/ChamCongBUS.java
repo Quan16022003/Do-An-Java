@@ -45,12 +45,10 @@ public class ChamCongBUS extends AbstractElementBUS<ChamCong, String>{
         return listChamCong;
     }
 
-    @Override
     public boolean updateDeleted(ChamCong t) {
         return dao.updateDeleted(t);
     }
 
-    @Override
     public List<ChamCong> find(String k) {
         return dao.find(k);
     }

@@ -8,8 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LuongDAO implements IDAO<Luong, Integer> {
-    private final MySQLConnection mySQLConnection = new MySQLConnection();
+public class LuongDAO extends AbstractDAO<Luong, Integer> {
     @Override
 
     public boolean insert(Luong luong) {

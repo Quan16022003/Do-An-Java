@@ -16,7 +16,6 @@ import java.util.logging.Logger;
  * @author ADMIN
  */
 public class ChamCongDAO extends AbstractDAO<ChamCong, String> {
-
     private static final Logger LOGGER = Logger.getLogger(ChamCongDAO.class.getName());
 
     @Override
@@ -54,7 +53,6 @@ public class ChamCongDAO extends AbstractDAO<ChamCong, String> {
         return false;
     }
 
-    @Override
     public boolean updateDeleted(ChamCong t) {
         String query = "UPDATE cham_cong SET is_deleted=1 "
                 + "WHERE ma_nhan_vien=? AND ngay_cham_cong=?";
@@ -71,7 +69,6 @@ public class ChamCongDAO extends AbstractDAO<ChamCong, String> {
         return false;
     }
 
-    @Override
     public List<ChamCong> find(String k) {
         List<ChamCong> listChamCong = new ArrayList<>();
         String query = "SELECT * FROM cham_cong WHERE (ma_nhan_vien like '%"+k+"%' OR ngay_cham_cong like '%"+k+"%' OR gio_bd like '%"+k+"%' OR gio_kt like '%"+k+"%' ) and is_deleted =0";
