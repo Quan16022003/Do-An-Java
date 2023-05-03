@@ -5,9 +5,7 @@
 package DAL;
 
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,6 +16,7 @@ import java.util.logging.Logger;
  * Database connection singleton
  */
 public class MySQLConnection {
+
     public Connection connection;
     private final String URL = "jdbc:mysql://localhost:3306/quanlygiaovien";
 
@@ -40,22 +39,40 @@ public class MySQLConnection {
             LOGGER.log(Level.SEVERE, e.getMessage(), e);
         }
     }
-    
+
     public Connection getConnection() {
         return connection;
     }
-    public void openConnection() {
+
+    public void closeConnection() {
         try {
-            connection = DriverManager.getConnection(URL + database, USER, PASSWORD);
-        } catch (SQLException ex) {
-            Logger.getLogger(MySQLConnection.class.getName()).log(Level.SEVERE, null, ex);
+            connection.close();
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
         }
     }
-    public void closeConnection() {
-        DbUtils.closeQuietly(connection);
+
+    public int executeUpdate(String sql, Object... params) {
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            for (int i = 0; i < params.length; i++) {
+                statement.setObject(i + 1, params[i]);
+            }
+            return statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public void setDatabase(String database) {
-        this.database = database;
+    public ResultSet executeQuery(String sql, Object... params) {
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            for (int i = 0; i < params.length; i++) {
+                statement.setObject(i + 1, params[i]);
+            }
+            return statement.executeQuery();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
