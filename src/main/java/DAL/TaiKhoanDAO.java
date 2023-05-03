@@ -18,7 +18,9 @@ import java.util.logging.Logger;
  *
  * @author Nguyen Hoang Quan
  */
-public class TaiKhoanDAO extends AbstractDAO<TaiKhoan, String> {
+public class TaiKhoanDAO implements IDAO<TaiKhoan, String> {
+    private final MySQLConnection mySQLConnection = new MySQLConnection();
+
     private static final Logger LOGGER = Logger.getLogger(TaiKhoanDAO.class.getName());
 
     @Override

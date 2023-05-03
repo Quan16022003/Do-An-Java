@@ -4,7 +4,6 @@
  */
 package DAL;
 
-import org.apache.commons.dbutils.DbUtils;
 
 import java.sql.*;
 import java.util.logging.Level;
@@ -20,6 +19,7 @@ public class MySQLConnection {
 
     public Connection connection;
     private final String URL = "jdbc:mysql://localhost:3306/quanlygiaovien";
+
     private final String USER = "root";
     private final String PASSWORD = "123456";
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";

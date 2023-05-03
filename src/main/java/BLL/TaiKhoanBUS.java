@@ -3,14 +3,16 @@ package BLL;
 import DAL.TaiKhoanDAO;
 import DTO.TaiKhoan;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 public class TaiKhoanBUS extends AbstractElementBUS<TaiKhoan, String> {
     private final TaiKhoanDAO dao = new TaiKhoanDAO();
-    private List<TaiKhoan> taiKhoans;
 
     @Override
     public boolean insert(TaiKhoan taiKhoan) {
+        taiKhoan.setPassword(encryptedPassword(taiKhoan.getPassword()));
         return dao.insert(taiKhoan);
     }
 
@@ -31,10 +33,47 @@ public class TaiKhoanBUS extends AbstractElementBUS<TaiKhoan, String> {
 
     @Override
     public List<TaiKhoan> selectAll() {
-        if (taiKhoans == null) {
-            taiKhoans = dao.selectAll();
+        return null;
+    }
+
+    private String encryptedPassword(String password) {
+        String encrypted = null;
+        try
+        {
+            /* MessageDigest instance for MD5. */
+            MessageDigest m = MessageDigest.getInstance("MD5");
+
+            /* Add plain-text password bytes to digest using MD5 update() method. */
+            m.update(password.getBytes());
+
+            /* Convert the hash value into bytes */
+            byte[] bytes = m.digest();
+
+            /* The bytes array has bytes in decimal form. Converting it into hexadecimal format. */
+            StringBuilder s = new StringBuilder();
+            for(int i=0; i< bytes.length ;i++)
+            {
+                s.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+            }
+
+            /* Complete hashed password in hexadecimal format */
+            encrypted = s.toString();
         }
-        return taiKhoans;
+        catch (NoSuchAlgorithmException e)
+        {
+            e.printStackTrace();
+        }
+        return encrypted;
+    }
+
+    public boolean validate(String username, String password) {
+        TaiKhoan taiKhoan = select(username);
+        if (taiKhoan != null) {
+            if (taiKhoan.getPassword().equals(encryptedPassword(password))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

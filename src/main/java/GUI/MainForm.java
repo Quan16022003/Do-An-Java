@@ -6,13 +6,13 @@ package GUI;
 
 import GUI.QLChamCong.ChamCongForm;
 import GUI.QLLuong.Form3Content;
+import GUI.QLLuong.QuanLyLuongContent;
 import GUI.QLNhanVien.Form1Content;
 import GUI.QLTaiKhoan.Form4Content;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.HeadlessException;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
@@ -26,13 +26,12 @@ import javax.swing.*;
 public class MainForm extends JFrame{
     private final Dimension FRAME_SIZE = new Dimension(1280, 720);
     private final Color FRAME_COLOR = new Color(238,238,238);
-//    private final TitleBar titleBar;
     private final SideBar sideBar;
     private Content pContent;
     
     private final String[] menus = new String[]{"Quản lý nhân viên", "Quản lý chấm công", "Quản lý lương", "Quản lý tài khoản"};
     
-    public MainForm(String username) throws HeadlessException,IOException,FileNotFoundException {
+    public MainForm(String username) {
         System.out.println(username );
         setSize(FRAME_SIZE);
         setResizable(true);
@@ -73,7 +72,7 @@ public class MainForm extends JFrame{
         switch (menu.getText()) {
             case "Quản lý nhân viên" -> pContent = new Form1Content();
             case "Quản lý chấm công" -> pContent = new ChamCongForm();
-            case "Quản lý lương" -> pContent = new Form3Content();
+            case "Quản lý lương" -> pContent = new QuanLyLuongContent();
             case "Quản lý tài khoản" -> pContent = new Form4Content();
 
             default -> throw new AssertionError();
