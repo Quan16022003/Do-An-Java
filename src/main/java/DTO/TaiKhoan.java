@@ -1,26 +1,30 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package DTO;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 /**
  *
  * @author Nguyen Hoang Quan
  */
 public class TaiKhoan {
+    private int id;
     private String username;
     private String password;
-    private String maNhanVien;
+    private String maGiaoVien;
     private String role;
+    private int is_deleted;
 
     public TaiKhoan() {
     }
 
-    public TaiKhoan(ResultSet rs) throws SQLException {
-        setUsername(rs.getString("username"));
-        setPassword(rs.getString("password"));
-        setMaNhanVien(rs.getString("ma_giao_vien"));
-        setRole(rs.getString("role"));
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -39,12 +43,12 @@ public class TaiKhoan {
         this.password = password;
     }
 
-    public String getMaNhanVien() {
-        return maNhanVien;
+    public String getMaGiaoVien() {
+        return maGiaoVien;
     }
 
-    public void setMaNhanVien(String maNhanVien) {
-        this.maNhanVien = maNhanVien;
+    public void setMaGiaoVien(String maGiaoVien) {
+        this.maGiaoVien = maGiaoVien;
     }
 
     public String getRole() {
@@ -55,13 +59,11 @@ public class TaiKhoan {
         this.role = role;
     }
 
-    @Override
-    public String toString() {
-        return "TaiKhoan{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", maGiaoVien='" + maNhanVien + '\'' +
-                ", role='" + role + '\'' +
-                '}';
+    public int getIs_deleted() {
+        return is_deleted;
+    }
+
+    public void setIs_deleted(int is_deleted) {
+        this.is_deleted = is_deleted;
     }
 }
