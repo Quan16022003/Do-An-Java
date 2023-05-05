@@ -11,6 +11,9 @@ package DTO;
 public class NhanVien {
     private String MaNV, MaDV, MaLoaiNV, MaChucVu, Ten, GioiTinh, NgSinh, SDT,
             SoNha, Duong, Phuong_Xa, Quan_Huyen, TP_Tinh, CCCD, NgCap, NoiCap, NgVaoLam, image;
+    public NhanVien(){
+        this.MaDV = "0";
+    }
     public NhanVien(String MaNV, String MaDV, String MaLoaiNV, String MaChucVu
             ,String Ten, String GioiTinh, String NgSinh, String SDT, String SoNha, String Duong, String Phuong_Xa,
             String Quan_Huyen, String TP_Tinh, String CCCD, String NgCap, String NoiCap, String NgVaoLam, String image)

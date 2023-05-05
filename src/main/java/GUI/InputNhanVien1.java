@@ -23,12 +23,12 @@ import javax.swing.JTextField;
  *
  * @author apple
  */
-public class InputNhanVien extends javax.swing.JDialog{
+public class InputNhanVien1 extends javax.swing.JDialog{
     private Nhan_Vien_GUI home;
     private NhanVienDAO DAO;
     private NhanVienBUS BUS;
     
-    public InputNhanVien(javax.swing.JPanel parent) {
+    public InputNhanVien1(javax.swing.JPanel parent) {
 //        super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
@@ -36,25 +36,26 @@ public class InputNhanVien extends javax.swing.JDialog{
         BUS = new NhanVienBUS();
         DAO = new NhanVienDAO();
         
-        txtMaNV.getDocument().addDocumentListener(new BindingListener(txtMaNV, "[a-z0-9]*"));
-        txtMaDV.getDocument().addDocumentListener(new BindingListener(txtMaDV, "[a-z0-9]*"));
-        txtCCCD.getDocument().addDocumentListener(new BindingListener(txtCCCD, "\\d{12}"));
-        txtTen.getDocument().addDocumentListener(new BindingListener(txtTen,"[a-z0-9\\s]*"));
-        txtNgaySinh.getDocument().addDocumentListener(new BindingListener(txtNgaySinh,"^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$"));        
-        txtGioiTinh.getDocument().addDocumentListener(new BindingListener(txtGioiTinh,"(?i)(nam|nu)"));                   
-        txtSoDienThoai.getDocument().addDocumentListener(new BindingListener(txtSoDienThoai,"\\d{10}]*")); 
-        txtMaLoaiNV.getDocument().addDocumentListener(new BindingListener(txtMaLoaiNV, "[a-z0-9]*"));
-        txtMaChucVu.getDocument().addDocumentListener(new BindingListener(txtMaChucVu, "[a-z0-9]*"));
-        txtDuong.getDocument().addDocumentListener(new BindingListener(txtDuong,"[a-z0-9\\s]*"));
-        txtPhuong_Xa.getDocument().addDocumentListener(new BindingListener(txtPhuong_Xa,"[a-z0-9\\s]*"));
-        txtQuan_Huyen.getDocument().addDocumentListener(new BindingListener(txtQuan_Huyen,"[a-z0-9\\s]*"));
-        txtThanhPho_Tinh.getDocument().addDocumentListener(new BindingListener(txtThanhPho_Tinh,"[a-z0-9\\s]*"));
-        txtNgayCap.getDocument().addDocumentListener(new BindingListener(txtNgayCap,"^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$"));        
-        txtNoiCap.getDocument().addDocumentListener(new BindingListener(txtNoiCap,"[a-z0-9\\s]*"));
-        txtNgayVaoLam.getDocument().addDocumentListener(new BindingListener(txtNgayVaoLam,"^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$"));        
-        txtSoNha.getDocument().addDocumentListener(new BindingListener(txtSoNha, "^[a-zA-Z0-9\\s\\/]*$"));
+//        txtMaNV.getDocument().addDocumentListener(new BindingListener(txtMaNV, "[a-z0-9]*"));
+//        txtMaDV.getDocument().addDocumentListener(new BindingListener(txtMaDV, "[a-z0-9]*"));
+//        txtCCCD.getDocument().addDocumentListener(new BindingListener(txtCCCD, "\\d{12}"));
+//        txtTen.getDocument().addDocumentListener(new BindingListener(txtTen,"[a-z0-9\\s]*"));
+//        txtNgaySinh.getDocument().addDocumentListener(new BindingListener(txtNgaySinh,"^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$"));        
+//        txtGioiTinh.getDocument().addDocumentListener(new BindingListener(txtGioiTinh,"(?i)(nam|nu)"));                   
+//        txtSoDienThoai.getDocument().addDocumentListener(new BindingListener(txtSoDienThoai,"\\d{10}]*")); 
+//        txtMaLoaiNV.getDocument().addDocumentListener(new BindingListener(txtMaLoaiNV, "[a-z0-9]*"));
+//        txtMaChucVu.getDocument().addDocumentListener(new BindingListener(txtMaChucVu, "[a-z0-9]*"));
+//        txtDuong.getDocument().addDocumentListener(new BindingListener(txtDuong,"[a-z0-9\\s]*"));
+//        txtPhuong_Xa.getDocument().addDocumentListener(new BindingListener(txtPhuong_Xa,"[a-z0-9\\s]*"));
+//        txtQuan_Huyen.getDocument().addDocumentListener(new BindingListener(txtQuan_Huyen,"[a-z0-9\\s]*"));
+//        txtThanhPho_Tinh.getDocument().addDocumentListener(new BindingListener(txtThanhPho_Tinh,"[a-z0-9\\s]*"));
+//        txtNgayCap.getDocument().addDocumentListener(new BindingListener(txtNgayCap,"^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$"));        
+//        txtNoiCap.getDocument().addDocumentListener(new BindingListener(txtNoiCap,"[a-z0-9\\s]*"));
+//        txtNgayVaoLam.getDocument().addDocumentListener(new BindingListener(txtNgayVaoLam,"^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$"));        
+//        txtSoNha.getDocument().addDocumentListener(new BindingListener(txtSoNha, "^[a-zA-Z0-9\\s\\/]*$"));
     }
     private void initComponents() {
+        
         setSize(new Dimension(900, 530));
        setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -66,89 +67,84 @@ public class InputNhanVien extends javax.swing.JDialog{
         setBackground(Color.yellow);
         gbc.gridy = 0;
         imagePanel = new ChooseAvatarPanel();
-        imagePanel.setPreferredSize(new Dimension(100, 150));
+        imagePanel.setPreferredSize(new Dimension(200, 250));
         gbc.gridx = 0;
         gbc.gridheight= 5;
         gbc.fill = GridBagConstraints.VERTICAL;
         add(imagePanel, gbc);
         gbc.gridheight= 1;
         
-        var a =100;
         gbc.gridy = 0;
         JLabelMaNV = new JLabel("Mã nhân viên:");
-        JLabelMaNV.setPreferredSize(new Dimension(a, 25));
+        JLabelMaNV.setPreferredSize(new Dimension(200, 25));
         gbc.gridx = 1;
         add(JLabelMaNV, gbc);
-        
-        gbc.gridy = 1;
-        JLabelMaDV = new JLabel("Mã đơn vị:");
-        JLabelMaDV.setPreferredSize(new Dimension(a, 25));
-        gbc.gridx = 1;
-        add(JLabelMaDV, gbc);
-        
-        gbc.gridy = 2;
-        JLabelMaLoaiNV = new JLabel("Loại nhân viên:");
-        JLabelMaLoaiNV.setPreferredSize(new Dimension(a, 25));
-        gbc.gridx = 1;
-        add(JLabelMaLoaiNV, gbc);
-        
-        gbc.gridy = 3;
-        JLabelMaChucVu = new JLabel("Mã chức vụ:");
-        JLabelMaChucVu.setPreferredSize(new Dimension(a, 25));
-        gbc.gridx = 1;
-        add(JLabelMaChucVu, gbc);
-        
-        gbc.gridy = 4;
-        JLabelTen = new JLabel("Họ và tên:");
-        JLabelTen.setPreferredSize(new Dimension(a, 25));
-        gbc.gridx = 1;
-        add(JLabelTen, gbc);
-        
         txtMaNV = new JTextField();
         txtMaNV.setPreferredSize(new Dimension(150, 25));
         gbc.gridx = 2;
-        gbc.gridy = 0;
+        
         add(txtMaNV, gbc);
         
+        gbc.gridy = 1;
+        JLabelMaDV = new JLabel("Mã đơn vị:");
+        JLabelMaDV.setPreferredSize(new Dimension(200, 25));
+        gbc.gridx = 1;
+        add(JLabelMaDV, gbc);
         txtMaDV = new JTextField();
         txtMaDV.setPreferredSize(new Dimension(150, 25));
         gbc.gridx = 2;
-        gbc.gridy = 1;
         add(txtMaDV, gbc);
+        
+        gbc.gridy = 2;
+        JLabelMaLoaiNV = new JLabel("Loại nhân viên:");
+        JLabelMaLoaiNV.setPreferredSize(new Dimension(200, 25));
+        gbc.gridx = 1;
+        add(JLabelMaLoaiNV, gbc);
         txtMaLoaiNV = new JTextField();
         txtMaLoaiNV.setPreferredSize(new Dimension(150, 25));
         gbc.gridx = 2;
-        gbc.gridy = 2;
         add(txtMaLoaiNV, gbc);
+        
+        gbc.gridy = 3;
+        JLabelMaChucVu = new JLabel("Mã chức vụ:");
+        JLabelMaChucVu.setPreferredSize(new Dimension(200, 25));
+        gbc.gridx = 1;
+        add(JLabelMaChucVu, gbc);
         txtMaChucVu = new JTextField();
         txtMaChucVu.setPreferredSize(new Dimension(150, 25));
         gbc.gridx = 2;
-        gbc.gridy = 3;
         add(txtMaChucVu, gbc);
         
+        gbc.gridy = 4;
+        JLabelTen = new JLabel("Họ và tên:");
+        JLabelTen.setPreferredSize(new Dimension(200, 25));
+        gbc.gridx = 1;
+        add(JLabelTen, gbc);
         txtTen = new JTextField();
         txtTen.setPreferredSize(new Dimension(150, 25));
         gbc.gridx = 2;
-        gbc.gridy = 4;
+        gbc.gridwidth = 3;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         add(txtTen, gbc);
+        gbc.gridwidth = 1;
         
         
         gbc.gridy = 0;
         JLabelGioiTinh = new JLabel("Giới tính:");
-        JLabelGioiTinh.setPreferredSize(new Dimension(a, 25));
+        JLabelGioiTinh.setPreferredSize(new Dimension(200, 25));
         gbc.gridx = 3;
         add(JLabelGioiTinh, gbc);
-        
         txtGioiTinh = new JTextField();
-        txtGioiTinh.setPreferredSize(new Dimension(150, 25));
-        gbc.gridx = 4;
+        txtGioiTinh.setPreferredSize(new Dimension(400, 25));
+        gbc.gridx = 9;
+        gbc.gridwidth = 1;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         add(txtGioiTinh, gbc);
         gbc.gridwidth = 1;
         
         gbc.gridy = 1;
         JLabelNgaySinh = new JLabel("Ngày sinh:");
-        JLabelNgaySinh.setPreferredSize(new Dimension(a, 25));
+        JLabelNgaySinh.setPreferredSize(new Dimension(200, 25));
         gbc.gridx = 3;
         add(JLabelNgaySinh, gbc);
         txtNgaySinh = new JTextField();
@@ -158,7 +154,7 @@ public class InputNhanVien extends javax.swing.JDialog{
         
         gbc.gridy = 2;
         JLabelSoDienThoai = new JLabel("Số điện thoại:");
-        JLabelSoDienThoai.setPreferredSize(new Dimension(a, 25));
+        JLabelSoDienThoai.setPreferredSize(new Dimension(200, 25));
         gbc.gridx = 3;
         add(JLabelSoDienThoai, gbc);
         txtSoDienThoai = new JTextField();
@@ -168,7 +164,7 @@ public class InputNhanVien extends javax.swing.JDialog{
         
         gbc.gridy = 3;
         JLabelNgayVaoLam = new JLabel("Ngày vào làm:");
-        JLabelNgayVaoLam.setPreferredSize(new Dimension(a, 25));
+        JLabelNgayVaoLam.setPreferredSize(new Dimension(200, 25));
         gbc.gridx = 3;
         add(JLabelNgayVaoLam, gbc);
         txtNgayVaoLam = new JTextField();
@@ -176,29 +172,29 @@ public class InputNhanVien extends javax.swing.JDialog{
         gbc.gridx = 4;
         add(txtNgayVaoLam, gbc);
         
-        gbc.gridy = 4;
-        JLabelMaDV = new JLabel("Mã đơn vị:");
-        JLabelMaDV.setPreferredSize(new Dimension(a, 25));
-        gbc.gridx = 3;
-        add(JLabelMaDV, gbc);
-        txtMaDV = new JTextField();
-        txtMaDV.setPreferredSize(new Dimension(150, 25));
-        gbc.gridx = 4;
-        add(txtMaDV, gbc);
-        
         gbc.gridy = 5;
         JLabelSoNha = new JLabel("Số nhà:");
-        JLabelSoNha.setPreferredSize(new Dimension(a, 25));
+        JLabelSoNha.setPreferredSize(new Dimension(200, 25));
         gbc.gridx = 0;
         add(JLabelSoNha, gbc);
         txtSoNha = new JTextField();
         txtSoNha.setPreferredSize(new Dimension(150, 25));
         gbc.gridx = 1;
         add(txtSoNha, gbc);
-        ////
-         gbc.gridy = 5;
+        
+        gbc.gridy = 5;
+        JLabelSoNha = new JLabel("Số nhà:");
+        JLabelSoNha.setPreferredSize(new Dimension(200, 25));
+        gbc.gridx = 0;
+        add(JLabelSoNha, gbc);
+        txtSoNha = new JTextField();
+        txtSoNha.setPreferredSize(new Dimension(150, 25));
+        gbc.gridx = 1;
+        add(txtSoNha, gbc);
+        
+        gbc.gridy = 5;
         JLabelDuong = new JLabel("Đường:");
-        JLabelDuong.setPreferredSize(new Dimension(a, 25));
+        JLabelDuong.setPreferredSize(new Dimension(200, 25));
         gbc.gridx = 2;
         add(JLabelDuong, gbc);
         txtDuong = new JTextField();
@@ -208,7 +204,7 @@ public class InputNhanVien extends javax.swing.JDialog{
         
         gbc.gridy = 6;
         JLabelPhuong_Xa = new JLabel("Phường/Xã:");
-        JLabelPhuong_Xa.setPreferredSize(new Dimension(a, 25));
+        JLabelPhuong_Xa.setPreferredSize(new Dimension(200, 25));
         gbc.gridx = 0;
         add(JLabelPhuong_Xa, gbc);
         txtPhuong_Xa = new JTextField();
@@ -218,7 +214,7 @@ public class InputNhanVien extends javax.swing.JDialog{
         
         gbc.gridy = 6;
         JLabelQuan_Huyen = new JLabel("Quận/Huyện:");
-        JLabelQuan_Huyen.setPreferredSize(new Dimension(a, 25));
+        JLabelQuan_Huyen.setPreferredSize(new Dimension(200, 25));
         gbc.gridx = 2;
         add(JLabelQuan_Huyen, gbc);
         txtQuan_Huyen = new JTextField();
@@ -228,7 +224,7 @@ public class InputNhanVien extends javax.swing.JDialog{
         
         gbc.gridy = 7;
         JLabelThanhPho_Tinh = new JLabel("Thành phố/Tỉnh:");
-        JLabelThanhPho_Tinh.setPreferredSize(new Dimension(a, 25));
+        JLabelThanhPho_Tinh.setPreferredSize(new Dimension(200, 25));
         gbc.gridx = 0;
         add(JLabelThanhPho_Tinh, gbc);
         txtThanhPho_Tinh = new JTextField();
@@ -238,7 +234,7 @@ public class InputNhanVien extends javax.swing.JDialog{
         
         gbc.gridy = 7;
         JLabelCCCD = new JLabel("Căn cước công dân:");
-        JLabelCCCD.setPreferredSize(new Dimension(a, 25));
+        JLabelCCCD.setPreferredSize(new Dimension(200, 25));
         gbc.gridx = 2;
         add(JLabelCCCD, gbc);
         txtCCCD = new JTextField();
@@ -248,7 +244,7 @@ public class InputNhanVien extends javax.swing.JDialog{
         
         gbc.gridy = 8;
         JLabelNoiCap = new JLabel("Nơi cấp:");
-        JLabelNoiCap.setPreferredSize(new Dimension(a, 25));
+        JLabelNoiCap.setPreferredSize(new Dimension(200, 25));
         gbc.gridx = 0;
         add(JLabelNoiCap, gbc);
         txtNoiCap = new JTextField();
@@ -261,7 +257,7 @@ public class InputNhanVien extends javax.swing.JDialog{
         
         gbc.gridy = 9;
         JLabelNgayCap = new JLabel("Ngày cấp:");
-        JLabelNgayCap.setPreferredSize(new Dimension(a, 25));
+        JLabelNgayCap.setPreferredSize(new Dimension(200, 25));
         gbc.gridx = 0;
         add(JLabelNgayCap, gbc);
         txtNgayCap = new JTextField();
@@ -296,11 +292,12 @@ public class InputNhanVien extends javax.swing.JDialog{
         btnCancel.setPreferredSize(new Dimension(120,25));
         btnCancel.setText("Hủy bỏ");
 
-        gbc.gridx= 2;
+        gbc.gridx= 1;
         gbc.gridy= 10;
         add(btnEdit,gbc);
-        gbc.gridx= 3;
+        gbc.gridx= 2;
         add(btnCancel,gbc);
+
     }
     
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {
@@ -372,7 +369,7 @@ public class InputNhanVien extends javax.swing.JDialog{
      public static void main(String args[]) {
          java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                InputNhanVien dialog = new InputNhanVien(new javax.swing.JPanel());
+                InputNhanVien1 dialog = new InputNhanVien1(new javax.swing.JPanel());
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

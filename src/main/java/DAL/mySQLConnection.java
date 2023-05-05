@@ -21,7 +21,7 @@ public class mySQLConnection {
     private final String URL = "jdbc:mysql://localhost:3306/quanlygiaovien";
 
     private final String USER = "root";
-    private final String PASSWORD = "123456";
+    private final String PASSWORD = "";
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final Logger LOGGER = Logger.getLogger(mySQLConnection.class.getName());
     public mySQLConnection() {
