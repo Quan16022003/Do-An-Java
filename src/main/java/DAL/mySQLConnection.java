@@ -18,10 +18,10 @@ import java.util.logging.Logger;
 public class mySQLConnection {
 
     public Connection connection;
-    private final String URL = "jdbc:mysql://localhost:3306/quanlygiaovien";
+    private final String URL = "jdbc:mysql://localhost:3306/test";
 
     private final String USER = "root";
-    private final String PASSWORD = "123456";
+    private final String PASSWORD = "";
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final Logger LOGGER = Logger.getLogger(mySQLConnection.class.getName());
     public mySQLConnection() {

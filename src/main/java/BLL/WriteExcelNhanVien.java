@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package DAL;
+package BLL;
 
+import DAL.NhanVienDAO;
 import DTO.NhanVien;
 import java.io.File;
 import java.io.FileOutputStream;

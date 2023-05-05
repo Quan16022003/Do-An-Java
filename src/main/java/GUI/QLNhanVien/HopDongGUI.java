@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package GUI;
+package GUI.QLNhanVien;
 
 import DAL.HopDongDAO;
-import DAL.WriteExcelHopDong;
+import BLL.WriteExcelHopDong;
 import DTO.HopDong;
 import GUI.modal.Content;
 import GUI.modal.HomeAbstractDataModel_for_Hop_Dong;

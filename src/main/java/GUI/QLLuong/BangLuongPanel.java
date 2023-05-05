@@ -41,7 +41,6 @@ public class BangLuongPanel extends JPanel {
     private void initBangLuongPanel() {
         scrollPane = new JScrollPane();
         bangLuongPanel = new JPanel(new BorderLayout());
-        bangLuongPanel.setBorder(BorderFactory.createEmptyBorder(5, 10, 0, 10));
         bangLuongPanel.add(scrollPane);
         if (data.size() == 0) {
             JLabel noDataLabel = new JLabel("Không có dữ liệu");

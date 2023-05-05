@@ -4,15 +4,11 @@
  */
 package GUI.QLLuong;
 
-import BLL.QLLuongBUS;
-import DTO.Luong;
-import GUI.Content;
+import GUI.modal.Content;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 
 import javax.swing.*;
 import java.awt.*;
-import java.time.LocalDate;
-import java.util.List;
 
 /**
  *

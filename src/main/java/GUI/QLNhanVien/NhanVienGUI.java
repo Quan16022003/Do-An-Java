@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package GUI;
+package GUI.QLNhanVien;
 
 import DAL.NhanVienDAO;
-import DAL.WriteExcelNhanVien;
+import BLL.WriteExcelNhanVien;
 import DTO.NhanVien;
 import GUI.modal.Content;
 import GUI.modal.HomeAbstractDataModel_for_Nhan_Vien;
@@ -23,7 +23,7 @@ import javax.swing.JPanel;
  *
  * @author apple
  */
-public class Nhan_Vien_GUI extends Content {
+public class NhanVienGUI extends Content {
     
     private List<NhanVien> NhanViens;
     private HomeAbstractDataModel_for_Nhan_Vien tblModel;
@@ -31,7 +31,7 @@ public class Nhan_Vien_GUI extends Content {
     private JTable table;
     private NhanVienDAO Dao;
     
-    public Nhan_Vien_GUI() {
+    public NhanVienGUI() {
         initComponents();
 //        this.setLocationRelativeTo(null);
         NhanViens = new ArrayList<>();   
@@ -190,7 +190,7 @@ public class Nhan_Vien_GUI extends Content {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Nhan_Vien_GUI().setVisible(true);
+                new NhanVienGUI().setVisible(true);
             }
         });
     }

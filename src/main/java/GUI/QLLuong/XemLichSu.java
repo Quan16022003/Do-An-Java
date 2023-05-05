@@ -1,9 +1,12 @@
 package GUI.QLLuong;
 
+import BLL.ExportDataLuong;
 import BLL.QLLuongBUS;
+import DTO.Luong;
 import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
+import javax.xml.crypto.Data;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,13 +14,15 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
+import java.util.*;
+import java.util.List;
 
 
 public class XemLichSu extends JPanel {
     QLLuongBUS bus = new QLLuongBUS();
     private JPanel headerPanel, mainPanel;
     private JDateChooser dateChooser1, dateChooser2;
+    private Map<String, List<Luong>> datas;
 
     public XemLichSu() {
         setLayout(new BorderLayout());
@@ -52,6 +57,7 @@ public class XemLichSu extends JPanel {
     }
     private void initMainPanel() {
         mainPanel.removeAll();
+        datas = new LinkedHashMap<>();
         JTabbedPane tabbedPane = new JTabbedPane();
         tabbedPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
         tabbedPane.setTabPlacement(JTabbedPane.BOTTOM);
@@ -63,13 +69,32 @@ public class XemLichSu extends JPanel {
         while (!currentMonth.isAfter(YearMonth.from(endDate))) {
             LocalDate date = LocalDate.of(currentMonth.getYear(), currentMonth.getMonth(), 1);
             String formattedMonth = currentMonth.format(DateTimeFormatter.ofPattern("MM-yyyy"));
-            System.out.println(date);
-            tabbedPane.addTab(formattedMonth, new BangLuongPanel(date, bus.selectAllByDate(date)));
+            List<Luong> luongs = bus.selectAllByDate(date);
+            datas.put(formattedMonth, luongs);
+            tabbedPane.addTab(formattedMonth, new BangLuongPanel(date, luongs));
             currentMonth = currentMonth.plusMonths(1);
         }
-        mainPanel.add(tabbedPane);
+        tabbedPane.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
+        JPanel funcPanel = initFuncPanel();
+        mainPanel.add(tabbedPane, BorderLayout.CENTER);
+        mainPanel.add(funcPanel, BorderLayout.SOUTH);
         mainPanel.revalidate();
         mainPanel.repaint();
     }
 
+    private JPanel initFuncPanel() {
+        JPanel funcPanel = new JPanel();
+        JButton button = new JButton("Xuất Excel");
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                datas = Collections.synchronizedMap(datas);
+                ExportDataLuong.Export(datas);
+            }
+        });
+        button.setPreferredSize(new Dimension(100, 30));
+        funcPanel.add(button);
+        return funcPanel;
+    }
 }
+

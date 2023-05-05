@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package GUI;
+package GUI.QLNhanVien;
 
 import DAL.NhanVienDAO;
 import BLL.NhanVienBUS;
@@ -10,7 +10,6 @@ import DAL.BindingListener;
 import DTO.NhanVien;
 import GUI.modal.ChooseAvatarPanel;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -19,16 +18,16 @@ import javax.swing.JPanel;
  *
  * @author apple
  */
-public class EditNhanVien extends javax.swing.JDialog{
-    private Nhan_Vien_GUI home;
+public class InputNhanVien extends javax.swing.JDialog{
+    private NhanVienGUI home;
     private NhanVienDAO DAO;
     private NhanVienBUS BUS;
     
-    public EditNhanVien(javax.swing.JPanel parent) {
+    public InputNhanVien(javax.swing.JPanel parent) {
 //        super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-        home = (Nhan_Vien_GUI) parent;
+        home = (NhanVienGUI) parent;
         BUS = new NhanVienBUS();
         DAO = new NhanVienDAO();
         
@@ -51,7 +50,7 @@ public class EditNhanVien extends javax.swing.JDialog{
         txtSoNha.getDocument().addDocumentListener(new BindingListener(txtSoNha, "^[a-zA-Z0-9\\s\\/]*$"));
     }
     private void initComponents() {
-        //form go here
+        
         
                 String monhoc[] = {"tram cam"," FA", "no life"};
                 String gioitinh[] = {"nu", "khong phai nu", "loai khac"};
@@ -213,7 +212,7 @@ public class EditNhanVien extends javax.swing.JDialog{
 //        pn2.setBackground(Color.CYAN);
         
         imagePanel = new ChooseAvatarPanel();
-//        imagePanel.setImage("./src/main/java/Image/Books_160px.png");
+        imagePanel.setImage("./src/main/java/Image/Books_160px.png");
         pn2.add(imagePanel);
         
         
@@ -371,13 +370,15 @@ public class EditNhanVien extends javax.swing.JDialog{
         this.add(pnmain);
         this.revalidate();
         this.setVisible(true);
+
     }
     
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {
-        String MaNV, MaDV, MaLoaiNV, MaChucVu, Ten, GioiTinh,
-                NgSinh, SDT,SoNha, Duong, Phuong_Xa,
-                Quan_Huyen, TP_Tinh, CCCD, NgCap,
-                NoiCap, NgVaoLam, image;
+        String MaNV = "", MaDV = "", MaLoaiNV = "", MaChucVu = "", Ten = "", GioiTinh = "",
+                NgSinh = "", SDT = "",SoNha = "", Duong = "", Phuong_Xa = "",
+                Quan_Huyen = "", TP_Tinh = "", CCCD = "", NgCap = "",
+                NoiCap = "", NgVaoLam = "" , image = "";
+        
         MaNV = txtMaNV.getText();
         MaDV = txtMaDV.getText();
         MaLoaiNV = txtMaLoaiNV.getText();
@@ -405,10 +406,29 @@ public class EditNhanVien extends javax.swing.JDialog{
             {
                  DAO.insert(nhanvien);
 
-                 home.updateNhanVienlist(nhanvien);
+                 home.addNhanVienlist(nhanvien);
                  JOptionPane.showMessageDialog(rootPane,
-                         "Thêm thành công!");  
-                 this.dispose();
+                         "Thêm thành công!");
+                
+                txtMaNV.setText("");//
+                txtMaDV.setText("");//
+                txtMaLoaiNV.setText("");
+                txtMaChucVu.setText("");//
+                txtTen.setText("");
+                txtGioiTinh.setText("");
+                txtNgaySinh.setText("");
+                txtSoDienThoai.setText("");//
+                txtSoNha.setText("");
+                txtDuong.setText("");
+                txtPhuong_Xa.setText("");
+                txtQuan_Huyen.setText("");
+                txtThanhPho_Tinh.setText("");
+                txtCCCD.setText("");
+                txtNgayCap.setText("");
+                txtNoiCap.setText("");
+                txtNgayVaoLam.setText("");
+                imagePanel.setImage(null);
+                 
             }
             else
                 JOptionPane.showMessageDialog(rootPane,
@@ -422,7 +442,7 @@ public class EditNhanVien extends javax.swing.JDialog{
      public static void main(String args[]) {
          java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                EditNhanVien dialog = new EditNhanVien(new javax.swing.JPanel());
+                InputNhanVien dialog = new InputNhanVien(new javax.swing.JPanel());
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -434,7 +454,7 @@ public class EditNhanVien extends javax.swing.JDialog{
         });
      }
      
-     private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnEdit;
     private ChooseAvatarPanel imagePanel;
     private javax.swing.JLabel JLabelMaNV;
@@ -471,29 +491,4 @@ public class EditNhanVien extends javax.swing.JDialog{
     private javax.swing.JTextField txtNoiCap;
     private javax.swing.JLabel JLabelNgayCap;
     private javax.swing.JTextField txtNgayCap;
-     
-     public void setEditData(NhanVien nv) {
-         //pull out data here
-         //image
-        imagePanel.setImage(nv.getImage());
-        txtMaNV.setText(nv.getMaNV());
-        txtMaNV.setEditable(false);
-        txtMaDV.setText(nv.getMaDV());
-        txtMaLoaiNV.setText(nv.getMaLoaiNV());
-        txtMaChucVu.setText(nv.getMaChucVu());
-        txtTen.setText(nv.getTen());
-        txtGioiTinh.setText(nv.getGioiTinh());
-        txtNgaySinh.setText(nv.getNgSinh());
-        txtSoDienThoai.setText(nv.getSDT());
-        txtSoNha.setText(nv.getSoNha());
-        txtDuong.setText(nv.getDuong());
-        txtPhuong_Xa.setText(nv.getPhuong_Xa());
-        txtQuan_Huyen.setText(nv.getQuan_Huyen());
-        txtThanhPho_Tinh.setText(nv.getTP_Tinh());
-        txtCCCD.setText(nv.getCCCD());
-        txtNgayCap.setText(nv.getNgCap());
-        txtNoiCap.setText(nv.getNoiCap());
-        txtNgayVaoLam.setText(nv.getNgVaoLam());
-    
-     }
 }

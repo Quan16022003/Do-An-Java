@@ -4,7 +4,7 @@
  */
 package GUI.QLTaiKhoan;
 
-import GUI.Content;
+import GUI.modal.Content;
 
 import java.awt.*;
 

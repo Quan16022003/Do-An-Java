@@ -21,6 +21,7 @@ public class XemLuongHienTai extends JPanel{
         this.date = LocalDate.now();
         this.data = bus.selectAllByDate(date);
         bangLuongPanel = new BangLuongPanel(date, data);
+        bangLuongPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
         initFuncButtons();
         add(bangLuongPanel, BorderLayout.CENTER);
         add(funcPanel, BorderLayout.PAGE_END);

@@ -2,44 +2,36 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package GUI;
+package GUI.QLNhanVien;
 
+import DAL.HopDongDAO;
+import BLL.HopDongBUS;
 import DTO.HopDong;
-import DAL.NhanVienDAO;
-import BLL.NhanVienBUS;
-import GUI.modal.ChooseAvatarPanel;
+
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
-import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
  *
  * @author apple
  */
-public class EditHopDong extends javax.swing.JDialog {
-    private Nhan_Vien_GUI home;
-    private NhanVienDAO DAO;
-    private NhanVienBUS BUS;
+public class InputHopDong extends javax.swing.JDialog {
+    private HopDongGUI home;
+    private HopDongDAO DAO;
+    private HopDongBUS BUS;
     
-    public EditHopDong(javax.swing.JPanel parent) {
+    public InputHopDong(javax.swing.JPanel parent) {
 //        super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-        home = (Nhan_Vien_GUI) parent;
-        BUS = new NhanVienBUS();
-        DAO = new NhanVienDAO();
+        home = (HopDongGUI) parent;
+        BUS = new HopDongBUS();
+        DAO = new HopDongDAO();
     }
     private void initComponents() {
-        //form go here
         
-        
-                String monhoc[] = {"tram cam"," FA", "no life"};
-                String gioitinh[] = {"nu", "khong phai nu", "loai khac"};
-                        String chuyenmon[] = {"thi lai", " rot mon", "helpless"};
-//=======
-
 //>>>>>>> origin/main
 
 
@@ -66,10 +58,10 @@ public class EditHopDong extends javax.swing.JDialog {
         
         this.setLayout(new BorderLayout(0,0));
 
-        this.setSize(650  , 250);
+        this.setSize(650  , 300);
         JPanel pnmain = new JPanel();
 //        pnmain.setBackground(Color.blue);
-        pnmain.setPreferredSize(new Dimension(650, 250));
+        pnmain.setPreferredSize(new Dimension(650, 300));
         JLabelMaHD = new javax.swing.JLabel();
         JLabelMaHD.setText("Mã hợp đồng:  ");
         txtMaHD = new javax.swing.JTextField();
@@ -185,6 +177,7 @@ public class EditHopDong extends javax.swing.JDialog {
         pn6.add(txtNganHang);
 //        pn6.add(pngap6);
         pnmain.add(pn6);
+        
         JPanel pnll6 = new JPanel();
         pnll6.setPreferredSize(new Dimension(900,30));
         
@@ -197,6 +190,7 @@ public class EditHopDong extends javax.swing.JDialog {
         pnll6.add(btnCancel);
         
         pnmain.add(pnll6);
+        
         this.add(pnmain);
         this.revalidate();
         this.setVisible(true);
@@ -207,6 +201,52 @@ public class EditHopDong extends javax.swing.JDialog {
     }
     
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {
+        String MaHD="", MaLoaiHD, MaNV="", TenHD="", NgayKy="", HanHD="", HocVi="", Hang="", Bac="", MaSoThue=""
+            , CucThue="", STK="", NganHang="", SoTietGiangDay="";
+        
+        MaHD = txtMaHD.getText();
+        MaLoaiHD = txtMaLoaiHD.getText();
+        MaNV = txtMaNV.getText();
+        NgayKy = txtNgayKy.getText();
+        HanHD = txtHanHD.getText();
+        HocVi = txtHocVi.getText();
+        Hang = txtHang.getText();
+        Bac = txtBac.getText();
+        MaSoThue = txtMaSoThue.getText();
+        CucThue = txtCucThue.getText();
+        STK = txtSTK.getText();
+        NganHang = txtNganHang.getText();
+        SoTietGiangDay = txtSoTietGiangDay.getText();
+        HopDong hd = new HopDong(
+                MaHD, MaLoaiHD, MaNV, TenHD, NgayKy, HanHD, HocVi, Hang, Bac, MaSoThue
+            , CucThue, STK, NganHang, SoTietGiangDay
+        );
+        if (BUS.check(hd))
+            {
+                 DAO.insert(hd);
+
+                 home.addNhanVienlist(hd);
+                 JOptionPane.showMessageDialog(rootPane,
+                         "Thêm thành công!");
+                
+                txtMaHD.setText("");//
+                txtMaLoaiHD.setText("");//
+                txtMaNV.setText("");
+                txtNgayKy.setText("");//
+                txtHanHD.setText("");
+                txtHocVi.setText("");
+                txtHang.setText("");
+                txtBac.setText("");//
+                txtMaSoThue.setText("");
+                txtCucThue.setText("");
+                txtSTK.setText("");
+                txtNganHang.setText("");
+                txtSoTietGiangDay.setText("");
+            
+            }
+            else
+                JOptionPane.showMessageDialog(rootPane,
+                         "Stupid");
         
     }
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {
@@ -216,7 +256,7 @@ public class EditHopDong extends javax.swing.JDialog {
      public static void main(String args[]) {
          java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                EditHopDong dialog = new EditHopDong(new javax.swing.JPanel());
+                InputHopDong dialog = new InputHopDong(new javax.swing.JPanel());
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -256,23 +296,4 @@ public class EditHopDong extends javax.swing.JDialog {
     private javax.swing.JTextField txtNganHang;
     private javax.swing.JLabel JLabelSoTietGiangDay;
     private javax.swing.JTextField txtSoTietGiangDay;
-    public void setEditData(HopDong hd) {
-         //pull out data here
-         //image
-        txtMaNV.setText(hd.getMaNV());
-        txtMaHD.setText(hd.getMaHD());
-        txtMaHD.setEditable(false);
-        txtMaLoaiHD.setText(hd.getMaLoaiHD());
-        txtNgayKy.setText(hd.getNgayKy());
-        txtHanHD.setText(hd.getHanHD());
-        txtHocVi.setText(hd.getHocVi());
-        txtHang.setText(hd.getHang());
-        txtBac.setText(hd.getBac());
-        txtMaSoThue.setText(hd.getMaSoThue());
-        txtCucThue.setText(hd.getCucThue());
-        txtSTK.setText(hd.getSTK());
-        txtNganHang.setText(hd.getNganHang());
-        txtSoTietGiangDay.setText(hd.getSoTietGiangDay());
-    
-     }
 }

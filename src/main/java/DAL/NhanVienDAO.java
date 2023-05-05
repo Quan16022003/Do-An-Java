@@ -55,7 +55,7 @@ public class NhanVienDAO  extends AbstractDAO<NhanVien, Integer> {
         List<NhanVien> list = new ArrayList<NhanVien>();
          String query = "SELECT * FROM Nhan_Vien";
         mySQLConnection.openConnection();
-        ResultSet rs = mySQLConnection.executeQuery(query, LocalDate.now().getMonthValue(), LocalDate.now().getYear());
+        ResultSet rs = mySQLConnection.executeQuery(query);
         try {
             while (rs.next()) {
                 var MaNV = rs.getString("MaNV");
