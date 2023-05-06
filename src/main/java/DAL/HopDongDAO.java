@@ -15,19 +15,19 @@ public class HopDongDAO extends AbstractDAO<HopDong, Integer>{
     @Override
 
     public boolean insert(HopDong hd) {
-        String query = "INSERT INTO Hop_Dong(MaHD, MaLoaiHD, MaNV, TenHD, NgayKy, HanHD, HocVi, Hang, Bac, MaSoThue, CucThue, STK, NganHang, SoTietGiangDay) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String query = "INSERT INTO Hop_Dong(MaHD, MaLoaiHD, MaNV, TenHD, NgayKy, HanHD, HocVi, Hang, Bac, MaSoThue, CucThue, STK, NganHang, CongViecDuocGiao, HeSoLuong, HeSoPhuCap) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         mySQLConnection.openConnection();
         int rowInserted = mySQLConnection.executeUpdate(query, hd.getMaHD(), hd.getMaLoaiHD(), hd.getMaNV(), hd.getTenHD(), hd.getNgayKy(), hd.getHanHD(), hd.getHocVi(), hd.getHang(), hd.getBac(), hd.getMaSoThue()
-            , hd.getCucThue(), hd.getSTK(), hd.getNganHang(), hd.getSoTietGiangDay());
+            , hd.getCucThue(), hd.getSTK(), hd.getNganHang(), hd.getCongViecDuocGiao(),hd.getHeSoLuong(),hd.getHeSoPhuCap());
         mySQLConnection.closeConnection();
         return rowInserted > 0;
     }
 
     @Override
     public boolean update(HopDong hd) {
-        String query = "UPDATE Hop_Dong SET MaHD = ?, MaLoaiHD = ?, MaNV = ?, TenHD = ?, NgayKy = ?, HanHD = ?, HocVi = ?, Hang = ?, Bac = ?, MaSoThue = ?, CucThue = ?, STK = ?, NganHang = ?, SoTietGiangDay = ? WHERE MaHD = ?";
+        String query = "UPDATE Hop_Dong SET MaHD = ?, MaLoaiHD = ?, MaNV = ?, TenHD = ?, NgayKy = ?, HanHD = ?, HocVi = ?, Hang = ?, Bac = ?, MaSoThue = ?, CucThue = ?, STK = ?, NganHang = ?,  CongViecDuocGiao = ?, HeSoLuong = ?, HeSoPhuCap = ? WHERE MaHD = ?";
         mySQLConnection.openConnection();
-        int rowUpdated = mySQLConnection.executeUpdate(query, hd.getMaHD(), hd.getMaLoaiHD(),hd.getMaNV(),hd.getTenHD(),hd.getNgayKy(),hd.getHanHD(),hd.getHocVi(),hd.getHang(),hd.getBac(),hd.getMaSoThue(),hd.getCucThue(),hd.getSTK(),hd.getNganHang(),hd.getSoTietGiangDay());
+        int rowUpdated = mySQLConnection.executeUpdate(query, hd.getMaHD(), hd.getMaLoaiHD(),hd.getMaNV(),hd.getTenHD(),hd.getNgayKy(),hd.getHanHD(),hd.getHocVi(),hd.getHang(),hd.getBac(),hd.getMaSoThue(),hd.getCucThue(),hd.getSTK(),hd.getNganHang(),hd.getCongViecDuocGiao(),hd.getHeSoLuong(),hd.getHeSoPhuCap());
         mySQLConnection.closeConnection();
         return rowUpdated > 0;
     }
@@ -49,9 +49,9 @@ public class HopDongDAO extends AbstractDAO<HopDong, Integer>{
     @Override
     public List<HopDong> selectAll() {
         List<HopDong> list = new ArrayList<HopDong>();
-        String query = "INSERT INTO Hop_Dong(MaHD, MaLoaiHD, MaNV, TenHD, NgayKy, HanHD, HocVi, Hang, Bac, MaSoThue, CucThue, STK, NganHang, SoTietGiangDay) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String query = "INSERT INTO Hop_Dong(MaHD, MaLoaiHD, MaNV, TenHD, NgayKy, HanHD, HocVi, Hang, Bac, MaSoThue, CucThue, STK, NganHang, CongViecDuocGiao, HeSoLuong, HeSoPhuCap) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         mySQLConnection.openConnection();
-        ResultSet rs = mySQLConnection.executeQuery(query, LocalDate.now().getMonthValue(), LocalDate.now().getYear());
+        ResultSet rs = mySQLConnection.executeQuery(query);
         try {
             while (rs.next()){
                 var MaHD = rs.getString("MaHD");
@@ -67,10 +67,13 @@ public class HopDongDAO extends AbstractDAO<HopDong, Integer>{
                 var CucThue = rs.getString("CucThue");
                 var STK = rs.getString("STK");
                 var NganHang = rs.getString("NganHang");
-                var SoTietGiangDay = rs.getString("SoTietGiangDay");
+                var CongViecDuocGiao =rs.getString("CongViecDuocGiao");
+                var HeSoLuong =rs.getString("HeSoLuong");
+                var HeSoPhuCap =rs.getString("HeSoPhuCap");
              
-                HopDong nv = new HopDong(MaHD, MaLoaiHD, MaNV, TenHD, NgayKy, HanHD, HocVi, Hang, Bac, MaSoThue
-            , CucThue, STK, NganHang, SoTietGiangDay);
+                HopDong nv;
+                nv = new HopDong(MaHD, MaLoaiHD, MaNV, TenHD, NgayKy, HanHD, HocVi, Hang, Bac, MaSoThue
+                        , CucThue, STK, NganHang, CongViecDuocGiao, HeSoLuong, HeSoPhuCap);
                         list.add(nv);
             }
         } catch (SQLException e) {

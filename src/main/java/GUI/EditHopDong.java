@@ -5,8 +5,9 @@
 package GUI;
 
 import DTO.HopDong;
-import DAL.NhanVienDAO;
-import BLL.NhanVienBUS;
+import DAL.HopDongDAO;
+import BLL.HopDongBUS;
+import DAL.BindingListener;
 import GUI.modal.ChooseAvatarPanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -14,6 +15,7 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -22,19 +24,36 @@ import javax.swing.JTextField;
  * @author apple
  */
 public class EditHopDong extends javax.swing.JDialog {
-    private Nhan_Vien_GUI home;
-    private NhanVienDAO DAO;
-    private NhanVienBUS BUS;
+    private HopDongGUI home;
+    private HopDongDAO DAO;
+    private HopDongBUS BUS;
     
     public EditHopDong(javax.swing.JPanel parent) {
 //        super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-        home = (Nhan_Vien_GUI) parent;
-        BUS = new NhanVienBUS();
-        DAO = new NhanVienDAO();
+        home = (HopDongGUI) parent;
+        BUS = new HopDongBUS();
+        DAO = new HopDongDAO();
+        txtMaNV.getDocument().addDocumentListener(new BindingListener(txtMaNV, "[a-z0-9]*"));
+        txtMaHD.getDocument().addDocumentListener(new BindingListener(txtMaHD, "[a-z0-9]*"));
+        txtSTK.getDocument().addDocumentListener(new BindingListener(txtSTK, "\\d{12}"));
+        txtHocVi.getDocument().addDocumentListener(new BindingListener(txtHocVi,"[a-z0-9\\s]*"));
+        txtMaSoThue.getDocument().addDocumentListener(new BindingListener(txtMaSoThue, "[a-z0-9]*"));
+        txtNganHang.getDocument().addDocumentListener(new BindingListener(txtNganHang,"[a-z0-9\\s]*"));
+        txtCongViecDuocGiao.getDocument().addDocumentListener(new BindingListener(txtCongViecDuocGiao,"[a-z0-9\\s]*"));
+        txtCucThue.getDocument().addDocumentListener(new BindingListener(txtCucThue,"[a-z0-9\\s]*"));
+        txtNgayKy.getDocument().addDocumentListener(new BindingListener(txtNgayKy,"^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$"));        
+        txtHanHD.getDocument().addDocumentListener(new BindingListener(txtHanHD,"^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$"));        
+        txtHang.getDocument().addDocumentListener(new BindingListener(txtHang,"[a-z0-9\\s]*"));
+        txtBac.getDocument().addDocumentListener(new BindingListener(txtBac,"[a-z0-9\\s]*"));
+        txtHeSoLuong.getDocument().addDocumentListener(new BindingListener(txtHeSoLuong,"[+-]?([0-9]*[.])?[0-9]+"));
+        txtHeSoPhuCap.getDocument().addDocumentListener(new BindingListener(txtHeSoPhuCap,"[+-]?([0-9]*[.])?[0-9]+"));
+
     }
-    private void initComponents() {
+   private void initComponents() {
+        
+//>>>>>>> origin/main
         setSize(new Dimension(800, 400));
 
 
@@ -137,14 +156,14 @@ public class EditHopDong extends javax.swing.JDialog {
         add(txtSTK, gbc);
         
         gbc.gridy = 2;
-        JLabelSoTietGiangDay = new JLabel("Số tiết giảng dạy:");
-        JLabelSoTietGiangDay.setPreferredSize(new Dimension(200, 25));
+        CongViecDuocGiao = new JLabel("Công việc được giao:");
+        CongViecDuocGiao.setPreferredSize(new Dimension(200, 25));
         gbc.gridx = 2;
-        add(JLabelSoTietGiangDay, gbc);
-        txtSoTietGiangDay = new JTextField();
-        txtSoTietGiangDay.setPreferredSize(new Dimension(150, 25));
+        add(CongViecDuocGiao, gbc);
+        txtCongViecDuocGiao = new JTextField();
+        txtCongViecDuocGiao.setPreferredSize(new Dimension(150, 25));
         gbc.gridx = 3;
-        add(txtSoTietGiangDay, gbc);
+        add(txtCongViecDuocGiao, gbc);
         
         gbc.gridy = 3;
         JLabelCucThue = new JLabel("Thuộc cục thuế:");
@@ -167,6 +186,27 @@ public class EditHopDong extends javax.swing.JDialog {
         gbc.gridx = 3;
         add(txtNganHang, gbc);
         
+        
+        gbc.gridy = 6;
+        HeSoLuong = new JLabel("Hệ số lương:");
+        HeSoLuong.setPreferredSize(new Dimension(200, 25));
+        gbc.gridx = 0;
+        add(HeSoLuong, gbc);
+        txtHeSoLuong = new JTextField();
+        txtHeSoLuong.setPreferredSize(new Dimension(150, 25));
+        gbc.gridx = 1;
+        add(txtHeSoLuong, gbc);
+   
+        
+        gbc.gridy = 6;
+        HeSoPhuCap = new JLabel("Hệ số phụ cấp:");
+        HeSoPhuCap.setPreferredSize(new Dimension(200, 25));
+        gbc.gridx = 2;
+        add(HeSoPhuCap, gbc);
+        txtHeSoPhuCap = new JTextField();
+        txtHeSoPhuCap.setPreferredSize(new Dimension(150, 25));
+        gbc.gridx = 3;
+        add(txtHeSoPhuCap, gbc);
 
         btnEdit = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
@@ -196,16 +236,64 @@ public class EditHopDong extends javax.swing.JDialog {
         btnCancel.setText("Hủy bỏ");
 
         gbc.gridx= 1;
-        gbc.gridy= 6;
+        gbc.gridy= 7;
         add(btnEdit,gbc);
         gbc.gridx= 2;
-        gbc.gridy= 6;
+        gbc.gridy= 7;
         add(btnCancel,gbc);
 
     }
     
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {
+        String MaHD="", MaLoaiHD="", MaNV="", TenHD="", NgayKy="", HanHD="", HocVi="", Hang="", Bac="", MaSoThue=""
+            , CucThue="", STK="", NganHang="", CongViecDuocGiao="",HeSoLuong="",HeSoPhuCap="";
         
+        MaHD = txtMaHD.getText();
+        MaLoaiHD = txtMaLoaiHD.getText();
+        MaNV = txtMaNV.getText();
+        NgayKy = txtNgayKy.getText();
+        HanHD = txtHanHD.getText();
+        HocVi = txtHocVi.getText();
+        Hang = txtHang.getText();
+        Bac = txtBac.getText();
+        MaSoThue = txtMaSoThue.getText();
+        CucThue = txtCucThue.getText();
+        STK = txtSTK.getText();
+        NganHang = txtNganHang.getText();
+        CongViecDuocGiao = txtCongViecDuocGiao.getText();
+        HeSoLuong = txtHeSoLuong.getText();
+        HeSoPhuCap = txtHeSoPhuCap.getText();
+        HopDong hd = new HopDong(
+                MaHD, MaLoaiHD, MaNV, TenHD, NgayKy, HanHD, HocVi, Hang, Bac, MaSoThue
+            , CucThue, STK, NganHang, CongViecDuocGiao,HeSoLuong,HeSoPhuCap
+        );
+        if (BUS.check(hd))
+            {
+                 DAO.insert(hd);
+
+                 home.addNhanVienlist(hd);
+                 JOptionPane.showMessageDialog(rootPane,
+                         "Thêm thành công!");
+                
+                txtMaHD.setText("");//
+                txtMaLoaiHD.setText("");//
+                txtMaNV.setText("");
+                txtNgayKy.setText("");//
+                txtHanHD.setText("");
+                txtHocVi.setText("");
+                txtHang.setText("");
+                txtBac.setText("");//
+                txtMaSoThue.setText("");
+                txtCucThue.setText("");
+                txtSTK.setText("");
+                txtNganHang.setText("");
+                txtCongViecDuocGiao.setText("");
+                txtHeSoLuong.setText("");
+                txtHeSoPhuCap.setText("");
+            }
+            else
+                JOptionPane.showMessageDialog(rootPane,
+                         "Stupid");
     }
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
@@ -254,6 +342,12 @@ public class EditHopDong extends javax.swing.JDialog {
     private javax.swing.JTextField txtNganHang;
     private javax.swing.JLabel JLabelSoTietGiangDay;
     private javax.swing.JTextField txtSoTietGiangDay;
+     private javax.swing.JLabel CongViecDuocGiao;
+    private javax.swing.JTextField txtCongViecDuocGiao;
+    private javax.swing.JLabel HeSoLuong;
+    private javax.swing.JTextField txtHeSoLuong;
+    private javax.swing.JLabel HeSoPhuCap;
+    private javax.swing.JTextField txtHeSoPhuCap;
     public void setEditData(HopDong hd) {
          //pull out data here
          //image
@@ -270,7 +364,9 @@ public class EditHopDong extends javax.swing.JDialog {
         txtCucThue.setText(hd.getCucThue());
         txtSTK.setText(hd.getSTK());
         txtNganHang.setText(hd.getNganHang());
-        txtSoTietGiangDay.setText(hd.getSoTietGiangDay());
+        txtCongViecDuocGiao.setText(hd.getCongViecDuocGiao());
+        txtHeSoLuong.setText(hd.getHeSoLuong());
+        txtHeSoPhuCap.setText(hd.getHeSoPhuCap());
     
      }
 }

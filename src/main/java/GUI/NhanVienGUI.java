@@ -4,11 +4,11 @@
  */
 package GUI;
 
-import DAL.HopDongDAO;
-import DAL.WriteExcelHopDong;
-import DTO.HopDong;
+import DAL.NhanVienDAO;
+import DAL.WriteExcelNhanVien;
+import DTO.NhanVien;
 import GUI.modal.Content;
-import GUI.modal.HomeAbstractDataModelforHopDong;
+import GUI.modal.HomeAbstractDataModelforNhanVien;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -23,36 +23,39 @@ import javax.swing.JPanel;
  *
  * @author apple
  */
-public class HopDongGUI extends Content {
+public class NhanVienGUI extends Content {
     
-    private List<HopDong> HopDongs;
-    private HomeAbstractDataModelforHopDong tblModel;
+    private List<NhanVien> NhanViens;
+    private HomeAbstractDataModelforNhanVien tblModel;
     private int selectedIndex;
     private JTable table;
-    private HopDongDAO Dao;
+    private NhanVienDAO Dao;
     
-    public HopDongGUI() {
+    public NhanVienGUI() {
         initComponents();
 //        this.setLocationRelativeTo(null);
-        HopDongs = new ArrayList<>();           
+        NhanViens = new ArrayList<>();   
         table = new JTable(tblModel);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
  //       this.setTitle("Trang chủ");
  //       loadDataFromFile("SV.txt");
+        showData();
     }
     
      private void showData() {
 //        tblModel.setRowCount(0); // reset nd trong bang ve 0
-        tblModel.add(HopDongs);
+        Dao = new NhanVienDAO();
+        NhanViens = Dao.selectAll();
+        tblModel.add((ArrayList<NhanVien>) NhanViens);
     }
     
-    public void addNhanVienlist(HopDong s) {
-        HopDongs.add(s); //them moi sv vao danh sach
+    public void addNhanVienlist(NhanVien s) {
+        NhanViens.add(s); //them moi sv vao danh sach
         showData();
     }
     
-    public void removeNhanVienlist(HopDong s) {
-        HopDongs.remove(s); //them moi sv vao danh sach
+    public void removeNhanVienlist(NhanVien s) {
+        NhanViens.remove(s); //them moi sv vao danh sach
         showData();
     }
     
@@ -65,6 +68,7 @@ public class HopDongGUI extends Content {
         btnAdd = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
+        btnExport = new javax.swing.JButton();
         table = new JTable(tblModel);
         tblResult.setPreferredSize(new Dimension(400,400));
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -72,16 +76,17 @@ public class HopDongGUI extends Content {
         
 //        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("DANH SÁCH HỢP ĐỒNG");
+        jLabel1.setText("DANH SÁCH NHÂN VIÊN");
         jLabel1.setFont(new Font("Segoe UI", 0, 25));
-         tblModel = new HomeAbstractDataModelforHopDong();
+        
+         tblModel = new HomeAbstractDataModelforNhanVien();
         tblResult.setModel(tblModel);
         jScrollPane1.setViewportView(tblResult);
 
         btnAdd.setText("Thêm mới");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddHopDonglistActionPerformed(evt);
+                btnAddNhanVienlistActionPerformed(evt);
             }
         });
 
@@ -98,6 +103,12 @@ public class HopDongGUI extends Content {
                 btnDeleteActionPerformed(evt);
             }
         });
+        btnExport.setText("Xuất");
+        btnExport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExportActionPerformed(evt);
+            }
+        });
         
         setLayout(layout);
             JPanel titlePanel = new JPanel();
@@ -111,6 +122,7 @@ public class HopDongGUI extends Content {
             ButtonPanel.add(btnAdd);
             ButtonPanel.add(btnEdit);
             ButtonPanel.add(btnDelete);
+            ButtonPanel.add(btnExport);
             
             JPanel gapPanel1 = new JPanel();
             gapPanel1.setPreferredSize(new Dimension(10,0));
@@ -130,30 +142,30 @@ public class HopDongGUI extends Content {
     
     
     
-    private void btnAddHopDonglistActionPerformed(java.awt.event.ActionEvent evt) {                                              
+    private void btnAddNhanVienlistActionPerformed(java.awt.event.ActionEvent evt) {                                              
         // TODO add your handling code here:
-        InputHopDong inputnv = new InputHopDong(this);
+        InputNhanVien inputnv = new InputNhanVien(this);
         inputnv.setVisible(true);
         
     } 
     
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {                                        
         selectedIndex = tblResult.getSelectedRow();
-        if(HopDongs.size() == 0) {
+        if(NhanViens.size() == 0) {
             JOptionPane.showMessageDialog( null,
                     "Hãy nhập thêm giáo viên rồi sửa!");
         } else if(selectedIndex == -1) {
             JOptionPane.showMessageDialog(null, 
                     "Hãy chọn dòng có giáo viên cần sửa rồi ấn Sửa!");
         } else { // chon dong can sua va nhan nut
-            EditHopDong edit = new EditHopDong(this);
-            edit.setEditData(HopDongs.get(selectedIndex));
+            EditNhanVien edit = new EditNhanVien(this);
+            edit.setEditData(NhanViens.get(selectedIndex));
             edit.setVisible(true);
         }
     }
       private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {                                        
         selectedIndex = tblResult.getSelectedRow();
-        if(HopDongs.size() == 0) {
+        if(NhanViens.size() == 0) {
             JOptionPane.showMessageDialog( null,
                     "Woah woah! Something went very wrong with you !");
         } else if(selectedIndex == -1) {
@@ -164,21 +176,21 @@ public class HopDongGUI extends Content {
             int key = JOptionPane.showConfirmDialog(null, "You about to do something","Are you sure?",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (key == JOptionPane.YES_OPTION){
-                    HopDongs.remove(selectedIndex);
+                    NhanViens.remove(selectedIndex);
                     //EditNhanVien edit = new EditNhanVien(this);
                 }
         }
         showData();
     }
       private void btnExportActionPerformed(java.awt.event.ActionEvent evt){
-          WriteExcelHopDong demo = new WriteExcelHopDong();
+          WriteExcelNhanVien demo = new WriteExcelNhanVien();
           demo.export();
       }
     
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new HopDongGUI().setVisible(true);
+                new NhanVienGUI().setVisible(true);
             }
         });
     }
@@ -187,13 +199,14 @@ public class HopDongGUI extends Content {
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnExport;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblResult;
     // End of variables declaration                   
 
-    public void updateNhanVienlist(HopDong s) {
-        HopDongs.remove(selectedIndex);
+    public void updateNhanVienlist(NhanVien s) {
+        NhanViens.remove(selectedIndex);
         this.addNhanVienlist(s);
     }
 }

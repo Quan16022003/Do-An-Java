@@ -47,7 +47,7 @@ public class MainForm extends JFrame{
         
 //        titleBar = new TitleBar(this);
         sideBar = new SideBar(this);
-        pContent = new Nhan_Vien_GUI();
+        pContent = new NhanVienGUI();
         
         //this.add(titleBar, BorderLayout.PAGE_START);
         add(sideBar, BorderLayout.WEST);
@@ -59,12 +59,12 @@ public class MainForm extends JFrame{
         remove(pContent);
         switch (menu.getText()) {
             case "Quản lý giáo viên" -> {
-                pContent = new Nhan_Vien_GUI();
+                pContent = new NhanVienGUI();
             }
 //            case "Chấm công giáo viên" -> {
 //                pContent = new ChamCong_Form();
 //            }
-            case "Xin chào" -> {
+            case "Hop Dong" -> {
                 pContent = new HopDongGUI();
             }
 //            case "Tạm biệt" -> {

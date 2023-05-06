@@ -10,10 +10,11 @@ package DTO;
  */
 public class HopDong {
     private String MaHD, MaLoaiHD, MaNV, TenHD, NgayKy, HanHD, HocVi, Hang, Bac, MaSoThue
-            , CucThue, STK, NganHang, SoTietGiangDay;
+            , CucThue, STK, NganHang, CongViecDuocGiao, HeSoLuong, HeSoPhuCap;
     public HopDong(String MaHD,String MaLoaiHD,String MaNV,String TenHD,String NgayKy,
             String HanHD,String HocVi,String Hang,String Bac,String MaSoThue
-            ,String CucThue, String STK,String NganHang,String SoTietGiangDay)
+            ,String CucThue, String STK,String NganHang,String CongViecDuocGiao,String HeSoLuong,
+            String HeSoPhuCap)
     {
         this.MaHD = MaHD;
         this.MaLoaiHD = MaLoaiHD;
@@ -28,11 +29,38 @@ public class HopDong {
         this.CucThue = CucThue;
         this.STK = STK;
         this.NganHang = NganHang;
-        this.SoTietGiangDay = SoTietGiangDay;
+        this.CongViecDuocGiao = CongViecDuocGiao;
+        this.HeSoLuong = HeSoLuong;
+        this.HeSoPhuCap = HeSoPhuCap;
     }
 
     public HopDong() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+
+    public String getCongViecDuocGiao() {
+        return CongViecDuocGiao;
+    }
+
+    public void setCongViecDuocGiao(String CongViecDuocGiao) {
+        this.CongViecDuocGiao = CongViecDuocGiao;
+    }
+
+    public String getHeSoLuong() {
+        return HeSoLuong;
+    }
+
+    public void setHeSoLuong(String HeSoLuong) {
+        this.HeSoLuong = HeSoLuong;
+    }
+
+    public String getHeSoPhuCap() {
+        return HeSoPhuCap;
+    }
+
+    public void setHeSoPhuCap(String HeSoPhuCap) {
+        this.HeSoPhuCap = HeSoPhuCap;
     }
 
     public String getMaHD() {
@@ -137,14 +165,6 @@ public class HopDong {
 
     public void setNganHang(String NganHang) {
         this.NganHang = NganHang;
-    }
-
-    public String getSoTietGiangDay() {
-        return SoTietGiangDay;
-    }
-
-    public void setSoTietGiangDay(String SoTietGiangDay) {
-        this.SoTietGiangDay = SoTietGiangDay;
     }
     
 }

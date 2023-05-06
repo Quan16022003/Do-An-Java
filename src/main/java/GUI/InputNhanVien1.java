@@ -24,7 +24,7 @@ import javax.swing.JTextField;
  * @author apple
  */
 public class InputNhanVien1 extends javax.swing.JDialog{
-    private Nhan_Vien_GUI home;
+    private NhanVienGUI home;
     private NhanVienDAO DAO;
     private NhanVienBUS BUS;
     
@@ -32,7 +32,7 @@ public class InputNhanVien1 extends javax.swing.JDialog{
 //        super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-        home = (Nhan_Vien_GUI) parent;
+        home = (NhanVienGUI) parent;
         BUS = new NhanVienBUS();
         DAO = new NhanVienDAO();
         
