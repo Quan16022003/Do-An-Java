@@ -8,7 +8,8 @@ import GUI.QLChamCong.ChamCongForm;
 import GUI.QLLuong.QuanLyLuongContent;
 import GUI.QLNhanVien.HopDongGUI;
 import GUI.QLNhanVien.NhanVienGUI;
-import GUI.QLTaiKhoan.Form4Content;
+import GUI.QLNhanVien.QuanLyNhanVien;
+import GUI.QLTaiKhoan.Panel_QuanLyDonVi;
 import GUI.modal.Content;
 
 import java.awt.BorderLayout;
@@ -69,10 +70,10 @@ public class MainForm extends JFrame{
     public void changeContent(JLabel menu) {
         remove(pContent);
         switch (menu.getText()) {
-            case "Quản lý nhân viên" -> pContent = new NhanVienGUI();
+            case "Quản lý nhân viên" -> pContent = new QuanLyNhanVien();
             case "Quản lý chấm công" -> pContent = new ChamCongForm();
             case "Quản lý lương" -> pContent = new QuanLyLuongContent();
-            case "Quản lý tài khoản" -> pContent = new Form4Content();
+            case "Quản lý tài khoản" -> pContent = new Panel_QuanLyDonVi();
 
             default -> throw new AssertionError();
         }

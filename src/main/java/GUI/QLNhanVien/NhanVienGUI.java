@@ -4,20 +4,20 @@
  */
 package GUI.QLNhanVien;
 
+import BLL.Report_Excel.InDanhSachPDF;
 import DAL.NhanVienDAO;
-import BLL.ExportExcel.WriteExcelNhanVien;
+import BLL.Report_Excel.WriteExcelNhanVien;
 import DTO.NhanVien;
 import GUI.modal.Content;
 import GUI.modal.HomeAbstractDataModel_for_Nhan_Vien;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 /**
  *
@@ -123,7 +123,15 @@ public class NhanVienGUI extends Content {
             ButtonPanel.add(btnEdit);
             ButtonPanel.add(btnDelete);
             ButtonPanel.add(btnExport);
-            
+
+            JButton btnExport = new JButton("In");
+            btnExport.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    InDanhSachPDF.renderPDF(NhanViens);
+                }
+            });
+            ButtonPanel.add(btnExport);
             JPanel gapPanel1 = new JPanel();
             gapPanel1.setPreferredSize(new Dimension(10,0));
             JPanel gapPanel2 = new JPanel();

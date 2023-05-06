@@ -1,6 +1,6 @@
 package GUI.QLLuong;
 
-import BLL.ExportExcel.ExportDataLuong;
+import BLL.Report_Excel.ExportDataLuong;
 import BLL.QLLuongBUS;
 import DTO.Luong;
 import com.toedter.calendar.JDateChooser;

@@ -23,13 +23,5 @@ public final class QuanLyLuongContent extends Content {
         tabbedPane.addTab("Xem lịch sử bảng lương", new XemLichSu());
         add(tabbedPane);
     }
-    public static void main(String[] args) {
-        FlatIntelliJLaf.setup();
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(new QuanLyLuongContent());
-        frame.pack();
-        frame.setVisible(true);
-    }
 
 }
