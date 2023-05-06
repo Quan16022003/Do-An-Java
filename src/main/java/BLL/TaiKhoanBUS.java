@@ -18,6 +18,7 @@ public class TaiKhoanBUS extends AbstractElementBUS<TaiKhoan, String> {
 
     @Override
     public boolean update(TaiKhoan taiKhoan) {
+        taiKhoan.setPassword(encryptedPassword(taiKhoan.getPassword()));
         return dao.update(taiKhoan);
     }
 

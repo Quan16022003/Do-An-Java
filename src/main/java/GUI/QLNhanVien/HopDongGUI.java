@@ -5,7 +5,7 @@
 package GUI.QLNhanVien;
 
 import DAL.HopDongDAO;
-import BLL.WriteExcelHopDong;
+import BLL.ExportExcel.WriteExcelHopDong;
 import DTO.HopDong;
 import GUI.modal.Content;
 import GUI.modal.HomeAbstractDataModel_for_Hop_Dong;

@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package BLL;
+package BLL.ExportExcel;
 
-import DAL.NhanVienDAO;
-import DTO.NhanVien;
+import DAL.HopDongDAO;
+import DTO.HopDong;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Map;
@@ -20,11 +20,11 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *
  * @author apple
  */
-public class WriteExcelNhanVien {
-    private NhanVienDAO DAO;
+public class WriteExcelHopDong {
+    private HopDongDAO DAO;
     public void export() 
     {
-        DAO = new NhanVienDAO();
+        DAO = new HopDongDAO();
         //Blank workbook
         XSSFWorkbook workbook = new XSSFWorkbook(); 
          
@@ -36,11 +36,10 @@ public class WriteExcelNhanVien {
   
         data.put(Integer.toString(i), new Object[] {"MaNV", "MaDV", "MaLoaiNV","MaChucVu","Ten","GioiTinh","NgSinh","SDT","SoNha","Duong","NgCap","NoiCap","NgVaoLam"});
         
-        for (NhanVien nv : DAO.selectAll()) {
-            data.put(Integer.toString(i), new Object[] {Integer.toString(i),nv.getMaNV(),nv.getMaDV(),nv.getMaLoaiNV(),nv.getMaChucVu(),
-                nv.getTen(),nv.getGioiTinh(),nv.getNgSinh(),nv.getSDT(),nv.getSoNha(),nv.getDuong(),
-                nv.getPhuong_Xa(),nv.getPhuong_Xa(),nv.getQuan_Huyen(),nv.getTP_Tinh(),nv.getCCCD(),
-                nv.getNgCap(),nv.getNoiCap(),nv.getNgVaoLam()});
+        for (HopDong hd : DAO.selectAll()) {
+            data.put(Integer.toString(i), new Object[] {Integer.toString(i),hd.getMaHD(),hd.getMaLoaiHD(),
+            hd.getMaNV(),hd.getTenHD(),hd.getNgayKy(),hd.getHanHD(),hd.getHocVi(),hd.getHang(),hd.getBac(),hd.getMaSoThue(),
+            hd.getCucThue(),hd.getCucThue(),hd.getSTK(),hd.getNganHang(),hd.getSoTietGiangDay()});
         }         
         //Iterate over data and write to sheet
         Set<String> keyset = data.keySet();

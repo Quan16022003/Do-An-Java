@@ -5,7 +5,7 @@
 package GUI.QLNhanVien;
 
 import DAL.NhanVienDAO;
-import BLL.WriteExcelNhanVien;
+import BLL.ExportExcel.WriteExcelNhanVien;
 import DTO.NhanVien;
 import GUI.modal.Content;
 import GUI.modal.HomeAbstractDataModel_for_Nhan_Vien;

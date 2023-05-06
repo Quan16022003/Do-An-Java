@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package BLL;
+package BLL.ExportExcel;
 
 //import com.mysql.cj.result.Row;
 import DTO.ChamCong;
@@ -29,7 +29,7 @@ public class expDATA {
         //        phần đầu vào giả , tự điều chỉnh cho hợp lí nha
         
         header = new String[]{"Mã nhân viên", "Ngày chấm công","Giờ vào", "Giờ ra", "Xác nhận"};
-        path = "C:\\Users\\ADMIN\\Documents\\NetBeansProJects\\";
+        path = "./";
         namef = "ChamCongfile";
         sheetname = "ChamCong";
         path = path + (namef + ".xlsx");
