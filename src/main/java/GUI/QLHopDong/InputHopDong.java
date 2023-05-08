@@ -7,6 +7,7 @@ package GUI.QLHopDong;
 import DAL.HopDongDAO;
 import BLL.HopDongBUS;
 import DTO.HopDong;
+import GUI.QLNhanVien.HopDongGUI;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;

@@ -4,6 +4,7 @@
  */
 package GUI;
 
+import BLL.MainFormBUS;
 import GUI.QLChamCong.ChamCongForm;
 import GUI.QLLuong.QuanLyLuongContent;
 import GUI.QLNhanVien.HopDongGUI;
@@ -11,6 +12,7 @@ import GUI.QLNhanVien.NhanVienGUI;
 import GUI.QLNhanVien.QuanLyNhanVien;
 import GUI.QLTaiKhoan.Panel_QuanLyDonVi;
 import GUI.modal.Content;
+import com.sun.tools.javac.Main;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -28,11 +30,13 @@ public class MainForm extends JFrame{
     private final Color FRAME_COLOR = new Color(238,238,238);
     private final SideBar sideBar;
     private Content pContent;
+    private final MainFormBUS bus = new MainFormBUS();
 
-    private final String[] menus = new String[]{"Quản lý nhân viên", "Quản lý chấm công", "Quản lý lương", "Quản lý tài khoản"};
+    private String[] menus;
 
     public MainForm(String username) {
         System.out.println(username );
+        menus = bus.getDsTenCN(username);
         setSize(FRAME_SIZE);
         setResizable(true);
         setBackground(FRAME_COLOR);
@@ -58,7 +62,7 @@ public class MainForm extends JFrame{
 
 //        titleBar = new TitleBar(this);
         sideBar = new SideBar(this);
-        pContent = new NhanVienGUI();
+        pContent = bus.changeContent(menus[0]);
 
         //this.add(titleBar, BorderLayout.PAGE_START);
         add(sideBar, BorderLayout.WEST);
@@ -69,14 +73,7 @@ public class MainForm extends JFrame{
 
     public void changeContent(JLabel menu) {
         remove(pContent);
-        switch (menu.getText()) {
-            case "Quản lý nhân viên" -> pContent = new QuanLyNhanVien();
-            case "Quản lý chấm công" -> pContent = new ChamCongForm();
-            case "Quản lý lương" -> pContent = new QuanLyLuongContent();
-            case "Quản lý tài khoản" -> pContent = new Panel_QuanLyDonVi();
-
-            default -> throw new AssertionError();
-        }
+        pContent = bus.changeContent(menu.getText());
         add(pContent, BorderLayout.CENTER);
         repaint();
         validate();

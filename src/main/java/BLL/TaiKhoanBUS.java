@@ -37,7 +37,7 @@ public class TaiKhoanBUS extends AbstractElementBUS<TaiKhoan, String> {
         return null;
     }
 
-    private String encryptedPassword(String password) {
+    public String encryptedPassword(String password) {
         String encrypted = null;
         try
         {

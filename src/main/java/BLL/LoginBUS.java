@@ -1,12 +1,10 @@
 package BLL;
 
-import DAL.TaiKhoanDAO;
-import DTO.TaiKhoan;
-
 public class LoginBUS {
     TaiKhoanBUS bus = new TaiKhoanBUS();
 
     public LoginBUS() {
+        System.out.println(bus.encryptedPassword("123456"));
     }
 
     public String validateLogin(String username, String password) {
@@ -29,9 +27,5 @@ public class LoginBUS {
         } else {
             return "Tài khoản hoặc mật khẩu không đúng";
         }
-    }
-
-    public String getMaNhanVien(String username) {
-        return bus.select(username).getMaNhanVien();
     }
 }

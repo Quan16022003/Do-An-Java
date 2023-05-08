@@ -11,7 +11,7 @@ public class TaiKhoan {
     private String username;
     private String password;
     private String maNhanVien;
-    private String role;
+    private int role;
 
     public TaiKhoan() {
     }
@@ -19,8 +19,8 @@ public class TaiKhoan {
     public TaiKhoan(ResultSet rs) throws SQLException {
         setUsername(rs.getString("username"));
         setPassword(rs.getString("password"));
-        setMaNhanVien(rs.getString("ma_giao_vien"));
-        setRole(rs.getString("role"));
+        setMaNhanVien(rs.getString("MaNV"));
+        setRole(rs.getInt("role"));
     }
 
     public String getUsername() {
@@ -47,11 +47,11 @@ public class TaiKhoan {
         this.maNhanVien = maNhanVien;
     }
 
-    public String getRole() {
+    public int getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(int role) {
         this.role = role;
     }
 

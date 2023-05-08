@@ -24,7 +24,7 @@ public class TaiKhoanDAO extends AbstractDAO<TaiKhoan, String> {
 
     @Override
     public boolean insert(TaiKhoan taiKhoan) {
-        String query = "INSERT INTO tai_khoan(username, password, ma_giao_vien, role) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO tai_khoan(username, password, MaNV, role) VALUES (?, ?, ?, ?)";
         mySQLConnection.openConnection();
         int rowsInserted = mySQLConnection.executeUpdate(query, taiKhoan.getUsername(), taiKhoan.getPassword(), taiKhoan.getMaNhanVien(), taiKhoan.getRole());
         LOGGER.log(Level.SEVERE, (rowsInserted > 0) ? "insert successfully" : "insert failed");

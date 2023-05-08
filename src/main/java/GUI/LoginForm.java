@@ -51,13 +51,22 @@ public class LoginForm extends JFrame implements KeyListener, ActionListener{
     private JPanel createForm() {
         JPanel form = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.anchor = GridBagConstraints.LINE_START;
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.insets.bottom = 5;
         gbc.insets.left = 5;
         gbc.insets.right = 5;
         gbc.insets.top = 5;
+
+        JLabel titleLabel = new JLabel("Đăng nhập");
+        titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        gbc.gridwidth = 2;
+        form.add(titleLabel, gbc);
+
+        gbc.anchor = GridBagConstraints.LINE_START;
+        gbc.gridwidth = 1;
+        gbc.gridx = 0;
+        gbc.gridy = 1;
 
         JLabel usrLabel = new JLabel("Tài khoản:");
         usrLabel.setFont(font);
@@ -69,7 +78,7 @@ public class LoginForm extends JFrame implements KeyListener, ActionListener{
         form.add(userField, gbc);
 
         gbc.gridx = 0;
-        gbc.gridy = 1;
+        gbc.gridy = 2;
         JLabel passwordLabel = new JLabel("Mật khẩu:");
         passwordLabel.setFont(font);
         form.add(passwordLabel, gbc);
@@ -111,8 +120,7 @@ public class LoginForm extends JFrame implements KeyListener, ActionListener{
         String validation = loginBUS.validateLogin(username, password);
         if (validation.equals("OK")) {
             JOptionPane.showMessageDialog(null, "Đăng nhập thành công");
-            String maGiaoVien = loginBUS.getMaNhanVien(username);
-            SwingUtilities.invokeLater(() -> new MainForm(maGiaoVien).setVisible(true));
+            SwingUtilities.invokeLater(() -> new MainForm(username).setVisible(true));
             dispose();
         }
         else {
