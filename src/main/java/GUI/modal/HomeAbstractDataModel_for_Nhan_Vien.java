@@ -14,9 +14,9 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author apple
  */
-public class HomeAbstractDataModel_for_Nhan_Vien extends AbstractTableModel{
+public class HomeAbstractDataModelforNhanVien extends AbstractTableModel{
     
-    private String[] cols = {"Mã nhân viên", "Mã đơn vị", "Mã Chức Vụ", "Giới Tính"};
+    private String[] cols = {"Mã nhân viên", "Mã đơn vị", "Mã Chức Vụ", "Số điện thoại"};
 
     private List<Object[]> rows = new ArrayList<>();
 
@@ -30,9 +30,7 @@ public class HomeAbstractDataModel_for_Nhan_Vien extends AbstractTableModel{
             
             rows.add(new Object[]{
                 
-               nv.getMaNV(),nv.getMaDV(),nv.getMaChucVu(),nv.getGioiTinh(),nv.getNgSinh(),nv.getSDT(),nv.getSoNha(),nv.getDuong(),
-                nv.getPhuong_Xa(),nv.getPhuong_Xa(),nv.getQuan_Huyen(),nv.getTP_Tinh(),nv.getCCCD(),
-                nv.getNgCap(),nv.getNoiCap(),nv.getNgVaoLam()            
+               nv.getMaNV(),nv.getMaDV(),nv.getMaChucVu(),nv.getSDT()           
             });
         }
         fireTableDataChanged();
