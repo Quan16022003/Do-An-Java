@@ -7,8 +7,8 @@ package GUI.QLNhanVien;
 import DAL.HopDongDAO;
 import BLL.Report_Excel.WriteExcelHopDong;
 import DTO.HopDong;
-import GUI.Model.Content;
-import GUI.Model.HomeAbstractDataModel_for_Hop_Dong;
+import GUI.modal.Content;
+import GUI.modal.HomeAbstractDataModelforHopDong;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -26,7 +26,7 @@ import javax.swing.JPanel;
 public class HopDongGUI extends Content {
     
     private List<HopDong> HopDongs;
-    private HomeAbstractDataModel_for_Hop_Dong tblModel;
+    private HomeAbstractDataModelforHopDong tblModel;
     private int selectedIndex;
     private JTable table;
     private HopDongDAO Dao;
@@ -39,11 +39,14 @@ public class HopDongGUI extends Content {
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
  //       this.setTitle("Trang chủ");
  //       loadDataFromFile("SV.txt");
+        showData();
     }
     
      private void showData() {
 //        tblModel.setRowCount(0); // reset nd trong bang ve 0
-        tblModel.add(HopDongs);
+        Dao = new HopDongDAO();
+        HopDongs = Dao.selectAll();
+        tblModel.add((ArrayList<HopDong>) HopDongs);
     }
     
     public void addNhanVienlist(HopDong s) {
@@ -74,7 +77,7 @@ public class HopDongGUI extends Content {
 
         jLabel1.setText("DANH SÁCH HỢP ĐỒNG");
         jLabel1.setFont(new Font("Segoe UI", 0, 25));
-         tblModel = new HomeAbstractDataModel_for_Hop_Dong();
+         tblModel = new HomeAbstractDataModelforHopDong();
         tblResult.setModel(tblModel);
         jScrollPane1.setViewportView(tblResult);
 
@@ -141,10 +144,10 @@ public class HopDongGUI extends Content {
         selectedIndex = tblResult.getSelectedRow();
         if(HopDongs.size() == 0) {
             JOptionPane.showMessageDialog( null,
-                    "Hãy nhập thêm giáo viên rồi sửa!");
+                    "Hãy nhập thêm hợp đồng rồi sửa!");
         } else if(selectedIndex == -1) {
             JOptionPane.showMessageDialog(null, 
-                    "Hãy chọn dòng có giáo viên cần sửa rồi ấn Sửa!");
+                    "Hãy chọn dòng có hợp đồng cần sửa rồi ấn Sửa!");
         } else { // chon dong can sua va nhan nut
             EditHopDong edit = new EditHopDong(this);
             edit.setEditData(HopDongs.get(selectedIndex));
@@ -155,13 +158,13 @@ public class HopDongGUI extends Content {
         selectedIndex = tblResult.getSelectedRow();
         if(HopDongs.size() == 0) {
             JOptionPane.showMessageDialog( null,
-                    "Woah woah! Something went very wrong with you !");
+                    "Hãy nhập thêm hợp đồng rồi xoá!");
         } else if(selectedIndex == -1) {
             JOptionPane.showMessageDialog(null, 
-                    "Hãy chọn dòng có giáo viên cần sửa rồi ấn Xoá !");
+                    "Hãy chọn dòng có hợp đồng cần sửa rồi ấn Xoá!");
         } else  
         { // chon dong can sua va nhan nut
-            int key = JOptionPane.showConfirmDialog(null, "You about to do something","Are you sure?",
+            int key = JOptionPane.showConfirmDialog(null, "Bạn có muốn xoá hợp đồng này?","Màng hình xoá",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (key == JOptionPane.YES_OPTION){
                     HopDongs.remove(selectedIndex);
