@@ -9,15 +9,15 @@ package DTO;
  * @author apple
  */
 public class NhanVien {
-    private String MaNV, MaDV, MaLoaiNV, MaChucVu, Ten, GioiTinh, NgSinh, SDT,
+    private String MaNV, MaDV, MaChucVu, Ten, GioiTinh, NgSinh, SDT,
             SoNha, Duong, Phuong_Xa, Quan_Huyen, TP_Tinh, CCCD, NgCap, NoiCap, NgVaoLam, image;
-    public NhanVien(String MaNV, String MaDV, String MaLoaiNV, String MaChucVu
+    public NhanVien(String MaNV, String MaDV, String MaChucVu
             ,String Ten, String GioiTinh, String NgSinh, String SDT, String SoNha, String Duong, String Phuong_Xa,
             String Quan_Huyen, String TP_Tinh, String CCCD, String NgCap, String NoiCap, String NgVaoLam, String image)
             {
         this.MaNV = MaNV; ///2 k
         this.MaDV = MaDV;/////////2k
-        this.MaLoaiNV = MaLoaiNV;//////2k
+//        this.MaLoaiNV = MaLoaiNV;//////2k
         this.MaChucVu = MaChucVu;/////2    11111
         this.Ten = Ten;  /////1k
         this.GioiTinh = GioiTinh;////1k
@@ -61,13 +61,13 @@ public class NhanVien {
         this.MaDV = MaDV;
     }
 
-    public String getMaLoaiNV() {
-        return MaLoaiNV;
-    }
-
-    public void setMaLoaiNV(String MaLoaiNV) {
-        this.MaLoaiNV = MaLoaiNV;
-    }
+//    public String getMaLoaiNV() {
+//        return MaLoaiNV;
+//    }
+//
+//    public void setMaLoaiNV(String MaLoaiNV) {
+//        this.MaLoaiNV = MaLoaiNV;
+//    }
 
     public String getMaChucVu() {
         return MaChucVu;
