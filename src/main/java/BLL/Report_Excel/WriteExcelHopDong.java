@@ -34,12 +34,11 @@ public class WriteExcelHopDong {
         //This data needs to be written (Object[])
         Map<String, Object[]> data = new TreeMap<String, Object[]>();
   
-        data.put(Integer.toString(i), new Object[] {"MaNV", "MaDV", "MaLoaiNV","MaChucVu","Ten","GioiTinh","NgSinh","SDT","SoNha","Duong","NgCap","NoiCap","NgVaoLam"});
+        data.put(Integer.toString(i), new Object[] {"MaHD", "MaNV","TenHD","NgayKy","HanHD","HeSoLuong","HeSoPhuCap"});
         
         for (HopDong hd : DAO.selectAll()) {
-            data.put(Integer.toString(i), new Object[] {Integer.toString(i),hd.getMaHD(),hd.getMaLoaiHD(),
-            hd.getMaNV(),hd.getTenHD(),hd.getNgayKy(),hd.getHanHD(),hd.getHocVi(),hd.getHang(),hd.getBac(),hd.getMaSoThue(),
-            hd.getCucThue(),hd.getCucThue(),hd.getSTK(),hd.getNganHang(),hd.getSoTietGiangDay()});
+            data.put(Integer.toString(i), new Object[] {Integer.toString(i),hd.getMaHD(),
+            hd.getMaNV(),hd.getTenHD(),hd.getNgayKy(),hd.getHanHD(),hd.getHeSoLuong(),hd.getHeSoPhuCap()});
         }         
         //Iterate over data and write to sheet
         Set<String> keyset = data.keySet();
