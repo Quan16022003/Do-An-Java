@@ -4,11 +4,12 @@
  */
 package GUI.QLChamCong;
 
+import BLL.ChamCongBUS;
 import BLL.Report_Excel.expDATA;
 import DAL.BindingListener;
 import DAL.ChamCongDAO;
 import DTO.ChamCong;
-import GUI.Model.Content;
+import GUI.modal.Content;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
@@ -27,18 +29,16 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ChamCongForm extends Content {
 
+    private ChamCongBUS bus = new ChamCongBUS();
     private JTabbedPane tab1;
-    private JPanel pn1, pn2;
+    private JPanel pn1;
     private JButton btThem, btSua, btXoa, btTimKiem, btLuu, btHuy, btExport;
-    private JLabel lblTitle, lblMaNV, lblXacNhan, lblNgay, lblThang, lblNgayNghi, lblTimeIn, lblTimeOut;
+    private JLabel lblTitle, lblMaNV, lblXacNhan, lblNgayNghi, lblTimeIn, lblTimeOut;
     private JTextField txtMaNV, txtXacNhan, txtTimeIn, txtTimeOut, txtNgayNghi, txtTimKiem;
-    private JComboBox cbNgay, cbThang;
-    private JTable tbChamCong,tbThongKe;
-    DefaultTableModel dtm1,dtm2;
-    private ArrayList<ChamCong> listChamCong;
+    private JTable tbChamCong;
+    DefaultTableModel dtm1;
+    private List<ChamCong> listChamCong;
 
-    
-    
     public void showResult() {
         ChamCong x = listChamCong.get(listChamCong.size() - 1);
 
@@ -58,7 +58,7 @@ public class ChamCongForm extends Content {
 
     public void showTable() {
         dtm1.setRowCount(0);
-        for (ChamCong x : new ChamCongDAO().find(txtTimKiem.getText())) {
+        for (ChamCong x : bus.find(txtTimKiem.getText())) {
             dtm1.addRow(new Object[]{
                 x.getMaNV(), x.getNgayThang(), x.getTimeIn(), x.getTimeOut(), x.getxacNhan()
             });
@@ -68,22 +68,14 @@ public class ChamCongForm extends Content {
 
     public ChamCongForm() {
         super();
-        
-        
-        listChamCong = new ChamCongDAO().getListChamCong();
+
+        listChamCong = bus.selectAll();
 
         tab1 = new JTabbedPane();
-//        tab2 = new JTabbedPane();
 
-        pn2 = new JPanel();
         pn1 = new JPanel();
         pn1.setLayout(null);
         pn1.setPreferredSize(new Dimension(1080, 688));
-        pn2.setLayout(null);
-        pn2.setPreferredSize(new Dimension(1080, 688));
-//        pn3 = new JPanel();
-//        pn3.setLayout(null);
-//        pn3.setPreferredSize(new Dimension(1080, 688));
 
         lblTitle = new JLabel("QUẢN LÍ CHẤM CÔNG");
         lblTitle.setBounds(475, 0, 130, 44);
@@ -142,7 +134,7 @@ public class ChamCongForm extends Content {
                         ex.printStackTrace();
                     }
 
-                    if (new ChamCongDAO().insert(x)) {
+                    if (bus.insert(x)) {
                         JOptionPane.showMessageDialog(pn1, "Thêm thành công!");
                         listChamCong.add(x);
                         showResult();
@@ -155,7 +147,7 @@ public class ChamCongForm extends Content {
             }
         });
 
-        btXoa = new JButton("Xoa");
+        btXoa = new JButton("Xoá");
         btXoa.setBounds(130, 400, 100, 35);
         pn1.add(btXoa);
         btXoa.addActionListener(new ActionListener() {
@@ -167,14 +159,14 @@ public class ChamCongForm extends Content {
                 } else if (row == -1) {
                     JOptionPane.showMessageDialog(pn1, "Hãy chọn dòng cần thao tác");
                 } else {
-                    int result = JOptionPane.showConfirmDialog(pn1, "Are you sure?");
+                    int result = JOptionPane.showConfirmDialog(pn1, "Bạn chắc chắn?");
                     if (result == JOptionPane.YES_OPTION) {
                         listChamCong.get(row).setIs_deleted(1);
-                        if (new ChamCongDAO().updateDeleted(listChamCong.get(row))) {
-                            JOptionPane.showMessageDialog(pn1, "Delete Success!");
+                        if (bus.updateDeleted(listChamCong.get(row))) {
+                            JOptionPane.showMessageDialog(pn1, "Xóa thành công!");
 
                         } else {
-                            JOptionPane.showMessageDialog(pn1, "Something wrong!");
+                            JOptionPane.showMessageDialog(pn1, "Lỗi!");
 
                         }
                         listChamCong.remove(row);
@@ -207,12 +199,12 @@ public class ChamCongForm extends Content {
                         ex.printStackTrace();
                     }
 
-                    if (new ChamCongDAO().update(x)) {
-                        JOptionPane.showMessageDialog(pn1, "Apply Success!");
+                    if (bus.update(x)) {
+                        JOptionPane.showMessageDialog(pn1, "Cập nhật thành công!");
                         listChamCong.add(x);
                         showResult();
                     } else {
-                        JOptionPane.showMessageDialog(pn1, "Duplicated!");
+                        JOptionPane.showMessageDialog(pn1, "Lỗi!");
 
                     }
 
@@ -225,7 +217,7 @@ public class ChamCongForm extends Content {
             }
         });
 
-        btSua = new JButton("Sua");
+        btSua = new JButton("Sửa");
         btSua.setBounds(250, 400, 100, 35);
         pn1.add(btSua);
         btSua.addActionListener(new ActionListener() {
@@ -249,8 +241,7 @@ public class ChamCongForm extends Content {
                     btXoa.setVisible(false);
                     txtMaNV.setEditable(false);
                     txtNgayNghi.setEditable(false);
-                    
-                    
+
 //                    listChamCong.remove(row);               
 //                    showResult();
                 }
@@ -268,22 +259,22 @@ public class ChamCongForm extends Content {
                 txtTimeIn.setText("");
                 txtTimeOut.setText("");
                 txtXacNhan.setText("");
-                
+
                 btSua.setVisible(true);
-                    btHuy.setVisible(false);
-                    btLuu.setVisible(false);
-                    btThem.setVisible(true);
-                    btXoa.setVisible(true);
-                
+                btHuy.setVisible(false);
+                btLuu.setVisible(false);
+                btThem.setVisible(true);
+                btXoa.setVisible(true);
+
             }
-            
+
         });
-        
+
         txtTimKiem = new JTextField("");
         txtTimKiem.setBounds(10, 500, 220, 35);
         pn1.add(txtTimKiem);
 
-        btTimKiem = new JButton("TimKiem");
+        btTimKiem = new JButton("Tìm kiếm");
         btTimKiem.setBounds(250, 500, 100, 35);
         pn1.add(btTimKiem);
         btTimKiem.addActionListener(new ActionListener() {
@@ -293,73 +284,59 @@ public class ChamCongForm extends Content {
                     JOptionPane.showMessageDialog(pn1, "Chưa có dữ liệu");
                 } else {
 
-                    if (txtTimKiem.getText().equals("")) {
-                        JOptionPane.showMessageDialog(pn1, "Cần điền thông tin!");
-                    } else {
+                    bus.find(txtTimKiem.getText());
+                    showTable();
 
-                        showTable();
-
-                    }
                 }
 
             }
 
         });
-        
+
         btExport = new JButton("Export");
         btExport.setBounds(250, 550, 100, 35);
         pn1.add(btExport);
         btExport.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ArrayList<ChamCong> xa = null;
+                List<ChamCong> xa = null;
                 String[] headera = null;
                 String namefa = null;
                 String patha = null;
                 String sheetnamea = null;
                 expDATA z = new expDATA();
                 try {
-                    z.exp(listChamCong, headera, namefa, patha, sheetnamea);
+                    z.exp(bus.find(txtTimKiem.getText()), headera, namefa, patha, sheetnamea);
                 } catch (IOException ex) {
                     Logger.getLogger(ChamCongForm.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            
+
         });
-        
-        txtMaNV.getDocument().addDocumentListener(new BindingListener(txtMaNV,"[A-Z0-9]*"));
-        txtNgayNghi.getDocument().addDocumentListener(new BindingListener(txtNgayNghi,"\\d{1,2}/\\d{1,2}/\\d{4}"));
-        txtTimeIn.getDocument().addDocumentListener(new BindingListener(txtTimeIn,"\\d{1,2}:\\d{1,2}"));
-        txtTimeOut.getDocument().addDocumentListener(new BindingListener(txtTimeOut,"\\d{1,2}:\\d{1,2}"));
-        txtXacNhan.getDocument().addDocumentListener(new BindingListener(txtXacNhan,"[01]{1}"));
-        
+
+        txtMaNV.getDocument().addDocumentListener(new BindingListener(txtMaNV, "[A-Z0-9]*"));
+        txtNgayNghi.getDocument().addDocumentListener(new BindingListener(txtNgayNghi, "\\d{1,2}/\\d{1,2}/\\d{4}"));
+        txtTimeIn.getDocument().addDocumentListener(new BindingListener(txtTimeIn, "\\d{1,2}:\\d{1,2}"));
+        txtTimeOut.getDocument().addDocumentListener(new BindingListener(txtTimeOut, "\\d{1,2}:\\d{1,2}"));
+        txtXacNhan.getDocument().addDocumentListener(new BindingListener(txtXacNhan, "[01]{1}"));
+
         dtm1 = new DefaultTableModel();
 //        dtm1.addColumn("STT");
         dtm1.addColumn("Mã nhân viên");
         dtm1.addColumn("Ngày chấm công");
         dtm1.addColumn("Giờ vào");
         dtm1.addColumn("Giờ ra");
-        dtm1.addColumn("Xác Nhận");
+        dtm1.addColumn("Xác Nhận đủ công");
 
-        dtm2 = new DefaultTableModel();
-        dtm2.addColumn("Mã nhân viên");
-        dtm2.addColumn("Tỏng ngày công");
-        
         showTable();
 
         tbChamCong = new JTable(dtm1);
-        tbThongKe = new JTable(dtm2);
-        JScrollPane sc2 = new JScrollPane(tbThongKe);
-        sc2.setBounds(10, 50, 1060, 650);
-        pn2.add(sc2);
-        
 
         JScrollPane sc = new JScrollPane(tbChamCong);
         sc.setBounds(360, 44, 700, 600);
         pn1.add(sc);
 
         tab1.addTab("Quản lí chấm công", pn1);
-        tab1.addTab("Thống kê chấm công", pn2);
 
         add(tab1);
     }
