@@ -8,7 +8,8 @@ import DAL.NhanVienDAO;
 import BLL.NhanVienBUS;
 import DAL.BindingListener;
 import DTO.NhanVien;
-import GUI.modal.ChooseAvatarPanel;
+import GUI.Model.ChooseAvatarPanel;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;

@@ -125,6 +125,9 @@ public class InDanhSachPDF {
     }
 
     public static void renderPDF(List<NhanVien> list){
+        for (var nhanVien : list){
+            System.out.println(nhanVien.toString());
+        }
         String timeNow = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         createDirectoryIfNotExist("Report");
         String outputFolder = "./Report/DanhSachNhanVien_"+timeNow+".pdf";

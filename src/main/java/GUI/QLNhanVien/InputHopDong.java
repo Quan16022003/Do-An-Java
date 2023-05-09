@@ -8,8 +8,6 @@ import DAL.HopDongDAO;
 import BLL.HopDongBUS;
 import DAL.BindingListener;
 import DTO.HopDong;
-import GUI.modal.ChooseAvatarPanel;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;

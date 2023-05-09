@@ -30,10 +30,11 @@ public class MainForm extends JFrame{
     private Content pContent;
     private final MainFormBUS bus = new MainFormBUS();
     private List<ChucNang> dsChucNang;
+    private String username;
 
     public MainForm(String username) {
-        System.out.println(username );
-        dsChucNang = bus.getDsTenCN(username);
+        this.username = username;
+        dsChucNang = bus.getDsTenCN(this.username);
         setSize(FRAME_SIZE);
         setResizable(true);
         setBackground(FRAME_COLOR);
@@ -59,7 +60,7 @@ public class MainForm extends JFrame{
 
 //        titleBar = new TitleBar(this);
         sideBar = new SideBar(this);
-        pContent = bus.changeContent(sideBar.getActiveLabel().getText());
+        pContent = bus.changeContent(sideBar.getActiveLabel().getText(), username);
 
         //this.add(titleBar, BorderLayout.PAGE_START);
         add(sideBar, BorderLayout.WEST);
@@ -70,7 +71,7 @@ public class MainForm extends JFrame{
 
     public void changeContent(JLabel menu) {
         remove(pContent);
-        pContent = bus.changeContent(menu.getText());
+        pContent = bus.changeContent(menu.getText(), username);
         add(pContent, BorderLayout.CENTER);
         repaint();
         validate();

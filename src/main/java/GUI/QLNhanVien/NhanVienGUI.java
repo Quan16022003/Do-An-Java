@@ -8,8 +8,9 @@ import BLL.Report_Excel.InDanhSachPDF;
 import DAL.NhanVienDAO;
 import BLL.Report_Excel.WriteExcelNhanVien;
 import DTO.NhanVien;
-import GUI.modal.Content;
-import GUI.modal.HomeAbstractDataModelforNhanVien;
+import GUI.Model.Content;
+import GUI.Model.HomeAbstractDataModelforNhanVien;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;

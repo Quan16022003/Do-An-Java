@@ -12,16 +12,16 @@ import java.util.logging.Logger;
 /**
  *
  * @author Nguyen Hoang Quan
- * 
+ *
  * Database connection singleton
  */
 public class mySQLConnection {
 
     public Connection connection;
-    private final String URL = "jdbc:mysql://localhost:3306/test";
+    private final String URL = "jdbc:mysql://localhost:3307/qlnv";
 
     private final String USER = "root";
-    private final String PASSWORD = "";
+    private final String PASSWORD = "Quan";
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final Logger LOGGER = Logger.getLogger(mySQLConnection.class.getName());
     public mySQLConnection() {
@@ -31,7 +31,7 @@ public class mySQLConnection {
             throw new RuntimeException(e);
         }
     }
-    
+
     public void openConnection() {
         try {
             connection = DriverManager.getConnection(URL, USER, PASSWORD);

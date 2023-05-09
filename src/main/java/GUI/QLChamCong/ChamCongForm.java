@@ -7,9 +7,8 @@ package GUI.QLChamCong;
 import BLL.ChamCongBUS;
 import BLL.Report_Excel.expDATA;
 import DAL.BindingListener;
-import DAL.ChamCongDAO;
 import DTO.ChamCong;
-import GUI.modal.Content;
+import GUI.Model.Content;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -306,7 +305,7 @@ public class ChamCongForm extends Content {
                 String sheetnamea = null;
                 expDATA z = new expDATA();
                 try {
-                    z.exp(bus.find(txtTimKiem.getText()), headera, namefa, patha, sheetnamea);
+                    z.exp((ArrayList<ChamCong>) bus.find(txtTimKiem.getText()), headera, namefa, patha, sheetnamea);
                 } catch (IOException ex) {
                     Logger.getLogger(ChamCongForm.class.getName()).log(Level.SEVERE, null, ex);
                 }

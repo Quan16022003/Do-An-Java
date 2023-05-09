@@ -145,7 +145,7 @@ public class Luong {
                 ", hsChucVu=" + hsChucVu +
                 ", hsLuong=" + hsLuong +
                 ", luongHuong=" + luongHuong +
-                ", tyLePC=" + heSoPhuCap +
+                ", HsPC=" + heSoPhuCap +
                 ", mucPC=" + mucPC +
                 ", mucBH=" + mucBH +
                 ", thucLinh=" + thucLinh +

@@ -8,7 +8,6 @@ import DTO.HopDong;
 import DAL.HopDongDAO;
 import BLL.HopDongBUS;
 import DAL.BindingListener;
-import GUI.modal.ChooseAvatarPanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;

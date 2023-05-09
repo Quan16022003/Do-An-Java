@@ -20,7 +20,7 @@ public class TaiKhoan {
         setUsername(rs.getString("username"));
         setPassword(rs.getString("password"));
         setMaNhanVien(rs.getString("MaNV"));
-        setRole(rs.getInt("role"));
+        setRole(rs.getInt("Ma_loai_QTC"));
     }
 
     public String getUsername() {

@@ -77,7 +77,7 @@ public class LuongDAO extends AbstractDAO<Luong, Integer> {
 
     public List<Luong> selectAllByDate(LocalDate localDate) {
         List<Luong> list = new ArrayList<Luong>();
-        String query = "SELECT luong.*, Ten FROM luong JOIN nhan_vien ON luong.MaNV = nhan_vien.MaNV " +
+        String query = "SELECT luong.*, HoTen FROM luong JOIN nhan_vien ON luong.MaNV = nhan_vien.MaNV " +
                        "WHERE month(NgayTao) = ? AND year(NgayTao) = ?";
         mySQLConnection.openConnection();
         ResultSet rs = mySQLConnection.executeQuery(query, localDate.getMonthValue(), localDate.getYear());
@@ -86,7 +86,7 @@ public class LuongDAO extends AbstractDAO<Luong, Integer> {
                 Luong luong = new Luong();
                 luong.setId(rs.getInt("id"));
                 luong.setMaNV(rs.getString("MaNV"));
-                luong.setTenNV(rs.getString("Ten"));
+                luong.setTenNV(rs.getString("HoTen"));
                 luong.setNgayCongQD(rs.getInt("NgayCongQD"));
                 luong.setNgayCongTT(rs.getInt("NgayCongTT"));
                 luong.setLuongCB(rs.getInt("LuongCB"));
@@ -108,9 +108,10 @@ public class LuongDAO extends AbstractDAO<Luong, Integer> {
     }
     public List<Luong> createNew(LocalDate localDate) {
         List<Luong> list = new ArrayList<Luong>();
-        String query = "SELECT nv.MaNV, Ten, HeSoLuong, HeSoPhuCap, HeSoChucVu, ngay_cong_qd, ngay_cong_tt, luongCB" +
+        String query = "SELECT nhan_vien.MaNV, HoTen, HeSoLuong, HeSoPhuCap, HsCV, ngay_cong_qd, ngay_cong_tt, " +
                 "(SELECT LuongCB FROM luongcb ORDER BY id DESC LIMIT 1) AS luongCB\n" +
                 "FROM nhan_vien\n" +
+                "JOIN hop_dong hd ON hd.MaNV = nhan_vien.MaNV\n" +
                 "JOIN chuc_vu cv ON cv.MaCV = nhan_vien.MaChucVu\n" +
                 "JOIN (SELECT ma_nhan_vien MaNV, COUNT(*) as ngay_cong_qd FROM `cham_cong` WHERE month(ngay_cham_cong) = "+ localDate.getMonthValue() +" AND year(ngay_cham_cong) = "+ localDate.getYear() +" GROUP BY ma_nhan_vien) tk1 ON tk1.MaNV = nhan_vien.MaNV\n" +
                 "JOIN (SELECT ma_nhan_vien MaNV, COUNT(*) as ngay_cong_tt FROM `cham_cong` WHERE xac_nhan = 1 AND  month(ngay_cham_cong) = "+ localDate.getMonthValue() +" AND year(ngay_cham_cong) = "+ localDate.getYear() + " GROUP BY ma_nhan_vien) tk2 ON tk2.MaNV = nhan_vien.MaNV";
@@ -120,10 +121,10 @@ public class LuongDAO extends AbstractDAO<Luong, Integer> {
             while (rs.next()) {
                 Luong luong = new Luong();
                 luong.setMaNV(rs.getString("MaNV"));
-                luong.setTenNV(rs.getString("Ten"));
+                luong.setTenNV(rs.getString("HoTen"));
                 luong.setHsLuong(rs.getDouble("HeSoLuong"));
-                luong.setHeSoPhuCap(rs.getInt("HeSoPhucCap"));
-                luong.setHsChucVu(rs.getDouble("HeSoChucVu"));
+                luong.setHeSoPhuCap(rs.getDouble("HeSoPhuCap"));
+                luong.setHsChucVu(rs.getDouble("HsCV"));
                 luong.setNgayCongQD(rs.getInt("ngay_cong_qd"));
                 luong.setNgayCongTT(rs.getInt("ngay_cong_tt"));
                 luong.setLuongCB(rs.getInt("luongCB"));

@@ -13,7 +13,7 @@ public class NhanVienDAO  extends AbstractDAO<NhanVien, Integer> {
     @Override
 
     public boolean insert(NhanVien nv) {
-         String query = "INSERT INTO Nhan_Vien(MaNV, MaDV, MaChucVu, Ten, GioiTinh, NgSinh, SDT, SoNha, Duong, Phuong_Xa, Quan_Huyen, Tp_Tinh, CCCD, NgCap, NoiCap, NgVaoLam, image) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+         String query = "INSERT INTO Nhan_Vien(MaNV, MaDV, MaChucVu, HoTen, GioiTinh, NgSinh, SDT, SoNha, Duong, Phuong_Xa, Quan_Huyen, Tp_Tinh, CCCD, NgCap, NoiCap, NgVaoLam, image) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         mySQLConnection.openConnection();
         int rowInserted = mySQLConnection.executeUpdate(query,nv.getMaNV(), nv.getMaDV(),nv.getMaChucVu()
         , nv.getTen(),nv.getGioiTinh(),nv.getNgSinh(),nv.getSDT(),nv.getSoNha(),nv.getDuong()
@@ -26,7 +26,7 @@ public class NhanVienDAO  extends AbstractDAO<NhanVien, Integer> {
 
     @Override
     public boolean update(NhanVien nv) {
-        String query = "UPDATE Nhan_Vien SET MaDV = ?, MaChucVu = ?, Ten = ?, GioiTinh = ?, NgSinh = ?, SDT = ?, SoNha = ?, Duong = ?, Phuong_Xa = ?, Quan_Huyen = ?, Tp_Tinh = ?, CCCD = ?, NgCap = ?, NoiCap = ?, NgVaoLam = ?, image = ? WHERE MaNV=?";
+        String query = "UPDATE Nhan_Vien SET MaDV = ?, MaChucVu = ?, HoTen = ?, GioiTinh = ?, NgSinh = ?, SDT = ?, SoNha = ?, Duong = ?, Phuong_Xa = ?, Quan_Huyen = ?, Tp_Tinh = ?, CCCD = ?, NgCap = ?, NoiCap = ?, NgVaoLam = ?, image = ? WHERE MaNV=?";
         mySQLConnection.openConnection();
         int rowUpdated = mySQLConnection.executeUpdate(query, nv.getMaNV(),nv.getMaDV(),nv.getMaChucVu()
         , nv.getTen(),nv.getGioiTinh(),nv.getNgSinh(),nv.getSDT(),nv.getSoNha(),nv.getDuong()
@@ -60,9 +60,8 @@ public class NhanVienDAO  extends AbstractDAO<NhanVien, Integer> {
             while (rs.next()) {
                 var MaNV = rs.getString("MaNV");
                 var MaDV = rs.getString("MaDV");
-                var MaLoaiNV = rs.getString("MaLoaiNV");
                 var MaChucVu = rs.getString("MaChucVu");
-                var Ten = rs.getString("Ten");
+                var Ten = rs.getString("HoTen");
                 var GioiTinh = rs.getString("GioiTinh");
                 var SDT = rs.getString("SDT");
                 var Duong = rs.getString("Duong");

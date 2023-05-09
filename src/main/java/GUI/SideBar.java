@@ -84,6 +84,8 @@ public class SideBar extends JPanel implements MouseListener{
         if (menuKeys.contains(QLHD)) menuLabels[i++] = initMenuLabel(menus.get(QLHD));
         if (menuKeys.contains(QLCC)) menuLabels[i++] = initMenuLabel(menus.get(QLCC));
         if (menuKeys.contains(QLTL)) menuLabels[i++] = initMenuLabel(menus.get(QLTL));
+        if (menuKeys.contains(QLTK)) menuLabels[i++] = initMenuLabel(menus.get(QLTK));
+        if (menuKeys.contains(CHANGE_PASS)) menuLabels[i++] = initMenuLabel(menus.get(CHANGE_PASS));
 
         for (i = 0; i < menuLabels.length; i++) {
             menuPanel.add(menuLabels[i]);

@@ -8,9 +8,10 @@ import GUI.QLLuong.QuanLyLuongContent;
 import GUI.QLNhanVien.HopDongGUI;
 import GUI.QLNhanVien.NhanVienGUI;
 import GUI.Model.Content;
-import GUI.ViewInfo;
+import GUI.QLTaiKhoan.K_DoiMatKhaugui;
+import GUI.QLTaiKhoan.K_Panel_QuanLyTaiKhoan;
+import GUI.XemThongTin.ViewInfo;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,7 +36,7 @@ public class MainFormBUS {
         return dsChucNang;
     }
 
-    public Content changeContent(String tenCN) {
+    public Content changeContent(String tenCN, String username) {
         for (var chucNang : dsChucNang) {
             if (chucNang.getTenCN().equals(tenCN)) {
                 switch (chucNang.getCodeCN()) {
@@ -53,6 +54,12 @@ public class MainFormBUS {
                     }
                     case VIEW_INFOR -> {
                         return new ViewInfo();
+                    }
+                    case QLTK -> {
+                        return new K_Panel_QuanLyTaiKhoan();
+                    }
+                    case CHANGE_PASS -> {
+                        return new K_DoiMatKhaugui(username);
                     }
                 }
                 break;

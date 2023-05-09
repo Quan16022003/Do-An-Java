@@ -35,17 +35,7 @@ public class LoginForm extends JFrame implements KeyListener, ActionListener{
         setLayout(new BorderLayout());
 
         getContentPane().add(createForm(), BorderLayout.CENTER);
-        getContentPane().add(createButtonsPanel(), BorderLayout.PAGE_END);
 
-    }
-
-    private JPanel createButtonsPanel() {
-        JPanel buttonsPanel = new JPanel();
-        dangNhapButton = new JButton("Đăng nhập");
-        dangNhapButton.setPreferredSize(new Dimension(100, 32));
-        dangNhapButton.addActionListener(this);
-        buttonsPanel.add(dangNhapButton);
-        return buttonsPanel;
     }
 
     private JPanel createForm() {
@@ -87,6 +77,15 @@ public class LoginForm extends JFrame implements KeyListener, ActionListener{
         passwordField.setFont(font);
         passwordField.addKeyListener(this);
         form.add(passwordField, gbc);
+
+        dangNhapButton = new JButton("Đăng nhập");
+        dangNhapButton.setPreferredSize(new Dimension(100, 32));
+        dangNhapButton.addActionListener(this);
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
+        form.add(dangNhapButton, gbc);
 
         return form;
     }

@@ -104,7 +104,29 @@ public class ChamCongDAO extends AbstractDAO<ChamCong, String> {
 
     @Override
     public List<ChamCong> selectAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<ChamCong> listChamCong = new ArrayList<>();
+        String query = "SELECT * FROM cham_cong WHERE is_deleted=0 AND gio_bd != gio_kt";
+        try {
+            mySQLConnection.openConnection();
+            ResultSet rs = mySQLConnection.executeQuery(query);
+            while (rs.next()) {
+                ChamCong chamCong = new ChamCong();
+                chamCong.setMaNV(rs.getString("ma_nhan_vien"));
+                chamCong.setxacNhan(rs.getString("xac_nhan"));
+                chamCong.setNgayThang(rs.getDate("ngay_cham_cong"));
+                chamCong.setTimeIn(rs.getString("gio_bd"));
+                chamCong.setTimeOut(rs.getString("gio_kt"));
+
+                listChamCong.add(chamCong);
+            }
+            mySQLConnection.closeConnection();
+
+        } catch (Exception e) {
+            LOGGER.log(Level.SEVERE, e.getMessage(), e);
+            return new ArrayList<>();
+        }
+
+        return listChamCong;
     }
 
     public ArrayList<ChamCong> getListChamCong() {
