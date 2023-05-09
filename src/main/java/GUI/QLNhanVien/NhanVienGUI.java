@@ -8,16 +8,17 @@ import BLL.Report_Excel.InDanhSachPDF;
 import DAL.NhanVienDAO;
 import BLL.Report_Excel.WriteExcelNhanVien;
 import DTO.NhanVien;
-import GUI.Model.Content;
-import GUI.Model.HomeAbstractDataModel_for_Nhan_Vien;
+import GUI.modal.Content;
+import GUI.modal.HomeAbstractDataModelforNhanVien;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.*;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.JPanel;
 
 /**
  *
@@ -26,7 +27,7 @@ import javax.swing.*;
 public class NhanVienGUI extends Content {
     
     private List<NhanVien> NhanViens;
-    private HomeAbstractDataModel_for_Nhan_Vien tblModel;
+    private HomeAbstractDataModelforNhanVien tblModel;
     private int selectedIndex;
     private JTable table;
     private NhanVienDAO Dao;
@@ -68,7 +69,8 @@ public class NhanVienGUI extends Content {
         btnAdd = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
-        btnExport = new javax.swing.JButton();
+        btnExportE = new javax.swing.JButton();
+        btnExportP = new javax.swing.JButton();
         table = new JTable(tblModel);
         tblResult.setPreferredSize(new Dimension(400,400));
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -79,7 +81,7 @@ public class NhanVienGUI extends Content {
         jLabel1.setText("DANH SÁCH NHÂN VIÊN");
         jLabel1.setFont(new Font("Segoe UI", 0, 25));
         
-         tblModel = new HomeAbstractDataModel_for_Nhan_Vien();
+         tblModel = new HomeAbstractDataModelforNhanVien();
         tblResult.setModel(tblModel);
         jScrollPane1.setViewportView(tblResult);
 
@@ -103,10 +105,16 @@ public class NhanVienGUI extends Content {
                 btnDeleteActionPerformed(evt);
             }
         });
-        btnExport.setText("Xuất");
-        btnExport.addActionListener(new java.awt.event.ActionListener() {
+        btnExportE.setText("Xuất Excel");
+        btnExportE.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExportActionPerformed(evt);
+                btnExportEActionPerformed(evt);
+            }
+        });
+        btnExportP.setText("Xuất PDF");
+        btnExportP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExportPActionPerformed(evt);
             }
         });
         
@@ -122,16 +130,8 @@ public class NhanVienGUI extends Content {
             ButtonPanel.add(btnAdd);
             ButtonPanel.add(btnEdit);
             ButtonPanel.add(btnDelete);
-            ButtonPanel.add(btnExport);
-
-            JButton btnExport = new JButton("In");
-            btnExport.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    InDanhSachPDF.renderPDF(NhanViens);
-                }
-            });
-            ButtonPanel.add(btnExport);
+            ButtonPanel.add(btnExportE);
+            ButtonPanel.add(btnExportP);
             JPanel gapPanel1 = new JPanel();
             gapPanel1.setPreferredSize(new Dimension(10,0));
             JPanel gapPanel2 = new JPanel();
@@ -161,10 +161,10 @@ public class NhanVienGUI extends Content {
         selectedIndex = tblResult.getSelectedRow();
         if(NhanViens.size() == 0) {
             JOptionPane.showMessageDialog( null,
-                    "Hãy nhập thêm giáo viên rồi sửa!");
+                    "Hãy nhập thêm nhân viên rồi sửa!");
         } else if(selectedIndex == -1) {
             JOptionPane.showMessageDialog(null, 
-                    "Hãy chọn dòng có giáo viên cần sửa rồi ấn Sửa!");
+                    "Hãy chọn dòng có nhân viên cần sửa rồi ấn Sửa!");
         } else { // chon dong can sua va nhan nut
             EditNhanVien edit = new EditNhanVien(this);
             edit.setEditData(NhanViens.get(selectedIndex));
@@ -175,13 +175,13 @@ public class NhanVienGUI extends Content {
         selectedIndex = tblResult.getSelectedRow();
         if(NhanViens.size() == 0) {
             JOptionPane.showMessageDialog( null,
-                    "Woah woah! Something went very wrong with you !");
+                    "Hãy nhập thêm nhân viên rồi xoá!");
         } else if(selectedIndex == -1) {
             JOptionPane.showMessageDialog(null, 
-                    "Hãy chọn dòng có giáo viên cần sửa rồi ấn Xoá !");
+                    "Hãy chọn dòng có giáo viên cần sửa rồi ấn Xoá!");
         } else  
         { // chon dong can sua va nhan nut
-            int key = JOptionPane.showConfirmDialog(null, "You about to do something","Are you sure?",
+            int key = JOptionPane.showConfirmDialog(null, "Bạn có muốn xoá nhân viên này?","Màng hình xoá",
                 JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                 if (key == JOptionPane.YES_OPTION){
                     NhanViens.remove(selectedIndex);
@@ -190,9 +190,13 @@ public class NhanVienGUI extends Content {
         }
         showData();
     }
-      private void btnExportActionPerformed(java.awt.event.ActionEvent evt){
+      private void btnExportEActionPerformed(java.awt.event.ActionEvent evt){
           WriteExcelNhanVien demo = new WriteExcelNhanVien();
           demo.export();
+      }
+      private void btnExportPActionPerformed(java.awt.event.ActionEvent evt){
+          InDanhSachPDF pdf = new InDanhSachPDF();
+          pdf.renderPDF(NhanViens);
       }
     
     public static void main(String args[]) {
@@ -207,7 +211,8 @@ public class NhanVienGUI extends Content {
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnDelete;
-    private javax.swing.JButton btnExport;
+    private javax.swing.JButton btnExportE;
+    private javax.swing.JButton btnExportP;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblResult;
