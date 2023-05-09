@@ -8,11 +8,17 @@ import DAL.NhanVienDAO;
 import BLL.NhanVienBUS;
 import DAL.BindingListener;
 import DTO.NhanVien;
-import GUI.Model.ChooseAvatarPanel;
+import GUI.modal.ChooseAvatarPanel;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -31,38 +37,238 @@ public class EditNhanVien extends javax.swing.JDialog{
         BUS = new NhanVienBUS();
         DAO = new NhanVienDAO();
         
-        txtMaNV.getDocument().addDocumentListener(new BindingListener(txtMaNV, "[a-z0-9]*"));
-        txtMaDV.getDocument().addDocumentListener(new BindingListener(txtMaDV, "[a-z0-9]*"));
+        
+        txtMaNV.getDocument().addDocumentListener(new BindingListener(txtMaNV, "[a-zA-Z0-9]*"));
+//        txtMaLoaiNV.getDocument().addDocumentListener(new BindingListener(txtMaLoaiNV, "[a-zA-Z0-9]*"));
+        txtMaDV.getDocument().addDocumentListener(new BindingListener(txtMaDV, "[a-zA-Z0-9]*"));
         txtCCCD.getDocument().addDocumentListener(new BindingListener(txtCCCD, "\\d{12}"));
-        txtTen.getDocument().addDocumentListener(new BindingListener(txtTen,"[a-z0-9\\s]*"));
+        txtTen.getDocument().addDocumentListener(new BindingListener(txtTen,"[a-zA-Z0-9\\s]*"));
         txtNgaySinh.getDocument().addDocumentListener(new BindingListener(txtNgaySinh,"^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$"));        
-        txtGioiTinh.getDocument().addDocumentListener(new BindingListener(txtGioiTinh,"(?i)(nam|nu)"));                   
+//        txtGioiTinh.getDocument().addDocumentListener(new BindingListener(txtGioiTinh,"(?i)(nam|nu)"));                   
         txtSoDienThoai.getDocument().addDocumentListener(new BindingListener(txtSoDienThoai,"\\d{10}]*")); 
-        txtMaLoaiNV.getDocument().addDocumentListener(new BindingListener(txtMaLoaiNV, "[a-z0-9]*"));
-        txtMaChucVu.getDocument().addDocumentListener(new BindingListener(txtMaChucVu, "[a-z0-9]*"));
-        txtDuong.getDocument().addDocumentListener(new BindingListener(txtDuong,"[a-z0-9\\s]*"));
-        txtPhuong_Xa.getDocument().addDocumentListener(new BindingListener(txtPhuong_Xa,"[a-z0-9\\s]*"));
-        txtQuan_Huyen.getDocument().addDocumentListener(new BindingListener(txtQuan_Huyen,"[a-z0-9\\s]*"));
-        txtThanhPho_Tinh.getDocument().addDocumentListener(new BindingListener(txtThanhPho_Tinh,"[a-z0-9\\s]*"));
+//        txtMaLoaiNV.getDocument().addDocumentListener(new BindingListener(txtMaLoaiNV, "[a-zA-Z0-9]*"));
+        txtMaChucVu.getDocument().addDocumentListener(new BindingListener(txtMaChucVu, "[a-zA-Z0-9]*"));
+        txtDuong.getDocument().addDocumentListener(new BindingListener(txtDuong,"[a-zA-Z0-9\\s]*"));
+        txtPhuong_Xa.getDocument().addDocumentListener(new BindingListener(txtPhuong_Xa,"[a-zA-Z0-9\\s]*"));
+        txtQuan_Huyen.getDocument().addDocumentListener(new BindingListener(txtQuan_Huyen,"[a-zA-Z0-9\\s]*"));
+        txtThanhPho_Tinh.getDocument().addDocumentListener(new BindingListener(txtThanhPho_Tinh,"[a-zA-Z0-9\\s]*"));
         txtNgayCap.getDocument().addDocumentListener(new BindingListener(txtNgayCap,"^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$"));        
-        txtNoiCap.getDocument().addDocumentListener(new BindingListener(txtNoiCap,"[a-z0-9\\s]*"));
+        txtNoiCap.getDocument().addDocumentListener(new BindingListener(txtNoiCap,"[a-zA-Z0-9\\s]*"));
         txtNgayVaoLam.getDocument().addDocumentListener(new BindingListener(txtNgayVaoLam,"^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$"));        
         txtSoNha.getDocument().addDocumentListener(new BindingListener(txtSoNha, "^[a-zA-Z0-9\\s\\/]*$"));
     }
     private void initComponents() {
-        //form go here
+        String gioitinh[] = {"Nam", "Nữ", "Khác"};
+       setSize(new Dimension(900, 530));
+       setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.anchor = GridBagConstraints.LINE_START;
+        gbc.insets.bottom = 5;
+        gbc.insets.left = 5;
+        gbc.insets.right = 5;
+        gbc.insets.top = 5;
+//        setBackground(Color.yellow);
+        gbc.gridy = 0;
+        imagePanel = new ChooseAvatarPanel();
+        imagePanel.setPreferredSize(new Dimension(100, 150));
+        gbc.gridx = 0;
+        gbc.gridheight= 5;
+        gbc.fill = GridBagConstraints.VERTICAL;
+        add(imagePanel, gbc);
+        gbc.gridheight= 1;
         
-                String monhoc[] = {"tram cam"," FA", "no life"};
-                String gioitinh[] = {"nu", "khong phai nu", "loai khac"};
-                        String chuyenmon[] = {"thi lai", " rot mon", "helpless"};
-//=======
-
-//>>>>>>> origin/main
-
-
- 
-
-
+        var a =100;
+        gbc.gridy = 0;
+        JLabelMaNV = new JLabel("Mã nhân viên:");
+        JLabelMaNV.setPreferredSize(new Dimension(a, 25));
+        gbc.gridx = 1;
+        add(JLabelMaNV, gbc);
+        
+        gbc.gridy = 1;
+        JLabelMaDV = new JLabel("Mã đơn vị:");
+        JLabelMaDV.setPreferredSize(new Dimension(a, 25));
+        gbc.gridx = 1;
+        add(JLabelMaDV, gbc);
+        
+//        gbc.gridy = 2;
+//        JLabelMaLoaiNV = new JLabel("Loại nhân viên:");
+//        JLabelMaLoaiNV.setPreferredSize(new Dimension(a, 25));
+//        gbc.gridx = 1;
+//        add(JLabelMaLoaiNV, gbc);
+        
+        gbc.gridy = 3;
+        JLabelMaChucVu = new JLabel("Mã chức vụ:");
+        JLabelMaChucVu.setPreferredSize(new Dimension(a, 25));
+        gbc.gridx = 1;
+        add(JLabelMaChucVu, gbc);
+        
+        gbc.gridy = 4;
+        JLabelTen = new JLabel("Họ và tên:");
+        JLabelTen.setPreferredSize(new Dimension(a, 25));
+        gbc.gridx = 1;
+        add(JLabelTen, gbc);
+        
+        txtMaNV = new JTextField();
+        txtMaNV.setPreferredSize(new Dimension(150, 25));
+//        txtMaNV.setBackground(Color.yellow);
+        gbc.gridx = 2;
+        gbc.gridy = 0;
+        gbc.gridwidth= 3;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridwidth= 1;
+        add(txtMaNV, gbc);
+        
+        txtMaDV = new JTextField();
+        txtMaDV.setPreferredSize(new Dimension(150, 25));
+        gbc.gridx = 2;
+        gbc.gridy = 1;
+        add(txtMaDV, gbc);
+//        txtMaLoaiNV = new JTextField();
+//        txtMaLoaiNV.setPreferredSize(new Dimension(150, 25));
+//        gbc.gridx = 2;
+//        gbc.gridy = 2;
+//        add(txtMaLoaiNV, gbc);
+        txtMaChucVu = new JTextField();
+        txtMaChucVu.setPreferredSize(new Dimension(150, 25));
+        gbc.gridx = 2;
+        gbc.gridy = 3;
+        add(txtMaChucVu, gbc);
+        
+        txtTen = new JTextField();
+        txtTen.setPreferredSize(new Dimension(150, 25));
+        gbc.gridx = 2;
+        gbc.gridy = 4;
+        add(txtTen, gbc);
+        
+        
+        gbc.gridy = 0;
+        JLabelGioiTinh = new JLabel("Giới tính:");
+        JLabelGioiTinh.setPreferredSize(new Dimension(a, 25));
+        gbc.gridx = 3;
+        add(JLabelGioiTinh, gbc);
+        
+        txtGioiTinh = new javax.swing.JComboBox(gioitinh);
+        txtGioiTinh.setPreferredSize(new Dimension(150, 25));
+        gbc.gridx = 4;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        txtGioiTinh.setBackground(new Color(195, 232, 141));
+        add(txtGioiTinh, gbc);
+        gbc.gridwidth = 1;
+        
+        gbc.gridy = 1;
+        JLabelNgaySinh = new JLabel("Ngày sinh:");
+        JLabelNgaySinh.setPreferredSize(new Dimension(a, 25));
+        gbc.gridx = 3;
+        add(JLabelNgaySinh, gbc);
+        txtNgaySinh = new JTextField();
+        txtNgaySinh.setPreferredSize(new Dimension(150, 25));
+        gbc.gridx = 4;
+        add(txtNgaySinh, gbc);
+        
+        gbc.gridy = 2;
+        JLabelSoDienThoai = new JLabel("Số điện thoại:");
+        JLabelSoDienThoai.setPreferredSize(new Dimension(a, 25));
+        gbc.gridx = 3;
+        add(JLabelSoDienThoai, gbc);
+        txtSoDienThoai = new JTextField();
+        txtSoDienThoai.setPreferredSize(new Dimension(150, 25));
+        gbc.gridx = 4;
+        add(txtSoDienThoai, gbc);
+        
+        gbc.gridy = 3;
+        JLabelNgayVaoLam = new JLabel("Ngày vào làm:");
+        JLabelNgayVaoLam.setPreferredSize(new Dimension(a, 25));
+        gbc.gridx = 3;
+        add(JLabelNgayVaoLam, gbc);
+        txtNgayVaoLam = new JTextField();
+        txtNgayVaoLam.setPreferredSize(new Dimension(150, 25));
+        gbc.gridx = 4;
+        add(txtNgayVaoLam, gbc);
+        
+        
+        gbc.gridy = 5;
+        JLabelSoNha = new JLabel("Số nhà:");
+        JLabelSoNha.setPreferredSize(new Dimension(a, 25));
+        gbc.gridx = 0;
+        add(JLabelSoNha, gbc);
+        txtSoNha = new JTextField();
+        txtSoNha.setPreferredSize(new Dimension(150, 25));
+        gbc.gridx = 1;
+        add(txtSoNha, gbc);
+        ////
+         gbc.gridy = 5;
+        JLabelDuong = new JLabel("Đường:");
+        JLabelDuong.setPreferredSize(new Dimension(a, 25));
+        gbc.gridx = 2;
+        add(JLabelDuong, gbc);
+        txtDuong = new JTextField();
+        txtDuong.setPreferredSize(new Dimension(150, 25));
+        gbc.gridx = 3;
+        add(txtDuong, gbc);
+        
+        gbc.gridy = 6;
+        JLabelPhuong_Xa = new JLabel("Phường/Xã:");
+        JLabelPhuong_Xa.setPreferredSize(new Dimension(a, 25));
+        gbc.gridx = 0;
+        add(JLabelPhuong_Xa, gbc);
+        txtPhuong_Xa = new JTextField();
+        txtPhuong_Xa.setPreferredSize(new Dimension(150, 25));
+        gbc.gridx = 1;
+        add(txtPhuong_Xa, gbc);
+        
+        gbc.gridy = 6;
+        JLabelQuan_Huyen = new JLabel("Quận/Huyện:");
+        JLabelQuan_Huyen.setPreferredSize(new Dimension(a, 25));
+        gbc.gridx = 2;
+        add(JLabelQuan_Huyen, gbc);
+        txtQuan_Huyen = new JTextField();
+        txtQuan_Huyen.setPreferredSize(new Dimension(150, 25));
+        gbc.gridx = 3;
+        add(txtQuan_Huyen, gbc);
+        
+        gbc.gridy = 7;
+        JLabelThanhPho_Tinh = new JLabel("Thành phố/Tỉnh:");
+        JLabelThanhPho_Tinh.setPreferredSize(new Dimension(a, 25));
+        gbc.gridx = 0;
+        add(JLabelThanhPho_Tinh, gbc);
+        txtThanhPho_Tinh = new JTextField();
+        txtThanhPho_Tinh.setPreferredSize(new Dimension(150, 25));
+        gbc.gridx = 1;
+        add(txtThanhPho_Tinh, gbc);
+        
+        gbc.gridy = 7;
+        JLabelCCCD = new JLabel("Căn cước công dân:");
+        JLabelCCCD.setPreferredSize(new Dimension(a, 25));
+        gbc.gridx = 2;
+        add(JLabelCCCD, gbc);
+        txtCCCD = new JTextField();
+        txtCCCD.setPreferredSize(new Dimension(150, 25));
+        gbc.gridx = 3;
+        add(txtCCCD, gbc);
+        
+        gbc.gridy = 8;
+        JLabelNoiCap = new JLabel("Nơi cấp:");
+        JLabelNoiCap.setPreferredSize(new Dimension(a, 25));
+        gbc.gridx = 0;
+        add(JLabelNoiCap, gbc);
+        txtNoiCap = new JTextField();
+        txtNoiCap.setPreferredSize(new Dimension(150, 25));
+        gbc.gridx = 1;
+        gbc.gridwidth = 3;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        add(txtNoiCap, gbc);
+        gbc.gridwidth = 1;
+        
+        gbc.gridy = 9;
+        JLabelNgayCap = new JLabel("Ngày cấp:");
+        JLabelNgayCap.setPreferredSize(new Dimension(a, 25));
+        gbc.gridx = 0;
+        add(JLabelNgayCap, gbc);
+        txtNgayCap = new JTextField();
+        txtNgayCap.setPreferredSize(new Dimension(150, 25));
+        gbc.gridx = 1;
+        add(txtNgayCap, gbc);
+        
 
         btnEdit = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
@@ -81,308 +287,34 @@ public class EditNhanVien extends javax.swing.JDialog{
             }
         });
         
-        this.setLayout(new BorderLayout(0,0));
 
-        this.setSize(900  , 530);
-        JPanel pnmain = new JPanel();
-//        pnmain.setBackground(Color.blue);
-        pnmain.setPreferredSize(new Dimension(950, 530));
-        
-        JPanel pn1 = new JPanel();
-        //pn1.setBackground(Color.red);
-        pn1.setPreferredSize(new Dimension(690, 250));
-        
-        JPanel pnl1 = new JPanel();
-        pnl1.setPreferredSize(new Dimension(690,30));
-        
-        JLabelMaNV = new javax.swing.JLabel();
-        JLabelMaNV.setText("Mã nhân viên:  ");
-        txtMaNV = new javax.swing.JTextField();
-        txtMaNV.setPreferredSize(new Dimension(220,25));
-        JLabelMaDV = new javax.swing.JLabel();
-        JLabelMaDV.setText("Mã đơn vị:   ");
-        txtMaDV = new javax.swing.JTextField();
-        txtMaDV.setPreferredSize(new Dimension(220,25));
-        
-        pnl1.add(JLabelMaNV);
-        pnl1.add(txtMaNV);
-        pnl1.add(JLabelMaDV);
-        pnl1.add(txtMaDV);
-        
-        JPanel pnl2 = new JPanel();
-        pnl2.setPreferredSize(new Dimension(690,30));
-        
-        JLabelMaLoaiNV = new javax.swing.JLabel();
-        JLabelMaLoaiNV.setText("Loại nhân viên: ");
-        txtMaLoaiNV = new javax.swing.JTextField();
-        txtMaLoaiNV.setPreferredSize(new Dimension(220,25));
-        JLabelMaChucVu = new javax.swing.JLabel();
-        JLabelMaChucVu.setText("Mã chức vụ:");
-        txtMaChucVu = new javax.swing.JTextField();
-        txtMaChucVu.setPreferredSize(new Dimension(220,25));
-        
-        pnl2.add(JLabelMaLoaiNV);
-        pnl2.add(txtMaLoaiNV);
-        pnl2.add(JLabelMaChucVu);
-        pnl2.add(txtMaChucVu);
-        
-        
-        JPanel pnl3 = new JPanel();
-        pnl3.setPreferredSize(new Dimension(690,30));
-        
-         
-        JLabelTen = new javax.swing.JLabel();
-        JLabelTen.setText("      Họ và tên:        ");
-        txtTen = new javax.swing.JTextField();
-        txtTen.setPreferredSize(new Dimension(525,25));
-        
-        JPanel pnl3gap = new JPanel();
-        pnl3gap.setPreferredSize(new Dimension(20,30));
-        
-        pnl3.add(JLabelTen);
-        pnl3.add(txtTen);
-        pnl3.add(pnl3gap);
-        
-        JPanel pnl4 = new JPanel();
-        pnl4.setPreferredSize(new Dimension(690,30));
-        
-        JLabelGioiTinh = new javax.swing.JLabel();
-        JLabelGioiTinh.setText("Giới tính:         ");
-        txtGioiTinh = new javax.swing.JTextField();
-        txtGioiTinh.setPreferredSize(new Dimension(220,25));
-        
-        JLabelNgaySinh = new javax.swing.JLabel();
-        JLabelNgaySinh.setText(" Ngày sinh:  ");
-        txtNgaySinh = new javax.swing.JTextField();
-        txtNgaySinh.setPreferredSize(new Dimension(220,25));
-        
-        pnl4.add(JLabelGioiTinh);
-        pnl4.add(txtGioiTinh);
-        pnl4.add(JLabelNgaySinh);
-        pnl4.add(txtNgaySinh);
-        
-        JPanel pnl5 = new JPanel();
-        pnl5.setPreferredSize(new Dimension(690,30));
-        
-        JPanel pnl5gap = new JPanel();
-        pnl5gap.setPreferredSize(new Dimension(300,30));
-        
-        JLabelSoDienThoai = new javax.swing.JLabel();
-        JLabelSoDienThoai.setText("Số điện thoại:   ");
-        txtSoDienThoai = new javax.swing.JTextField();
-        txtSoDienThoai.setPreferredSize(new Dimension(220,25));
-        
-        pnl5.add(JLabelSoDienThoai);
-        pnl5.add(txtSoDienThoai);
-        pnl5.add(pnl5gap);
-        
-        JPanel pnl6 = new JPanel();
-        pnl6.setPreferredSize(new Dimension(690,30));
-        
-        JPanel pnl6gap = new JPanel();
-        pnl6gap.setPreferredSize(new Dimension(300,30));
-        
-        JLabelNgayVaoLam = new javax.swing.JLabel();
-        JLabelNgayVaoLam.setText("Ngày vào làm:  ");
-        txtNgayVaoLam = new javax.swing.JTextField();
-        txtNgayVaoLam.setPreferredSize(new Dimension(220,25));
-        
-        pnl6.add(JLabelNgayVaoLam);
-        pnl6.add(txtNgayVaoLam);
-        pnl6.add(pnl6gap);
-        
-        
-        pn1.add(pnl1);
-        pn1.add(pnl2);
-        pn1.add(pnl3);
-        pn1.add(pnl4);
-        pn1.add(pnl5);
-        pn1.add(pnl6);
-        
-  
-    
-        
-        JPanel pn3 = new JPanel();
-//        pn3.setBackground(Color.blue);
-        pn3.setPreferredSize(new Dimension(200, 200));
 
-        
-        JPanel pn2 = new JPanel();
-        pn2.setPreferredSize(new Dimension(200, 250));
-//        pn2.setBackground(Color.CYAN);
-        
-        imagePanel = new ChooseAvatarPanel();
-//        imagePanel.setImage("./src/main/java/Image/Books_160px.png");
-        pn2.add(imagePanel);
-        
-        
-        
-         JPanel pn5 = new JPanel();
-//         pn5.setBackground(Color.gray);
-        pn5.setPreferredSize(new Dimension(900, 250));
-        pn5.add(pn2,BorderLayout.SOUTH);
-        pn5.add(pn1,BorderLayout.SOUTH);
-        pnmain.add(pn5,BorderLayout.NORTH);
-        
-        JPanel pn4 = new JPanel();
-//        pn4.setBackground(Color.YELLOW);
-        pn4.setPreferredSize(new Dimension(900, 230));   
-        
-        
-         ///// under form here   
-         
-         
-         JPanel pnll1 = new JPanel();
-        pnll1.setPreferredSize(new Dimension(900,30));
-        
-        JLabelSoNha = new javax.swing.JLabel();
-        JLabelSoNha.setText("Số nhà:            ");
-        txtSoNha = new javax.swing.JTextField();
-        txtSoNha.setPreferredSize(new Dimension(300,25));
-        
-        pnll1.add(JLabelSoNha);
-        pnll1.add(txtSoNha);
-        
-        JLabelDuong = new javax.swing.JLabel();
-        JLabelDuong.setText("  Đường:                  ");
-        txtDuong = new javax.swing.JTextField();
-        txtDuong.setPreferredSize(new Dimension(300,25));
-        
-        pnll1.add(JLabelDuong);
-        pnll1.add(txtDuong);
-        
-        
-         JPanel pnll2 = new JPanel();
-        pnll2.setPreferredSize(new Dimension(900,30));
-        
-        JLabelPhuong_Xa = new javax.swing.JLabel();
-        JLabelPhuong_Xa.setText("Phường/Xã:      ");
-        txtPhuong_Xa = new javax.swing.JTextField();
-        txtPhuong_Xa.setPreferredSize(new Dimension(300,25));
-        
-        pnll2.add(JLabelPhuong_Xa);
-        pnll2.add(txtPhuong_Xa);
-        
-        JLabelQuan_Huyen = new javax.swing.JLabel();
-        JLabelQuan_Huyen.setText(" Quận/Huyện:           ");
-        txtQuan_Huyen = new javax.swing.JTextField();
-        txtQuan_Huyen.setPreferredSize(new Dimension(300,25));
-        
-        pnll2.add(JLabelQuan_Huyen);
-        pnll2.add(txtQuan_Huyen);
-        
-         JPanel pnll3 = new JPanel();
-        pnll3.setPreferredSize(new Dimension(900,30));
-        
-        JLabelThanhPho_Tinh = new javax.swing.JLabel();
-        JLabelThanhPho_Tinh.setText("    Thành phố/Tỉnh:");
-        txtThanhPho_Tinh = new javax.swing.JTextField();
-        txtThanhPho_Tinh.setPreferredSize(new Dimension(250,25));
-        
-        pnll3.add(JLabelThanhPho_Tinh);
-        pnll3.add(txtThanhPho_Tinh);
-        
-        JLabelCCCD = new javax.swing.JLabel();
-        JLabelCCCD.setText("              Căn cước công dân:");
-        txtCCCD = new javax.swing.JTextField();
-        txtCCCD.setPreferredSize(new Dimension(250,25));
-        
-        JPanel pnll3gap = new JPanel();
-        pnll3gap.setPreferredSize(new Dimension(60,30));
-        
-        pnll3.add(JLabelCCCD);
-        pnll3.add(txtCCCD);
-        pnll3.add(pnll3gap);
-        
-        
-         JPanel pnll4 = new JPanel();
-        pnll4.setPreferredSize(new Dimension(900,30));
-        
-        JLabelNoiCap = new javax.swing.JLabel();
-        JLabelNoiCap.setText("Nơi cấp:          ");
-        txtNoiCap = new javax.swing.JTextField();
-        txtNoiCap.setPreferredSize(new Dimension(600,25));
-        
-        
-         JPanel pnll4gap = new JPanel();
-        pnll4gap.setPreferredSize(new Dimension(130,30));
-        
-        pnll4.add(JLabelNoiCap);
-        pnll4.add(txtNoiCap);
-        pnll4.add(pnll4gap);
-        
-        
-        JPanel pnll5 = new JPanel();
-        pnll5.setPreferredSize(new Dimension(900,30));
-        
-        JLabelNgayCap = new javax.swing.JLabel();
-        JLabelNgayCap.setText("Ngày cấp:       ");
-        txtNgayCap = new javax.swing.JTextField();
-        txtNgayCap.setPreferredSize(new Dimension(300,25));
-        
-        JPanel pnll5gap = new JPanel();
-        pnll5gap.setPreferredSize(new Dimension(430,30));
-        
-        pnll5.add(JLabelNgayCap);
-        pnll5.add(txtNgayCap);
-        pnll5.add(pnll5gap);
-        
-        JPanel pnll6 = new JPanel();
-        pnll6.setPreferredSize(new Dimension(900,30));
         
         btnEdit.setPreferredSize(new Dimension(120,25));
         btnEdit.setText("Lưu");
-        pnll6.add(btnEdit);
+
         
         btnCancel.setPreferredSize(new Dimension(120,25));
         btnCancel.setText("Hủy bỏ");
-        pnll6.add(btnCancel);
-        
-        pn4.add(pnll1);
-        pn4.add(pnll2);
-        pn4.add(pnll3);
-        pn4.add(pnll4);
-        pn4.add(pnll5);
-        pn4.add(pnll6);
-//        pn4.add(pnl6);
-        
-///under form end
-        
-        pnmain.add(pn4,BorderLayout.SOUTH);
-        
-        
-        this.add(pnmain);
-        this.revalidate();
-        this.setVisible(true);
-        
-        
-        
-        
-        
-        
-       
-        
-        
-        
-        
-        
-        
-        this.add(pnmain);
-        this.revalidate();
-        this.setVisible(true);
+
+        gbc.gridx= 0;
+        gbc.gridy= 5;
+        add(btnEdit,gbc);
+        gbc.gridx= 1;
+        add(btnCancel,gbc);
     }
     
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {
-        String MaNV, MaDV, MaLoaiNV, MaChucVu, Ten, GioiTinh,
-                NgSinh, SDT,SoNha, Duong, Phuong_Xa,
-                Quan_Huyen, TP_Tinh, CCCD, NgCap,
-                NoiCap, NgVaoLam, image;
+        String MaNV, MaDV, MaLoaiNV ="", MaChucVu, Ten, GioiTinh,
+                NgSinh="", SDT="",SoNha="", Duong="", Phuong_Xa="",
+                Quan_Huyen="", TP_Tinh="", CCCD="", NgCap="",
+                NoiCap="", NgVaoLam="", image="";
         MaNV = txtMaNV.getText();
         MaDV = txtMaDV.getText();
-        MaLoaiNV = txtMaLoaiNV.getText();
+//        MaLoaiNV = txtMaLoaiNV.getText();
         MaChucVu = txtMaChucVu.getText();
         Ten = txtTen.getText();
-        GioiTinh = txtGioiTinh.getText();
+        GioiTinh = txtGioiTinh.getSelectedItem().toString();
         NgSinh = txtNgaySinh.getText();
         SDT = txtSoDienThoai.getText();
         SoNha = txtSoNha.getText();
@@ -396,22 +328,18 @@ public class EditNhanVien extends javax.swing.JDialog{
         NgVaoLam = txtNgayVaoLam.getText();
         image = imagePanel.getDirectory();
         
-        NhanVien nhanvien = new NhanVien(
-                MaNV, MaDV, MaLoaiNV, MaChucVu, Ten, GioiTinh, NgSinh, SDT,
-                SoNha, Duong, Phuong_Xa, Quan_Huyen, TP_Tinh, CCCD, NgCap, NoiCap, NgVaoLam, image
+        NhanVien nhanvien = new NhanVien(MaNV, MaDV, MaChucVu, Ten, GioiTinh, NgSinh, SDT,
+            SoNha, Duong, Phuong_Xa, Quan_Huyen, TP_Tinh, CCCD, NgCap, NoiCap, NgVaoLam, image
         );
         if (BUS.check(nhanvien))
             {
-                 DAO.insert(nhanvien);
+                 DAO.update(nhanvien);
 
                  home.updateNhanVienlist(nhanvien);
                  JOptionPane.showMessageDialog(rootPane,
                          "Thêm thành công!");  
                  this.dispose();
             }
-            else
-                JOptionPane.showMessageDialog(rootPane,
-                         "Stupid");
         
     }
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {
@@ -437,9 +365,9 @@ public class EditNhanVien extends javax.swing.JDialog{
     private javax.swing.JButton btnEdit;
     private ChooseAvatarPanel imagePanel;
     private javax.swing.JLabel JLabelMaNV;
-    private javax.swing.JLabel JLabelMaLoaiNV;
+//    private javax.swing.JLabel JLabelMaLoaiNV;
     private javax.swing.JTextField txtMaNV;
-    private javax.swing.JTextField txtMaLoaiNV;
+//    private javax.swing.JTextField txtMaLoaiNV;
     private javax.swing.JLabel JLabelMaDV;
     private javax.swing.JLabel JLabelMaChucVu;
     private javax.swing.JTextField txtMaDV;
@@ -447,7 +375,7 @@ public class EditNhanVien extends javax.swing.JDialog{
     private javax.swing.JLabel JLabelTen;
     private javax.swing.JTextField txtTen;
     private javax.swing.JLabel JLabelGioiTinh;
-    private javax.swing.JTextField txtGioiTinh;
+    private javax.swing.JComboBox txtGioiTinh;
     private javax.swing.JLabel JLabelNgaySinh;
     private javax.swing.JTextField txtNgaySinh;
     private javax.swing.JLabel JLabelSoDienThoai;
@@ -478,10 +406,15 @@ public class EditNhanVien extends javax.swing.JDialog{
         txtMaNV.setText(nv.getMaNV());
         txtMaNV.setEditable(false);
         txtMaDV.setText(nv.getMaDV());
-        txtMaLoaiNV.setText(nv.getMaLoaiNV());
+//        txtMaLoaiNV.setText(nv.getMaLoaiNV());
         txtMaChucVu.setText(nv.getMaChucVu());
         txtTen.setText(nv.getTen());
-        txtGioiTinh.setText(nv.getGioiTinh());
+        if ("nu".equals(nv.getGioiTinh()))
+            txtGioiTinh.setSelectedIndex(0);
+        if ("khong phai nu".equals(nv.getGioiTinh()))
+            txtGioiTinh.setSelectedIndex(1);
+        else 
+            txtGioiTinh.setSelectedIndex(2);
         txtNgaySinh.setText(nv.getNgSinh());
         txtSoDienThoai.setText(nv.getSDT());
         txtSoNha.setText(nv.getSoNha());
