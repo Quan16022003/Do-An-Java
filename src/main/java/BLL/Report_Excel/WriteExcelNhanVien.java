@@ -34,10 +34,10 @@ public class WriteExcelNhanVien {
         //This data needs to be written (Object[])
         Map<String, Object[]> data = new TreeMap<String, Object[]>();
   
-        data.put(Integer.toString(i), new Object[] {"MaNV", "MaDV", "MaLoaiNV","MaChucVu","Ten","GioiTinh","NgSinh","SDT","SoNha","Duong","NgCap","NoiCap","NgVaoLam"});
+        data.put(Integer.toString(i), new Object[] {"MaNV", "MaDV","MaChucVu","Ten","GioiTinh","NgSinh","SDT","SoNha","Duong","NgCap","NoiCap","NgVaoLam"});
         
         for (NhanVien nv : DAO.selectAll()) {
-            data.put(Integer.toString(i), new Object[] {Integer.toString(i),nv.getMaNV(),nv.getMaDV(),nv.getMaLoaiNV(),nv.getMaChucVu(),
+            data.put(Integer.toString(i), new Object[] {Integer.toString(i),nv.getMaNV(),nv.getMaDV(),nv.getMaChucVu(),
                 nv.getTen(),nv.getGioiTinh(),nv.getNgSinh(),nv.getSDT(),nv.getSoNha(),nv.getDuong(),
                 nv.getPhuong_Xa(),nv.getPhuong_Xa(),nv.getQuan_Huyen(),nv.getTP_Tinh(),nv.getCCCD(),
                 nv.getNgCap(),nv.getNoiCap(),nv.getNgVaoLam()});
