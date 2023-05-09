@@ -15,6 +15,7 @@ import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.util.function.Consumer;
 import java.util.regex.Pattern;
+import javax.swing.JComboBox;
 
 
 public class BindingListener<T> implements DocumentListener {
@@ -30,7 +31,6 @@ public class BindingListener<T> implements DocumentListener {
         System.out.println(validationPattern);
         this.pattern = Pattern.compile(validationPattern);
     }
-
     @Override
     public void insertUpdate(DocumentEvent e) {
         dataUpdated(e);
@@ -57,9 +57,11 @@ public class BindingListener<T> implements DocumentListener {
             else {
                 parent.setBackground(new Color(244, 171, 171));
             }
-
-
-        } catch (BadLocationException ex) {
+            if (text.isEmpty())
+            {
+                parent.setBackground(Color.white);
+            } 
+        }catch (BadLocationException ex) {
             throw new RuntimeException(ex);
         }
     }
