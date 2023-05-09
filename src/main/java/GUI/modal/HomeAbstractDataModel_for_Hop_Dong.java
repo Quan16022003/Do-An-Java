@@ -14,9 +14,9 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author apple
  */
-public class HomeAbstractDataModel_for_Hop_Dong extends AbstractTableModel{
+public class HomeAbstractDataModelforHopDong extends AbstractTableModel{
     
-    private String[] cols = {"Mã hợp đồng ", "Mã nhân viên ", "Tên Hđ", "Ngày kí", "Hạn HĐ"};
+    private String[] cols = {"Mã hợp đồng ", "Mã nhân viên ", "Hạn hợp đồng", "Tên hợp đồng"};
 
     private ArrayList<Object[]> rows = new ArrayList<>();
 
@@ -30,8 +30,7 @@ public class HomeAbstractDataModel_for_Hop_Dong extends AbstractTableModel{
             
             rows.add(new Object[]{
                 
-               hd.getMaHD(),hd.getMaNV(),hd.getTenHD(), 
-                hd.getNgayKy(), hd.getHanHD()
+               hd.getMaHD(),hd.getMaNV(), hd.getHanHD(), hd.getTenHD()
             });
         }
         fireTableDataChanged();
