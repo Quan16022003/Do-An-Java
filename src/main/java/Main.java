@@ -1,5 +1,10 @@
 import GUI.LoginForm;
 import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.formdev.flatlaf.FlatLightLaf;
+import javax.swing.SwingUtilities;
+import GUI.LoginForm;
+import GUI.MainForm;
+import com.formdev.flatlaf.FlatIntelliJLaf;
 import javax.swing.SwingUtilities;
 
 public class Main {
