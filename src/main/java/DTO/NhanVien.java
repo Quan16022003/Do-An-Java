@@ -181,5 +181,7 @@ public class NhanVien {
         this.NgVaoLam = NgVaoLam;
     }
     
-    
+    public String getNoiOHienTai() {
+        return SoNha + ", đường " + Duong + ", "+ Phuong_Xa + ", " + Quan_Huyen + ", " + TP_Tinh;
+    }
 }

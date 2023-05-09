@@ -297,10 +297,10 @@ public class InputNhanVien extends javax.swing.JDialog{
         btnCancel.setPreferredSize(new Dimension(120,25));
         btnCancel.setText("Hủy bỏ");
 
-        gbc.gridx= 0;
-        gbc.gridy= 5;
+        gbc.gridx= 2;
+        gbc.gridy= 10;
         add(btnEdit,gbc);
-        gbc.gridx= 1;
+        gbc.gridx= 3;
         add(btnCancel,gbc);
     }
     

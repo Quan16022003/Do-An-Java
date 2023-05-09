@@ -175,7 +175,7 @@ public class K_DoiMatKhaugui extends Content {
 
         if (!s1.equals(s2)) {
             JOptionPane tb = new JOptionPane();
-            tb.showMessageDialog(this, "Đổi mật khẩu không thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+            tb.showMessageDialog(null, "Đổi mật khẩu không thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             lb_trangthaidoimk.setText("- Nhập lại mật khẩu không trùng, mời nhập lại");
             tf_newpass_ag.setText("");
 
@@ -190,11 +190,11 @@ public class K_DoiMatKhaugui extends Content {
                 K_TaiKhoanbus tks = new K_TaiKhoanbus();
                 tks.set(new K_TaiKhoanDTO(user_c, s1, user_c));
                 JOptionPane tb = new JOptionPane();
-                tb.showMessageDialog(this, "Đổi mật khẩu thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                tb.showMessageDialog(null, "Đổi mật khẩu thành công.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 lb_trangthaidoimk.setText("- Mật khẩu chỉ chứa các kí tự a-z, A-Z, 0-9 và tối thiểu 8 kí tự và tối đa 24 kí tự");
                 JOptionPane tb = new JOptionPane();
-                tb.showMessageDialog(this, "Mật khẩu mới không hợp lệ.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
+                tb.showMessageDialog(null, "Mật khẩu mới không hợp lệ.", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 tf_newpass.setText("");
                 tf_newpass_ag.setText("");
             }

@@ -53,7 +53,7 @@ public class MainFormBUS {
                         return new QuanLyLuongContent();
                     }
                     case VIEW_INFOR -> {
-                        return new ViewInfo();
+                        return new ViewInfo(username);
                     }
                     case QLTK -> {
                         return new K_Panel_QuanLyTaiKhoan();

@@ -29,6 +29,7 @@ public class ChooseAvatarPanel extends JPanel{
 
         imageLabel.setPreferredSize(new Dimension(100,150));
         imageLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+        imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
         
         chooseButton.addActionListener(new ActionListener() {
             @Override
@@ -80,7 +81,14 @@ public class ChooseAvatarPanel extends JPanel{
         }
        
     }
+    public void disableButton() {
+        chooseButton.setVisible(false);
+    }
 
+    @Override
+    public void setPreferredSize(Dimension preferredSize) {
+        imageLabel.setPreferredSize(preferredSize);
+    }
     // EXAMPLE
     
 }

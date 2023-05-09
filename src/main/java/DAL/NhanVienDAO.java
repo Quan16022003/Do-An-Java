@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NhanVienDAO  extends AbstractDAO<NhanVien, Integer> {
+public class NhanVienDAO  extends AbstractDAO<NhanVien, String> {
     @Override
 
     public boolean insert(NhanVien nv) {
@@ -37,17 +37,47 @@ public class NhanVienDAO  extends AbstractDAO<NhanVien, Integer> {
     }
 
     @Override
-    public boolean delete(Integer id) {
+    public boolean delete(String maNV) {
         String query = "DELETE FROM Nhan_Vien WHERE MaNV = ?";
         mySQLConnection.openConnection();
-        int rowDeleted = mySQLConnection.executeUpdate(query, id);
+        int rowDeleted = mySQLConnection.executeUpdate(query, maNV);
         mySQLConnection.closeConnection();
         return rowDeleted > 0;
     }
 
     @Override
-    public NhanVien select(Integer integer) {
-        return null;
+    public NhanVien select(String maNV) {
+        NhanVien nhanVien = null;
+        String query = "SELECT * FROM Nhan_Vien WHERE MaNV = ?";
+        mySQLConnection.openConnection();
+        ResultSet rs = mySQLConnection.executeQuery(query, maNV);
+        try {
+            if (rs.next()) {
+                var MaNV = rs.getString("MaNV");
+                var MaDV = rs.getString("MaDV");
+                var MaChucVu = rs.getString("MaChucVu");
+                var Ten = rs.getString("HoTen");
+                var GioiTinh = rs.getString("GioiTinh");
+                var SDT = rs.getString("SDT");
+                var SoNha = rs.getString("SoNha");
+                var Duong = rs.getString("Duong");
+                var Phuong_Xa = rs.getString("Phuong_Xa");
+                var Quan_Huyen = rs.getString("Quan_Huyen");
+                var Tp_Tinh = rs.getString("Tp_Tinh");
+                var CCCD = rs.getString("CCCD");
+                var NgCap = rs.getString("NgCap");
+                var NoiCap = rs.getString("NoiCap");
+                var NgVaoLam = rs.getString("NgVaoLam");
+                var image = rs.getString("image");
+                var NgSinh = rs.getString("NgSinh");
+                nhanVien = new NhanVien(MaNV, MaDV, MaChucVu, Ten, GioiTinh, NgSinh, SDT, SoNha, Duong, Phuong_Xa, Quan_Huyen, Tp_Tinh, CCCD, NgCap, NoiCap, NgVaoLam, image);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        mySQLConnection.closeConnection();
+
+        return nhanVien;
     }
 
     @Override
