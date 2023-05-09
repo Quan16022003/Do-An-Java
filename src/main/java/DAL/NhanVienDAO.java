@@ -13,9 +13,9 @@ public class NhanVienDAO  extends AbstractDAO<NhanVien, Integer> {
     @Override
 
     public boolean insert(NhanVien nv) {
-         String query = "INSERT INTO Nhan_Vien(MaNV, MaDV, MaLoaiNV, MaChucVu, Ten, GioiTinh, NgSinh, SDT, SoNha, Duong, Phuong_Xa, Quan_Huyen, Tp_Tinh, CCCD, NgCap, NoiCap, NgVaoLam, image) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+         String query = "INSERT INTO Nhan_Vien(MaNV, MaDV, MaChucVu, Ten, GioiTinh, NgSinh, SDT, SoNha, Duong, Phuong_Xa, Quan_Huyen, Tp_Tinh, CCCD, NgCap, NoiCap, NgVaoLam, image) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         mySQLConnection.openConnection();
-        int rowInserted = mySQLConnection.executeUpdate(query, nv.getMaDV(),nv.getMaLoaiNV(),nv.getMaChucVu()
+        int rowInserted = mySQLConnection.executeUpdate(query,nv.getMaNV(), nv.getMaDV(),nv.getMaChucVu()
         , nv.getTen(),nv.getGioiTinh(),nv.getNgSinh(),nv.getSDT(),nv.getSoNha(),nv.getDuong()
         ,nv.getPhuong_Xa(),nv.getQuan_Huyen(),nv.getTP_Tinh(),nv.getCCCD(),nv.getNgCap()
         ,nv.getNoiCap(),nv.getNgVaoLam(),nv.getImage());
@@ -26,9 +26,9 @@ public class NhanVienDAO  extends AbstractDAO<NhanVien, Integer> {
 
     @Override
     public boolean update(NhanVien nv) {
-        String query = "UPDATE Nhan_Vien SET MaDV = ?, MaLoaiNV = ?, MaChucVu = ?, Ten = ?, GioiTinh = ?, NgSinh = ?, SDT = ?, SoNha = ?, Duong = ?, Phuong_Xa = ?, Quan_Huyen = ?, Tp_Tinh = ?, CCCD = ?, NgCap = ?, NoiCap = ?, NgVaoLam = ?, image = ? WHERE MaNV=?";
+        String query = "UPDATE Nhan_Vien SET MaDV = ?, MaChucVu = ?, Ten = ?, GioiTinh = ?, NgSinh = ?, SDT = ?, SoNha = ?, Duong = ?, Phuong_Xa = ?, Quan_Huyen = ?, Tp_Tinh = ?, CCCD = ?, NgCap = ?, NoiCap = ?, NgVaoLam = ?, image = ? WHERE MaNV=?";
         mySQLConnection.openConnection();
-        int rowUpdated = mySQLConnection.executeUpdate(query, nv.getMaDV(),nv.getMaLoaiNV(),nv.getMaChucVu()
+        int rowUpdated = mySQLConnection.executeUpdate(query, nv.getMaNV(),nv.getMaDV(),nv.getMaChucVu()
         , nv.getTen(),nv.getGioiTinh(),nv.getNgSinh(),nv.getSDT(),nv.getSoNha(),nv.getDuong()
         ,nv.getPhuong_Xa(),nv.getQuan_Huyen(),nv.getTP_Tinh(),nv.getCCCD(),nv.getNgCap()
         ,nv.getNoiCap(),nv.getNgVaoLam(),nv.getImage());
@@ -64,7 +64,7 @@ public class NhanVienDAO  extends AbstractDAO<NhanVien, Integer> {
                 var MaChucVu = rs.getString("MaChucVu");
                 var Ten = rs.getString("Ten");
                 var GioiTinh = rs.getString("GioiTinh");
-                var SDT = rs.getString("SoNha");
+                var SDT = rs.getString("SDT");
                 var Duong = rs.getString("Duong");
                 var Phuong_Xa = rs.getString("Phuong_Xa");
                 var Quan_Huyen = rs.getString("Quan_Huyen");
@@ -74,7 +74,9 @@ public class NhanVienDAO  extends AbstractDAO<NhanVien, Integer> {
                 var NoiCap = rs.getString("NoiCap");
                 var NgVaoLam = rs.getString("NgVaoLam");
                 var image = rs.getString("image");
-                NhanVien nv = new NhanVien(MaNV, MaDV, MaLoaiNV, MaChucVu, Ten, GioiTinh, NgCap, SDT, NoiCap, Duong, Phuong_Xa, Quan_Huyen, Tp_Tinh, CCCD, NgCap, NoiCap, NgVaoLam, image);
+                var NgSinh = rs.getString("NgSinh");
+                var SoNha = rs.getString("SoNha");
+                NhanVien nv = new NhanVien(MaNV, MaDV, MaChucVu, Ten, GioiTinh, NgSinh, SDT, SoNha, Duong, Phuong_Xa, Quan_Huyen, Tp_Tinh, CCCD, NgCap, NoiCap, NgVaoLam, image);
                        list.add(nv);
             }
         } catch (SQLException e) {
