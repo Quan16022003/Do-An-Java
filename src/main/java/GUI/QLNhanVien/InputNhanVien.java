@@ -8,8 +8,7 @@ import DAL.NhanVienDAO;
 import BLL.NhanVienBUS;
 import DAL.BindingListener;
 import DTO.NhanVien;
-import GUI.Model.ChooseAvatarPanel;
-
+import GUI.modal.ChooseAvatarPanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -42,19 +41,19 @@ public class InputNhanVien extends javax.swing.JDialog{
 //        txtMaLoaiNV.getDocument().addDocumentListener(new BindingListener(txtMaLoaiNV, "[a-zA-Z0-9]*"));
         txtMaDV.getDocument().addDocumentListener(new BindingListener(txtMaDV, "[a-zA-Z0-9]*"));
         txtCCCD.getDocument().addDocumentListener(new BindingListener(txtCCCD, "\\d{12}"));
-        txtTen.getDocument().addDocumentListener(new BindingListener(txtTen,"[a-zA-Z0-9\\s]*"));
-        txtNgaySinh.getDocument().addDocumentListener(new BindingListener(txtNgaySinh,"^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$"));        
+//        txtTen.getDocument().addDocumentListener(new BindingListener(txtTen,"[a-zA-Z0-9\\s]*"));
+        txtNgaySinh.getDocument().addDocumentListener(new BindingListener(txtNgaySinh,"^[0-9]{4}-(1[0-2]|0[1-9])-(3[01]|[12][0-9]|0[1-9])$"));        
 //        txtGioiTinh.getDocument().addDocumentListener(new BindingListener(txtGioiTinh,"(?i)(nam|nu)"));                   
         txtSoDienThoai.getDocument().addDocumentListener(new BindingListener(txtSoDienThoai,"\\d{10}]*")); 
 //        txtMaLoaiNV.getDocument().addDocumentListener(new BindingListener(txtMaLoaiNV, "[a-zA-Z0-9]*"));
         txtMaChucVu.getDocument().addDocumentListener(new BindingListener(txtMaChucVu, "[a-zA-Z0-9]*"));
-        txtDuong.getDocument().addDocumentListener(new BindingListener(txtDuong,"[a-zA-Z0-9\\s]*"));
-        txtPhuong_Xa.getDocument().addDocumentListener(new BindingListener(txtPhuong_Xa,"[a-zA-Z0-9\\s]*"));
-        txtQuan_Huyen.getDocument().addDocumentListener(new BindingListener(txtQuan_Huyen,"[a-zA-Z0-9\\s]*"));
-        txtThanhPho_Tinh.getDocument().addDocumentListener(new BindingListener(txtThanhPho_Tinh,"[a-zA-Z0-9\\s]*"));
-        txtNgayCap.getDocument().addDocumentListener(new BindingListener(txtNgayCap,"^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$"));        
-        txtNoiCap.getDocument().addDocumentListener(new BindingListener(txtNoiCap,"[a-zA-Z0-9\\s]*"));
-        txtNgayVaoLam.getDocument().addDocumentListener(new BindingListener(txtNgayVaoLam,"^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$"));        
+//        txtDuong.getDocument().addDocumentListener(new BindingListener(txtDuong,"[a-zA-Z0-9\\s]*"));
+////        txtPhuong_Xa.getDocument().addDocumentListener(new BindingListener(txtPhuong_Xa,"[a-zA-Z0-9\\s]*"));
+//        txtQuan_Huyen.getDocument().addDocumentListener(new BindingListener(txtQuan_Huyen,"[a-zA-Z0-9\\s]*"));
+//        txtThanhPho_Tinh.getDocument().addDocumentListener(new BindingListener(txtThanhPho_Tinh,"[a-zA-Z0-9\\s]*"));
+        txtNgayCap.getDocument().addDocumentListener(new BindingListener(txtNgayCap,"^[0-9]{4}-(1[0-2]|0[1-9])-(3[01]|[12][0-9]|0[1-9])$"));        
+//        txtNoiCap.getDocument().addDocumentListener(new BindingListener(txtNoiCap,"[a-zA-Z0-9\\s]*"));
+        txtNgayVaoLam.getDocument().addDocumentListener(new BindingListener(txtNgayVaoLam,"^[0-9]{4}-(1[0-2]|0[1-9])-(3[01]|[12][0-9]|0[1-9])$"));        
 //        txtSoNha.getDocument().addDocumentListener(new BindingListener(txtSoNha, "^[a-zA-Z0-9\\s\\/]*$"));
     }
     private void initComponents() {
@@ -96,13 +95,13 @@ public class InputNhanVien extends javax.swing.JDialog{
 //        gbc.gridx = 1;
 //        add(JLabelMaLoaiNV, gbc);
         
-        gbc.gridy = 3;
+        gbc.gridy = 2;
         JLabelMaChucVu = new JLabel("Mã chức vụ:");
         JLabelMaChucVu.setPreferredSize(new Dimension(a, 25));
         gbc.gridx = 1;
         add(JLabelMaChucVu, gbc);
         
-        gbc.gridy = 4;
+        gbc.gridy = 3;
         JLabelTen = new JLabel("Họ và tên:");
         JLabelTen.setPreferredSize(new Dimension(a, 25));
         gbc.gridx = 1;
@@ -131,13 +130,13 @@ public class InputNhanVien extends javax.swing.JDialog{
         txtMaChucVu = new JTextField();
         txtMaChucVu.setPreferredSize(new Dimension(150, 25));
         gbc.gridx = 2;
-        gbc.gridy = 3;
+        gbc.gridy = 2;
         add(txtMaChucVu, gbc);
         
         txtTen = new JTextField();
         txtTen.setPreferredSize(new Dimension(150, 25));
         gbc.gridx = 2;
-        gbc.gridy = 4;
+        gbc.gridy = 3;
         add(txtTen, gbc);
         
         
@@ -338,7 +337,12 @@ public class InputNhanVien extends javax.swing.JDialog{
         );
         if (BUS.check(nhanvien))
             {
-                 DAO.insert(nhanvien);
+                 if (DAO.insert(nhanvien) == false)
+                    {
+                 JOptionPane.showMessageDialog(rootPane,
+                         "Vui lòng kiểm tra lại hình ảnh, mã đơn vị hoặc mã chức vụ");  
+                    }
+                    else {
 
                  home.addNhanVienlist(nhanvien);
                  JOptionPane.showMessageDialog(rootPane,
@@ -362,6 +366,7 @@ public class InputNhanVien extends javax.swing.JDialog{
                 txtNoiCap.setText("");
                 txtNgayVaoLam.setText("");
                 imagePanel.setImage(null);
+                            }
                  
             }
         
