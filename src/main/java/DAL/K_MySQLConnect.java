@@ -19,8 +19,8 @@ import java.util.logging.Logger;
  */
 public class K_MySQLConnect {
     private String user = "root";
-    private String password="Quan";
-    private String url="jdbc:mysql://localhost:3307/qlgv";
+    private String password="123456";
+    private String url="jdbc:mysql://localhost:3306/qlgv";
 //     private String url="jdbc:mysql://localhost:3306/tuitest";
     private Connection conn = null;
     private Statement st = null;

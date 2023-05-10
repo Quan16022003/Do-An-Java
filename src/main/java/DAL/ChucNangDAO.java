@@ -36,7 +36,7 @@ public class ChucNangDAO extends AbstractDAO<ChucNang, Integer> {
     public List<ChucNang> selectAllByUsername(String username) {
         String query = "SELECT cn.name_chuc_nang, code_chuc_nang\n" +
                 "FROM tai_khoan tk, loai_quyen_truy_cap lqtc, quyen_truy_cap qtc, chuc_nang cn\n" +
-                "WHERE username = ? and tk.Ma_loai_QTC = lqtc.id_loai_QTC and lqtc.id_loai_QTC = qtc.id_loai_QTC and qtc.id_chuc_nang = cn.id_chuc_nang";
+                "WHERE username = ? and tk.role = lqtc.id_loai_QTC and lqtc.id_loai_QTC = qtc.id_loai_QTC and qtc.id_chuc_nang = cn.id_chuc_nang";
         mySQLConnection.openConnection();
 
         List<ChucNang> chucNangs = new ArrayList<ChucNang>();

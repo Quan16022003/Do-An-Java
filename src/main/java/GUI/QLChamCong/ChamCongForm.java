@@ -139,7 +139,7 @@ public class ChamCongForm extends Content {
                         showResult();
 
                     } else {
-                        JOptionPane.showMessageDialog(pn1, txtMaNV.getText() + " đã chấm công vào " + txtNgayNghi.getText() + " rồi");
+                        JOptionPane.showMessageDialog(pn1, txtMaNV.getText() + " đã chấm công vào " + txtNgayNghi.getText() + " rồi hoặc "+txtMaNV.getText() +" không tồn tại");
 
                     }
                 }
@@ -298,14 +298,13 @@ public class ChamCongForm extends Content {
         btExport.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                List<ChamCong> xa = null;
                 String[] headera = null;
                 String namefa = null;
                 String patha = null;
                 String sheetnamea = null;
                 expDATA z = new expDATA();
                 try {
-                    z.exp((ArrayList<ChamCong>) bus.find(txtTimKiem.getText()), headera, namefa, patha, sheetnamea);
+                    z.exp( bus.find(txtTimKiem.getText()), headera, namefa, patha, sheetnamea);
                 } catch (IOException ex) {
                     Logger.getLogger(ChamCongForm.class.getName()).log(Level.SEVERE, null, ex);
                 }

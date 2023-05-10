@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFFont;
@@ -24,12 +25,12 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 public class expDATA {
 
-    public static void exp(ArrayList<ChamCong> x, String[] header, String namef, String path, String sheetname) throws FileNotFoundException, IOException {
+    public static void exp(List<ChamCong> x, String[] header, String namef, String path, String sheetname) throws FileNotFoundException, IOException {
 
         //        phần đầu vào giả , tự điều chỉnh cho hợp lí nha
         
-        header = new String[]{"Mã nhân viên", "Ngày chấm công","Giờ vào", "Giờ ra", "Xác nhận"};
-        path = "./";
+        header = new String[]{"Mã nhân viên", "Ngày chấm công","Giờ vào", "Giờ ra", "Xác nhận đủ công"};
+        path = "C:\\Users\\ADMIN\\Documents\\NetBeansProjects\\";
         namef = "ChamCongfile";
         sheetname = "ChamCong";
         path = path + (namef + ".xlsx");
@@ -84,7 +85,7 @@ public class expDATA {
         FileOutputStream out = new FileOutputStream(new File(path));
         workbook.write(out);
         out.close();
-        System.out.println("Sus");
+        System.out.println("Export Success!");
 
     }
 }
