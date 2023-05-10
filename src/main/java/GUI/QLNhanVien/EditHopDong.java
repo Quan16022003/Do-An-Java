@@ -8,6 +8,7 @@ import DTO.HopDong;
 import DAL.HopDongDAO;
 import BLL.HopDongBUS;
 import DAL.BindingListener;
+import GUI.modal.ChooseAvatarPanel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -34,26 +35,28 @@ public class EditHopDong extends javax.swing.JDialog {
         home = (HopDongGUI) parent;
         BUS = new HopDongBUS();
         DAO = new HopDongDAO();
-        txtMaNV.getDocument().addDocumentListener(new BindingListener(txtMaNV, "[a-z0-9]*"));
+        txtMaNV.getDocument().addDocumentListener(new BindingListener(txtMaNV, "[a-zA-Z0-9]*"));
 //        txtMaHD.getDocument().addDocumentListener(new BindingListener(txtMaHD, "[a-z0-9]*"));
 //        txtSTK.getDocument().addDocumentListener(new BindingListener(txtSTK, "\\d{12}"));
 //        txtHocVi.getDocument().addDocumentListener(new BindingListener(txtHocVi,"[a-z0-9\\s]*"));
 //        txtMaSoThue.getDocument().addDocumentListener(new BindingListener(txtMaSoThue, "[a-z0-9]*"));
 //        txtNganHang.getDocument().addDocumentListener(new BindingListener(txtNganHang,"[a-z0-9\\s]*"));
-        txtCongViecDuocGiao.getDocument().addDocumentListener(new BindingListener(txtCongViecDuocGiao,"[a-z0-9\\s]*"));
+//        txtCongViecDuocGiao.getDocument().addDocumentListener(new BindingListener(txtCongViecDuocGiao,"[a-zA-Z0-9\\s]*"));
 //        txtCucThue.getDocument().addDocumentListener(new BindingListener(txtCucThue,"[a-z0-9\\s]*"));
-        txtNgayKy.getDocument().addDocumentListener(new BindingListener(txtNgayKy,"^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$"));        
-        txtHanHD.getDocument().addDocumentListener(new BindingListener(txtHanHD,"^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$"));        
+        txtNgayKy.getDocument().addDocumentListener(new BindingListener(txtNgayKy,"^[0-9]{4}-(1[0-2]|0[1-9])-(3[01]|[12][0-9]|0[1-9])$"));        
+        txtHanHD.getDocument().addDocumentListener(new BindingListener(txtHanHD,"^[0-9]{4}-(1[0-2]|0[1-9])-(3[01]|[12][0-9]|0[1-9])$"));        
 //        txtHang.getDocument().addDocumentListener(new BindingListener(txtHang,"[a-z0-9\\s]*"));
 //        txtBac.getDocument().addDocumentListener(new BindingListener(txtBac,"[a-z0-9\\s]*"));
 //        txtHeSoLuong.getDocument().addDocumentListener(new BindingListener(txtHeSoLuong,"[+-]?([0-9]*[.])?[0-9]+"));
 //        txtHeSoPhuCap.getDocument().addDocumentListener(new BindingListener(txtHeSoPhuCap,"[+-]?([0-9]*[.])?[0-9]+"));
 
+
+
     }
    private void initComponents() {
         
 //>>>>>>> origin/main
-        setSize(new Dimension(800/2, 500));
+        setSize(new Dimension(600, 500));
 
 
         setLayout(new GridBagLayout());
@@ -204,11 +207,11 @@ public class EditHopDong extends javax.swing.JDialog {
         gbc.gridy = 6;
         HeSoPhuCap = new JLabel("Hệ số phụ cấp:");
         HeSoPhuCap.setPreferredSize(new Dimension(200, 25));
-        gbc.gridx = 2;
+        gbc.gridx = 0;
         add(HeSoPhuCap, gbc);
         txtHeSoPhuCap = new JTextField();
         txtHeSoPhuCap.setPreferredSize(new Dimension(150, 25));
-        gbc.gridx = 3;
+        gbc.gridx = 1;
         add(txtHeSoPhuCap, gbc);
 
         btnEdit = new javax.swing.JButton();
@@ -238,10 +241,10 @@ public class EditHopDong extends javax.swing.JDialog {
         btnCancel.setPreferredSize(new Dimension(120,25));
         btnCancel.setText("Hủy bỏ");
 
-        gbc.gridx= 1;
+        gbc.gridx= 0;
         gbc.gridy= 7;
         add(btnEdit,gbc);
-        gbc.gridx= 2;
+        gbc.gridx= 1;
         gbc.gridy= 7;
         add(btnCancel,gbc);
 
@@ -270,7 +273,12 @@ public class EditHopDong extends javax.swing.JDialog {
         HopDong hd = new HopDong(MaHD, MaNV, CongViecDuocGiao, NgayKy, HanHD, HeSoLuong, HeSoPhuCap);
         if (BUS.check(hd))
             {
-                 DAO.update(hd);
+                 if (DAO.update(hd) == false)
+                    {
+                 JOptionPane.showMessageDialog(rootPane,
+                         "Mã đơn vị hoặc mã chức vụ không tồn tại");  
+                    }
+                 else {
 
                  home.addNhanVienlist(hd);
                  JOptionPane.showMessageDialog(rootPane,
@@ -291,6 +299,7 @@ public class EditHopDong extends javax.swing.JDialog {
                 txtCongViecDuocGiao.setText("");
                 txtHeSoLuong.setText("");
                 txtHeSoPhuCap.setText("");
+                 }
             }
     }
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {
